@@ -1,8 +1,17 @@
 ﻿// Client.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+//github msdl 참고 딥앱?
+//editer 프로잭트
+//공유 항목 프로젝트는 어느 플랫폼이여도 사용가능하기 때문에
+//빌드 중속성 굳이 하나하나 빌드가 아니라 하나를 돌리면 같이 빌드되게
+//engine -> editer
+//기존 클래스 복사 -> 기존항복에 추가 
+//c++ 버전 20으로
+
 #include "framework.h"
 #include "Client.h"
+#include "WApplication.h"
 
 //정적라이브러리 추가 1. 소스코드  2. 비주얼스튜디오 옵션
 //정적라이브러리에 들어가기 위한 헤더파일 include 
@@ -13,17 +22,19 @@
 //정적라이브러리의 commoninclude헤더파일 include해야 알수있음
 //#include "..\Client_Source\CommonInclude.h"
 
-//하나하나 전부 해줄 수 없기 때문에
-#include "CommonInclude.h"
+////하나하나 전부 해줄 수 없기 때문에
+//#include "CommonInclude.h"
+//
+////디버그일떄 Debug파일에 정적라이브러리를 참조하고 Release일때는 Release파일에 정적라이브럴리 참조
+//#ifdef _DEBUG
+//#pragma comment ("..\\x64\\Debug\\Client_Source.lib");
+//
+//#else
+//#pragma comment ("..\\x64\\Release\\Client_Source.lib");
+//
+//#endif
 
-//디버그일떄 Debug파일에 정적라이브러리를 참조하고 Release일때는 Release파일에 정적라이브럴리 참조
-#ifdef _DEBUG
-#pragma comment ("..\\x64\\Debug\\Client_Source.lib");
-
-#else
-#pragma comment ("..\\x64\\Release\\Client_Source.lib");
-
-#endif
+W::Application application;
 
 #define MAX_LOADSTRING 100
 
@@ -48,7 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
-   
+    
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_CLIENT, szWindowClass, MAX_LOADSTRING);
@@ -65,16 +76,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (WM_QUIT == msg.message)
+                break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            // 여기서 게임 로직이 돌아가야한다.
+            application.Run();
         }
     }
 
-    return (int) msg.wParam;
+    return (int)msg.wParam;
 }
 
 
@@ -117,20 +139,21 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
+    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, 0, 1280, 720, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
-   {
-      return FALSE;
-   }
+    if (!hWnd)
+    {
+        return FALSE;
+    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+    application.SetWindow(hWnd, 1280, 720);
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
 
-   return TRUE;
+    return TRUE;
 }
 
 //

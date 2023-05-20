@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{fa95d34b-aa75-4906-8677-b8cca43dce10}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Engine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Enums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTime.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTime.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)WMath.inl" />
+  </ItemGroup>
+</Project>
