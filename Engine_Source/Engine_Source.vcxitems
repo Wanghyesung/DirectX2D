@@ -23,6 +23,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTime.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTime.cpp" />

@@ -1,6 +1,5 @@
 #include "WTime.h"
 #include "WApplication.h"
-#include "WResources.h"
 
 extern W::Application application;
 
@@ -25,14 +24,14 @@ namespace W
 	{
 		QueryPerformanceCounter(&m_lCurFrequency);
 
-		double differnceFrequency = m_lCpuFrequency.QuadPart - m_lPrevFrequency.QuadPart;
+		double differnceFrequency = m_lCurFrequency.QuadPart - m_lPrevFrequency.QuadPart;
 
-		m_dDeltaTime = differnceFrequency / m_lPrevFrequency.QuadPart;
+		m_dDeltaTime = differnceFrequency / m_lCpuFrequency.QuadPart;
 
 		m_lPrevFrequency.QuadPart = m_lCurFrequency.QuadPart;
 	}
 
-	void Time::Render(HDC hdc)
+	void Time::Render()
 	{
 		m_dSecond += m_dDeltaTime;
 

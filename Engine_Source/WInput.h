@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine.h"
-
+#include "WGraphicDevice_Dx11.h"
 namespace W
 {
 	using namespace W::math;

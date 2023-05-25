@@ -1,9 +1,14 @@
 #include "WApplication.h"
 
+#include "WTime.h"
+#include "WInput.h"
+#include "WRenderer.h"
+
 namespace W
 {
+	//0,0의 해상도도 있음
 	Application::Application()
-		: //graphicDevice(nullptr)
+		:graphicDevice(nullptr),
 		m_hHwnd(NULL),
 		m_iWidth(-1),
 		m_iHeight(-1)
@@ -17,14 +22,23 @@ namespace W
 
 	void Application::Run()
 	{
+		Update();
+		LateUpdate();
+		Render();
 	}
 
 	void Application::Initialize()
 	{
+		Time::Initiailize();
+		Input::Initialize();
+
+		renderer::Initialize();
 	}
 
 	void Application::Update()
 	{
+		Time::Update();
+		Input::Update();
 	}
 
 	void Application::LateUpdate()
@@ -33,6 +47,9 @@ namespace W
 
 	void Application::Render()
 	{
+		Time::Render();
+
+		graphicDevice->Draw();
 	}
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)
@@ -45,6 +62,7 @@ namespace W
 			m_iHeight = _iHeight;
 		
 			graphicDevice = std::make_unique<W::graphics::GraphicDevice_Dx11>();
+			W::graphics::GetDevice() = graphicDevice.get();
 		}
 
 		RECT rt = { 0, 0, (LONG)_iWidth , (LONG)_iHeight };
