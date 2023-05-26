@@ -22,9 +22,14 @@ namespace W::graphics
 		bool CreateBuffer(ID3D11Buffer** _buffer, D3D11_BUFFER_DESC* _desc, D3D11_SUBRESOURCE_DATA* _data);
 		bool CreateShader();
 
+		//임시
+		bool CreateCircleShader();
 
 		bool CreateTexture(const D3D11_TEXTURE2D_DESC* _desc, void* _pdata);
+		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
 		void Draw();
+		//임시
+		void DrawCircle();
 
 	private:
 		// 실제 그래픽카드 하드웨어 객체
@@ -48,6 +53,8 @@ namespace W::graphics
 
 		// 더블버퍼링 작업을 진행해주는 swapChain
 		Microsoft::WRL::ComPtr<IDXGISwapChain> m_cpSwapChain;
+
+		D3D11_VIEWPORT m_tViewPort;
 	};
 
 	inline GraphicDevice_Dx11*& GetDevice()

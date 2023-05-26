@@ -74,14 +74,35 @@ namespace W::graphics
 		depthStencilDesc.Height = application.GetHeight();
 		//텍스처 배열의 텍스처 수입니다
 		depthStencilDesc.ArraySize = 1;
-
+	
+		//픽셀당 다중 샘플 수입니다.
+		//이미지 품질 수준입니다. 품질이 높을수록 성능이 떨어집니다 0 ~ 1
 		depthStencilDesc.SampleDesc.Count = 1;
+		depthStencilDesc.SampleDesc.Quality = 0;
+
 		depthStencilDesc.MiscFlags = 0;
+		//텍스처의 최대 Mipmap 수준 수입니다
+		depthStencilDesc.MipLevels = 0;
+		
 
 		D3D11_SUBRESOURCE_DATA data;
 		if (!CreateTexture(&depthStencilDesc, &data))
 			return;
 
+		//ndc좌표 -> window 좌표로 전환(뷰포트변환)(좌상단 우하단 크기, 
+		//뷰포트도 계속 갱신해야 스크린이 바뀔때 같이 바뀜
+		RECT winRect = {};
+		GetClientRect(hwnd, &winRect);
+
+		m_tViewPort =
+		{
+			0.f, 0.f,
+			(float)(winRect.right - winRect.left),
+			(float)(winRect.bottom - winRect.top),
+			0.f,1.f
+		};
+
+		BindViewPort(&m_tViewPort);
 		// 스텐실 버퍼를 출력-병합 단계에 바인딩합니다.
 		m_cpContext->OMSetRenderTargets(1, m_cpRenderTargetView.GetAddressOf(), m_cpDepthStencilView.Get());
 
@@ -167,7 +188,7 @@ namespace W::graphics
 		//	_COM_Outptr_opt_  ID3D11VertexShader** ppVertexShader
 
 		//공유항목 프로젝트끼리 연결하기 위해서는 파일 입출력이 필요함
-		ID3DBlob* vsBolp = nullptr;
+		
 		//현재 위치 -> 부모 위치
 		std::filesystem::path shaderPath =
 			std::filesystem::current_path().parent_path();
@@ -191,9 +212,131 @@ namespace W::graphics
 		m_cpDevice->CreateVertexShader(W::renderer::triangleVSBlob->GetBufferPointer(),
 			W::renderer::triangleVSBlob->GetBufferSize(),
 			nullptr, &W::renderer::triangleVSShader);
+		
+		std::filesystem::path psPath(shaderPath.c_str());
+		psPath += L"TrianglePs.hlsl";
+
+		D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+			, "main", "ps_5_0", 0, 0, &W::renderer::trianglePSBlob, &W::renderer::errorBlob);
+
+		if (W::renderer::errorBlob)
+		{
+			//에러 걸리면 에러블롭에 나옴
+			OutputDebugStringA((char*)W::renderer::errorBlob->GetBufferPointer());
+			W::renderer::errorBlob->Release();
+		}
+
+		m_cpDevice->CreatePixelShader(W::renderer::trianglePSBlob->GetBufferPointer(),
+			W::renderer::trianglePSBlob->GetBufferSize(),
+			nullptr, &W::renderer::trianglePSShader);
+
+		// Input layout 정점 구조 정보를 넘겨줘야한다.
+		// 시작과 끝 시멘틱알려줘야함
+		//layer = 시작위치, 데이터 크기, 정점데이터 시멘틱 이름 시멘틱 넘버
+		//정점 셰이더에서 out반환 픽셀 셰이더에서 out인자 반환으로 픽셀 하나
+		//정점 데이터를 gpu에게 알려줘야함 (입력조립기 단계 , Input layout 정점 구조)
+		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
+		//시작 점 = 0
+		arrLayout[0].AlignedByteOffset = 0;
+		//
+		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		arrLayout[0].InputSlot = 0;
+		//입력 데이터는 꼭짓점별 데이터입니다. (인스턴스 = 1)
+		arrLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		//시멘틱 구분 이름
+		arrLayout[0].SemanticName = "POSITION";
+		arrLayout[0].SemanticIndex = 0;
+
+		//vector(float3 12바이트)뒤에 color
+		arrLayout[1].AlignedByteOffset = 12;
+		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		arrLayout[1].InputSlot = 0;
+		arrLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		arrLayout[1].SemanticName = "COLOR";
+		arrLayout[1].SemanticIndex = 0;
+
+		m_cpDevice->CreateInputLayout(arrLayout, 2,
+			renderer::triangleVSBlob->GetBufferPointer(),
+			renderer::triangleVSBlob->GetBufferSize(),
+			&renderer::triangleLayout);
 
 		return true;
 	}
+	bool GraphicDevice_Dx11::CreateCircleShader()
+	{
+		std::filesystem::path shaderPath =
+			std::filesystem::current_path().parent_path();
+		shaderPath += L"\\Shader_Source\\";
+
+		std::filesystem::path vsPath(shaderPath.c_str());
+		vsPath += L"TriangleVS.hlsl";
+
+		//hlsl파일 컴파일 오류는 errorblob에 나옴
+		//메인함수 문자열로 , 버전, 
+		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			"main", "vs_5_0", 0, 0, &W::renderer::lineVSBlob, &W::renderer::errorBlob);
+
+		if (W::renderer::errorBlob)
+		{
+			//에러 걸리면 에러블롭에 나옴
+			OutputDebugStringA((char*)W::renderer::errorBlob->GetBufferPointer());
+			W::renderer::errorBlob->Release();
+		}
+
+		m_cpDevice->CreateVertexShader(W::renderer::lineVSBlob->GetBufferPointer(),
+			W::renderer::lineVSBlob->GetBufferSize(),
+			nullptr, &W::renderer::lineVSShader);
+
+		std::filesystem::path psPath(shaderPath.c_str());
+		psPath += L"TrianglePs.hlsl";
+
+		D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+			, "main", "ps_5_0", 0, 0, &W::renderer::linePSBlob, &W::renderer::errorBlob);
+
+		if (W::renderer::errorBlob)
+		{
+			//에러 걸리면 에러블롭에 나옴
+			OutputDebugStringA((char*)W::renderer::errorBlob->GetBufferPointer());
+			W::renderer::errorBlob->Release();
+		}
+
+		m_cpDevice->CreatePixelShader(W::renderer::linePSBlob->GetBufferPointer(),
+			W::renderer::linePSBlob->GetBufferSize(),
+			nullptr, &W::renderer::linePSShader);
+
+		// Input layout 정점 구조 정보를 넘겨줘야한다.
+		// 시작과 끝 시멘틱알려줘야함
+		//layer = 시작위치, 데이터 크기, 정점데이터 시멘틱 이름 시멘틱 넘버
+		//정점 셰이더에서 out반환 픽셀 셰이더에서 out인자 반환으로 픽셀 하나
+		//정점 데이터를 gpu에게 알려줘야함 (입력조립기 단계 , Input layout 정점 구조)
+		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
+		//시작 점 = 0
+		arrLayout[0].AlignedByteOffset = 0;
+		//
+		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		arrLayout[0].InputSlot = 0;
+		//입력 데이터는 꼭짓점별 데이터입니다. (인스턴스 = 1)
+		arrLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		//시멘틱 구분 이름
+		arrLayout[0].SemanticName = "POSITION";
+		arrLayout[0].SemanticIndex = 0;
+
+		//vector(float3 12바이트)뒤에 color
+		arrLayout[1].AlignedByteOffset = 12;
+		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		arrLayout[1].InputSlot = 0;
+		arrLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		arrLayout[1].SemanticName = "COLOR";
+		arrLayout[1].SemanticIndex = 0;
+
+		m_cpDevice->CreateInputLayout(arrLayout, 2,
+			renderer::lineVSBlob->GetBufferPointer(),
+			renderer::lineVSBlob->GetBufferSize(),
+			&renderer::lineLayout);
+
+		return true;
+	}
+
 	bool GraphicDevice_Dx11::CreateTexture(const D3D11_TEXTURE2D_DESC* _desc, void* _pdata)
 	{
 		//2d 텍스쳐 옵션
@@ -213,13 +356,20 @@ namespace W::graphics
 		dxGiDesc.MipLevels = _desc->MipLevels;
 		dxGiDesc.MiscFlags = _desc->MiscFlags;
 
+		//깊이버퍼
 		if (FAILED(m_cpDevice->CreateTexture2D(&dxGiDesc, nullptr, m_cpDepthStencilBuffer.ReleaseAndGetAddressOf())))
 			return false;
 
+		//깊이버퍼 뷰
 		if (FAILED(m_cpDevice->CreateDepthStencilView(m_cpDepthStencilBuffer.Get(), nullptr, m_cpDepthStencilView.GetAddressOf())))
 			return false;
 
 		return true;
+	}
+	void GraphicDevice_Dx11::BindViewPort(D3D11_VIEWPORT* _viewPort)
+	{
+		//뷰포트 개수
+		m_cpContext->RSSetViewports(1, _viewPort);
 	}
 	void GraphicDevice_Dx11::Draw()
 	{
@@ -227,8 +377,62 @@ namespace W::graphics
 		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 		//백버퍼 지우기
 		m_cpContext->ClearRenderTargetView(m_cpRenderTargetView.Get(), bgColor);
+		//깊이버퍼 지우기
+		m_cpContext->ClearDepthStencilView(m_cpDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0.0f);
 
-		//렌더링된 이미지 표시
+		//뷰포트 업데이트
+		HWND hWnd = application.GetHwnd();
+		RECT winRect = {};
+		GetClientRect(hWnd, &winRect);
+		m_tViewPort =
+		{
+			0.0f, 0.0f
+			, (float)(winRect.right - winRect.left)
+			, (float)(winRect.bottom - winRect.top)
+			, 0.0f, 1.0f
+		};
+		
+		BindViewPort(&m_tViewPort);
+		m_cpContext->OMSetRenderTargets(1, m_cpRenderTargetView.GetAddressOf(), m_cpDepthStencilView.Get());
+		
+		// input assembler 정점 데이터 지정
+		UINT vertexsize = sizeof(renderer::Vertex);
+		UINT offset = 0;
+		//꼭짓점 버퍼 배열을 입력 어셈블러 단계에 바인딩합니다.
+		m_cpContext->IASetVertexBuffers(0, 1, &renderer::triangleBuffer, &vertexsize, &offset);
+		m_cpContext->IASetInputLayout(renderer::triangleLayout);
+		//어떻게 그릴지
+		m_cpContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		
+		//bind vs, ps
+		m_cpContext->VSSetShader(renderer::triangleVSShader, 0, 0);
+		m_cpContext->PSSetShader(renderer::trianglePSShader, 0, 0);
+
+		m_cpContext->Draw(12, 0);
+
+		DrawCircle();
+		//레더타겟에 있는 이미지를 화면에 그려준다
 		m_cpSwapChain->Present(0, 0);
 	}
+
+	void GraphicDevice_Dx11::DrawCircle()
+	{
+		UINT vertexsize = sizeof(renderer::Vertex);
+		UINT offset = 0;
+		//꼭짓점 버퍼 배열을 입력 어셈블러 단계에 바인딩합니다.
+		m_cpContext->IASetVertexBuffers(0, 1, &renderer::lineBuffer, &vertexsize, &offset);
+		m_cpContext->IASetInputLayout(renderer::lineLayout);
+		//어떻게 그릴지
+		m_cpContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+		//bind vs, ps
+		m_cpContext->VSSetShader(renderer::lineVSShader, 0, 0);
+		m_cpContext->PSSetShader(renderer::linePSShader, 0, 0);
+
+		m_cpContext->Draw(360, 0);
+	}
+
+	// ps에서 받은 정점들의 데이터들이 보간되기 때문에 픽셀이 중간값이 나옴
+	//래스터라잊에서 뒷면제거 외적의 결과로 앞두ㅣ를 판결하기 떄문애 외적의 결과에(먀주보고있으면 뒷면) 따라서 나오는개 달라짐
+
 }
