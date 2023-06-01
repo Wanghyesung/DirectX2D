@@ -34,6 +34,26 @@
 //
 //#endif
 
+//vertex셰이더에 전달(이동)
+//키보드에서 받은(cpu)값을 vertexshader(GPU)로 변수로 입력 gpu에서 처리
+//cpu와 gpu에서 데이터 교환할 수 있는 버퍼가 필요함(상수 버퍼) 작은 수 구조체버퍼(상수버퍼들)
+//사용량이 많으면 cpu에서 연산하기 때문에 효율이 낮다
+//엔진에 따라 다르긴하지만 대부분의 단순값들은 cpu(하복) gpu(물리처리는 피직스?가 대표적)
+//게임 개발에 따라 gpu를 어떻게 쓸지
+//정점퍼버와(vertex 데이터) 다르게 인덕스 버퍼를 활용하여 그리는순서를 정함(정수 배열)
+//서브데이터를 넣을떄 크기만이 아니라, uint2(데이터들의 크기정보) 넣어줌
+//정점버퍼의경우는 cpu의 계산에 의한 데이터를 주기 때문에 cpu로 설정해줘야함 (기본값이 아니라)
+//상수버퍼 패딩 hlsl은 16바이트 경계를 넘지않아야한다 16바이트만 (vector4만 되는이유)
+//4개짜리(rgba, xyzw)와 같이 같은 차원의 수만 곱할 수 있기 때문에 gpu의 경우에는 주로 행렬을 사용하기 떄문
+//상수버퍼gpu로 전달 -> 픽셀셰이더로 전달
+//cpu에서 만든 서브리소스와 gpu의 서브리소스를 연결 지역변수로만든 서브리소스는 연결해제도 해주어야함
+//상수버퍼를 셰이더로 보낼때 어떤 셰이더로 보낼지 무슨데이터인지 , 버퍼주소 
+//cvuffer 자료형(상수버퍼) register로 슬롯 구분 상수버퍼크기와 정점셰이더에서 받는 데이터의 크기가 같아야함
+//cpu에서 받은 값을 gpu에 전달 후 셰이더로 전달하는 바인드과정을 매 프레임 반복
+//그릴때 정점버퍼셋팅했던것처럼 인덱스버퍼도 셋팅
+//키보드 좌우상하 삼각형 이동 
+
+
 W::Application application;
 
 #define MAX_LOADSTRING 100
@@ -149,7 +169,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         return FALSE;
     }
 
-    application.SetWindow(hWnd, 1280, 720);
+    application.SetWindow(hWnd, 1400, 750);
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 

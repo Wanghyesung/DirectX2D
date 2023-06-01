@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine.h"
+#include "WGraphics.h"
 
 //DirectX 11 라이브러리 추가(정적)
 #include <d3d11.h>
@@ -21,15 +22,17 @@ namespace W::graphics
 		bool CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* _desc, HWND _hwnd);
 		bool CreateBuffer(ID3D11Buffer** _buffer, D3D11_BUFFER_DESC* _desc, D3D11_SUBRESOURCE_DATA* _data);
 		bool CreateShader();
-
-		//임시
-		bool CreateCircleShader();
-
 		bool CreateTexture(const D3D11_TEXTURE2D_DESC* _desc, void* _pdata);
+
 		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
+
+		void SetConstantBuffer(ID3D11Buffer* _buffer, void* _data, UINT _iSize);
+		void BindConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
+		void BindsConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
+
 		void Draw();
 		//임시
-		void DrawCircle();
+		//void DrawCircle();
 
 	private:
 		// 실제 그래픽카드 하드웨어 객체

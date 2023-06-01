@@ -6,6 +6,8 @@
 
 namespace W
 {
+	Vector4 pos = Vector4(0.f, 0.f, 0.f, 1.f);
+
 	//0,0의 해상도도 있음
 	Application::Application()
 		:graphicDevice(nullptr),
@@ -39,6 +41,24 @@ namespace W
 	{
 		Time::Update();
 		Input::Update();
+
+		float fx = 0.f;
+		float fy = 0.f;
+
+		if (Input::GetKey(eKeyCode::RIGHT))
+			fx += 1.f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::LEFT))
+			fx -= 1.f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::UP))
+			fy += 1.f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::DOWN))
+			fy -= 1.f * Time::DeltaTime();
+		pos.x += fx;
+		pos.y += fy;
+
+		W::graphics::GetDevice()->SetConstantBuffer(W::renderer::triangleConstantBuffer, &pos, sizeof(Vector4));
+		W::graphics::GetDevice()->BindConstantBuffer(eShaderStage::VS, eCBType::Transform, W::renderer::triangleConstantBuffer);
+
 	}
 
 	void Application::LateUpdate()
@@ -62,6 +82,7 @@ namespace W
 			m_iHeight = _iHeight;
 		
 			graphicDevice = std::make_unique<W::graphics::GraphicDevice_Dx11>();
+			//제일먼저 호출될때 graphicDevice할당
 			W::graphics::GetDevice() = graphicDevice.get();
 		}
 

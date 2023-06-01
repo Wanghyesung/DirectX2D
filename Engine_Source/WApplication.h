@@ -23,6 +23,8 @@ namespace W
 		UINT GetHeight() { return m_iHeight; }
 		HWND GetHwnd() { return m_hHwnd; }
 
+		//std::unique_ptr<W::graphics::GraphicDevice_Dx11>& GetDevice() { return graphicDevice; }
+
 	private:
 		bool mbInitialize = false;
 		// 오로지 한개의 객체만 만들수 있는 스마트 포인터
