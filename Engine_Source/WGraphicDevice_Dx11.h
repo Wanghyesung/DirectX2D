@@ -4,11 +4,7 @@
 #include "WGraphics.h"
 
 //DirectX 11 라이브러리 추가(정적)
-#include <d3d11.h>
-#include <d3dcompiler.h>
 
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
 
 namespace W::graphics
 {
@@ -20,17 +16,30 @@ namespace W::graphics
 		~GraphicDevice_Dx11();
 
 		bool CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* _desc, HWND _hwnd);
-		bool CreateBuffer(ID3D11Buffer** _buffer, D3D11_BUFFER_DESC* _desc, D3D11_SUBRESOURCE_DATA* _data);
-		bool CreateShader();
 		bool CreateTexture(const D3D11_TEXTURE2D_DESC* _desc, void* _pdata);
+		bool CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* _pInputElementDescs, UINT _iNumElements, ID3DBlob* _byteCode, ID3D11InputLayout** _ppInputLayout);
+		bool CreateBuffer(ID3D11Buffer** _buffer, D3D11_BUFFER_DESC* _desc, D3D11_SUBRESOURCE_DATA* _data);
+		bool CompileFromfile(const std::wstring& _wstrFileName, const std::string& _strFunName, const std::string& _strVersion, ID3DBlob** _ppCod);
+		bool CreateVertexShader(const void* _pShaderByteCode, SIZE_T _BytecodeLength, ID3D11VertexShader** _ppVertexShader);
+		bool CreatePixelShader(const void* _pShaderByteCode, SIZE_T _BytecodeLength, ID3D11PixelShader** _ppPixelShader);
 
-		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
 
+		
+		void BindInputLayout(ID3D11InputLayout* _pInputLayout);
+		void BindPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology);
+		void BindVertexBuffer(UINT _iStartSlot, ID3D11Buffer* const* _ppVertexBuffers, const UINT* _pStrides, const UINT* _pOffsets);
+		void BindIndexBuffer(ID3D11Buffer* pIndexBuffer, DXGI_FORMAT _Format, UINT _iOffset);
+		void BindVertexShader(ID3D11VertexShader* _pVertexShader);
+		void BindPixelShader(ID3D11PixelShader* _pPixelShader);
 		void SetConstantBuffer(ID3D11Buffer* _buffer, void* _data, UINT _iSize);
 		void BindConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
 		void BindsConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
 
+		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
+
+		void DrawIndexed(UINT _iIndexCount, UINT _iStartIndexLocation, INT _iBaseVertexLocation);
 		void Draw();
+		void Present();
 		//임시
 		//void DrawCircle();
 
@@ -64,6 +73,6 @@ namespace W::graphics
 	{
 		static GraphicDevice_Dx11* device = nullptr;
 		return device;
-	}
+ 	}
 }
 

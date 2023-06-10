@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.h"
 #include "WGraphicDevice_Dx11.h"
+#include "WScene.h"
 
 namespace W
 {
@@ -35,7 +36,7 @@ namespace W
 		UINT m_iWidth;
 		UINT m_iHeight;
 
-
+		Scene* m_pScene;
 	};
 }
 

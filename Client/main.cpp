@@ -12,6 +12,9 @@
 #include "framework.h"
 #include "Client.h"
 #include "WApplication.h"
+#include "WRenderer.h"
+
+//키 이동, shader 색, 랜덤한게 생성, 먹으면 크기 늘어나게 (분열은 선택)
 
 //정적라이브러리 추가 1. 소스코드  2. 비주얼스튜디오 옵션
 //정적라이브러리에 들어가기 위한 헤더파일 include 
@@ -34,25 +37,24 @@
 //
 //#endif
 
-//vertex셰이더에 전달(이동)
-//키보드에서 받은(cpu)값을 vertexshader(GPU)로 변수로 입력 gpu에서 처리
-//cpu와 gpu에서 데이터 교환할 수 있는 버퍼가 필요함(상수 버퍼) 작은 수 구조체버퍼(상수버퍼들)
-//사용량이 많으면 cpu에서 연산하기 때문에 효율이 낮다
-//엔진에 따라 다르긴하지만 대부분의 단순값들은 cpu(하복) gpu(물리처리는 피직스?가 대표적)
-//게임 개발에 따라 gpu를 어떻게 쓸지
-//정점퍼버와(vertex 데이터) 다르게 인덕스 버퍼를 활용하여 그리는순서를 정함(정수 배열)
-//서브데이터를 넣을떄 크기만이 아니라, uint2(데이터들의 크기정보) 넣어줌
-//정점버퍼의경우는 cpu의 계산에 의한 데이터를 주기 때문에 cpu로 설정해줘야함 (기본값이 아니라)
-//상수버퍼 패딩 hlsl은 16바이트 경계를 넘지않아야한다 16바이트만 (vector4만 되는이유)
-//4개짜리(rgba, xyzw)와 같이 같은 차원의 수만 곱할 수 있기 때문에 gpu의 경우에는 주로 행렬을 사용하기 떄문
-//상수버퍼gpu로 전달 -> 픽셀셰이더로 전달
-//cpu에서 만든 서브리소스와 gpu의 서브리소스를 연결 지역변수로만든 서브리소스는 연결해제도 해주어야함
-//상수버퍼를 셰이더로 보낼때 어떤 셰이더로 보낼지 무슨데이터인지 , 버퍼주소 
-//cvuffer 자료형(상수버퍼) register로 슬롯 구분 상수버퍼크기와 정점셰이더에서 받는 데이터의 크기가 같아야함
-//cpu에서 받은 값을 gpu에 전달 후 셰이더로 전달하는 바인드과정을 매 프레임 반복
-//그릴때 정점버퍼셋팅했던것처럼 인덱스버퍼도 셋팅
-//키보드 좌우상하 삼각형 이동 
 
+//셰이더 만들어진 후 셋팅
+//layout 설정 -> setpustate에서 레이아웃 속성설정 
+//레이아웃 설정할 떄 vertexbuffer2진코드 덩어리 필요 
+//레아이웃 셰이더에 묶어서 
+//상수버퍼는 class안에 묶어서 -> 자주 사용하기 때문에, cpu에 데이터를 gpu로 보내야하기 떄문
+//구조화 버퍼는 배열같은 큰 데이터를 보내는 용도
+//버퍼를 만들때 ㅏ용하는 id3d11buffer클래스는 밖에 따로 뺴둠
+//따로 만든 버퍼 struct를 모든 버퍼 부모로 사용 (똑같이 사용하는 id3d11buffer 보관)
+//wrl
+//gpu연결 -> shader 연결
+//상수버퍼 만들때 데이터 크기(vertex)만 인자값으로 넣고 안에 옵션은 고정
+//constbuffer 생성자에 무슨 타입인지 실행중에 바뀌면 안되기 때문
+//ecs 기존의 컴포넌트 방식이 아니라 시스템이 가지고있는 데이터만 업데이트들 돌리기 , 헬스라는 데이터를
+//가지고있지않으면 업데이트를 하지않음 연속적으로 데이터(주소)를 가지고있자 
+//헬스는 헬스대로 트렌스폼은 프랜스폼대로 배열로 가지고있자
+//컴포넌트는 다른 컴포넌트의 주소를 가져와서 바꿀 수 있지만 ecs는 예외처리를 많이 해야함 한 배열에 다 묶여있기때문
+//스크립트도 유니티 compont 처럼 끌어서 쓸 수 있도록
 
 W::Application application;
 
@@ -116,6 +118,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
+    renderer::Release();
+
     return (int)msg.wParam;
 }
 
@@ -162,7 +166,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, 1280, 720, nullptr, nullptr, hInstance, nullptr);
+        CW_USEDEFAULT, 0, 1400, 750, nullptr, nullptr, hInstance, nullptr);
 
     if (!hWnd)
     {

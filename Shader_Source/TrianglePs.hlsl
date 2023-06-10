@@ -10,6 +10,7 @@ struct VSOut
     float4 Color : COLOR;
 };
 
+
 //∑ª¥ı ≈∏∞Ÿ¿∏∑Œ
 float4 main(VSOut In) : SV_TARGET
 {

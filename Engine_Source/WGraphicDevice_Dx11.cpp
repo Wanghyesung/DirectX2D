@@ -65,10 +65,11 @@ namespace W::graphics
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		//출력 병합 과정에서  깊이 스텐실 대상으로 바인딩합니다
 		depthStencilDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
-		//24비트
-		depthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
 		//텍스처를 읽고 쓰는 방법을 식별하는 값입니다.
 		depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+		depthStencilDesc.CPUAccessFlags = 0;
+		//24비트
+		depthStencilDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
 		//버퍼 해상도
 		depthStencilDesc.Width = application.GetWidth();
 		depthStencilDesc.Height = application.GetHeight();
@@ -132,7 +133,7 @@ namespace W::graphics
 		dxGiDesc.BufferDesc.RefreshRate.Numerator = 240;//최대 프레임
 		dxGiDesc.BufferDesc.RefreshRate.Denominator = 1; //최소 프레임
 		//지정된 모니터의 해상도에 맞게 이미지가 늘어나는 방식 (확대비율 지정) 
-		dxGiDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+		dxGiDesc.BufferDesc.Scaling = DXGI_MODE_SCALING::DXGI_MODE_SCALING_UNSPECIFIED;
 		dxGiDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 
 		//픽셀당 다중 샘플 수, 이미지 품질 수준 0~1
@@ -176,80 +177,40 @@ namespace W::graphics
 
 		return true;
 	}
-	bool GraphicDevice_Dx11::CreateShader()
+	
+
+	bool GraphicDevice_Dx11::CompileFromfile(const std::wstring& _wstrFileName, const std::string& _strFunName, const std::string& _strVersion, ID3DBlob** _ppCod)
 	{
-		//공유항목 프로젝트끼리 연결하기 위해서는 파일 입출력이 필요함
-		
-		//현재 위치 -> 부모 위치
-		std::filesystem::path shaderPath =
-			std::filesystem::current_path().parent_path();
-		shaderPath += L"\\Shader_Source\\";
+		ID3DBlob* errorBlob = nullptr;
+		D3DCompileFromFile(_wstrFileName.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			_strFunName.c_str(), _strVersion.c_str(), 0, 0, _ppCod, &errorBlob);
 
-		std::filesystem::path vsPath(shaderPath.c_str());
-		vsPath += L"TriangleVS.hlsl";
-
-		//hlsl파일 컴파일 오류는 errorblob에 나옴
-		//메인함수 문자열로 , 버전, 
-		D3DCompileFromFile(vsPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-			"main", "vs_5_0", 0, 0, &W::renderer::triangleVSBlob, &W::renderer::errorBlob);
-
-		if (W::renderer::errorBlob)
+		if (errorBlob)
 		{
-			//에러 걸리면 에러블롭에 나옴
-			OutputDebugStringA((char*)W::renderer::errorBlob->GetBufferPointer());
-			W::renderer::errorBlob->Release();
-		}
-		
-		m_cpDevice->CreateVertexShader(W::renderer::triangleVSBlob->GetBufferPointer(),
-			W::renderer::triangleVSBlob->GetBufferSize(),
-			nullptr, &W::renderer::triangleVSShader);
-		
-		std::filesystem::path psPath(shaderPath.c_str());
-		psPath += L"TrianglePs.hlsl";
-
-		D3DCompileFromFile(psPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-			, "main", "ps_5_0", 0, 0, &W::renderer::trianglePSBlob, &W::renderer::errorBlob);
-
-		if (W::renderer::errorBlob)
-		{
-			//에러 걸리면 에러블롭에 나옴
-			OutputDebugStringA((char*)W::renderer::errorBlob->GetBufferPointer());
-			W::renderer::errorBlob->Release();
+			OutputDebugStringA((char*)(errorBlob->GetBufferPointer()));
+			errorBlob->Release();
+			errorBlob = nullptr;
 		}
 
-		m_cpDevice->CreatePixelShader(W::renderer::trianglePSBlob->GetBufferPointer(),
-			W::renderer::trianglePSBlob->GetBufferSize(),
-			nullptr, &W::renderer::trianglePSShader);
+		return true;
+	}
 
-		// Input layout 정점 구조 정보를 넘겨줘야한다.
-		// 시작과 끝 시멘틱알려줘야함
-		//layer = 시작위치, 데이터 크기, 정점데이터 시멘틱 이름 시멘틱 넘버
-		//정점 셰이더에서 out반환 픽셀 셰이더에서 out인자 반환으로 픽셀 하나
-		//정점 데이터를 gpu에게 알려줘야함 (입력조립기 단계 , Input layout 정점 구조)
-		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
-		//시작 점 = 0
-		arrLayout[0].AlignedByteOffset = 0;
-		//색 채널당 32비트를 지원하는 3개 구성 요소의 96비트 부동 소수점 형식입니다. 
-		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-		arrLayout[0].InputSlot = 0;
-		//입력 데이터는 꼭짓점별 데이터입니다. (인스턴스 = 1)
-		arrLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		//시멘틱 구분 이름
-		arrLayout[0].SemanticName = "POSITION";
-		arrLayout[0].SemanticIndex = 0;
+	bool GraphicDevice_Dx11::CreateVertexShader(const void* _pShaderByteCode, 
+		SIZE_T _BytecodeLength, 
+		ID3D11VertexShader** _ppVertexShader)
+	{
+		if (FAILED(m_cpDevice->CreateVertexShader(_pShaderByteCode, _BytecodeLength, nullptr, _ppVertexShader)))
+			return false;
 
-		//vector(float3 12바이트)뒤에 color
-		arrLayout[1].AlignedByteOffset = 12;
-		arrLayout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-		arrLayout[1].InputSlot = 0;
-		arrLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		arrLayout[1].SemanticName = "COLOR";
-		arrLayout[1].SemanticIndex = 0;
+		return true;
+	}
 
-		m_cpDevice->CreateInputLayout(arrLayout, 2,
-			renderer::triangleVSBlob->GetBufferPointer(),
-			renderer::triangleVSBlob->GetBufferSize(),
-			&renderer::triangleLayout);
+	bool GraphicDevice_Dx11::CreatePixelShader(const void* _pShaderByteCode, 
+		SIZE_T _BytecodeLength, 
+		ID3D11PixelShader** _ppPixelShader)
+	{
+		if (FAILED(m_cpDevice->CreatePixelShader(_pShaderByteCode, _BytecodeLength, nullptr, _ppPixelShader)))
+			return false;
 
 		return true;
 	}
@@ -284,26 +245,76 @@ namespace W::graphics
 
 		return true;
 	}
+	bool GraphicDevice_Dx11::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* _pInputElementDescs, 
+		UINT _iNumElements, 
+		ID3DBlob* _byteCode, 
+		ID3D11InputLayout** _ppInputLayout)
+	{
+		if (FAILED(m_cpDevice->CreateInputLayout(_pInputElementDescs, _iNumElements,
+			_byteCode->GetBufferPointer(),
+			_byteCode->GetBufferSize(),
+			_ppInputLayout)))
+			return false;
+
+		return true;
+	}
 	void GraphicDevice_Dx11::BindViewPort(D3D11_VIEWPORT* _viewPort)
 	{
 		//뷰포트 개수
 		m_cpContext->RSSetViewports(1, _viewPort);
 
 	}
+	void GraphicDevice_Dx11::BindInputLayout(ID3D11InputLayout* _pInputLayout)
+	{
+		m_cpContext->IASetInputLayout(_pInputLayout);
+	}
+	void GraphicDevice_Dx11::BindPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology)
+	{
+		m_cpContext->IASetPrimitiveTopology(_Topology);
+	}
+	void GraphicDevice_Dx11::BindVertexBuffer(UINT _iStartSlot,
+		ID3D11Buffer* const* _ppVertexBuffers, 
+		const UINT* _pStrides, 
+		const UINT* _pOffsets)
+	{
+		m_cpContext->IASetVertexBuffers(_iStartSlot, 1, _ppVertexBuffers, _pStrides, _pOffsets);
+	}
+
+	void GraphicDevice_Dx11::BindIndexBuffer(ID3D11Buffer* pIndexBuffer, 
+		DXGI_FORMAT _Format, 
+		UINT _iOffset)
+	{
+		m_cpContext->IASetIndexBuffer(pIndexBuffer, _Format, _iOffset);
+	}
+
+	void GraphicDevice_Dx11::BindVertexShader(ID3D11VertexShader* _pVertexShader)
+	{
+		m_cpContext->VSSetShader(_pVertexShader,0,0);
+	}
+
+	void GraphicDevice_Dx11::BindPixelShader(ID3D11PixelShader* _pPixelShader)
+	{
+		m_cpContext->PSSetShader(_pPixelShader, 0, 0);
+	}
+
 	void GraphicDevice_Dx11::SetConstantBuffer(ID3D11Buffer* _buffer, void* _data, UINT _iSize)
 	{
+		//cpu에서 받은 값을 gpu로 보내는 과정 연결후 연결 해제까지
 		D3D11_MAPPED_SUBRESOURCE subRes = {};
 		//리소스는 쓰기용으로 매핑됩니다. 
 		m_cpContext->Map(_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subRes);
 		//버퍼 복사
 		memcpy(subRes.pData, _data, _iSize);
+		//cpu와 gpu연결 해제
 		m_cpContext->Unmap(_buffer, 0);//사용후 unmap
 	}
+
 	void GraphicDevice_Dx11::BindConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer)
 	{
 		switch (_eStage)
 		{
 		case eShaderStage::VS:
+			//시작 슬롯 버퍼 개수 
 			m_cpContext->VSSetConstantBuffers((UINT)_eType, 1, &_buffer);
 			break;
 		case eShaderStage::HS:
@@ -337,6 +348,10 @@ namespace W::graphics
 		m_cpContext->CSSetConstantBuffers((UINT)_eType, 1, &_buffer);
 
 	}
+	void GraphicDevice_Dx11::DrawIndexed(UINT _iIndexCount, UINT _iStartIndexLocation, INT _iBaseVertexLocation)
+	{
+		m_cpContext->DrawIndexed(_iIndexCount, _iStartIndexLocation, _iBaseVertexLocation);
+	}
 	void GraphicDevice_Dx11::Draw()
 	{
 		//회색
@@ -359,28 +374,42 @@ namespace W::graphics
 		};
 		
 		BindViewPort(&m_tViewPort);
+		//하나 이상의 렌더링 대상을 원자성으로 바인딩하고 깊이 스텐실 버퍼를 출력-병합 단계에 바인딩합니다.
 		m_cpContext->OMSetRenderTargets(1, m_cpRenderTargetView.GetAddressOf(), m_cpDepthStencilView.Get());
 		
 		// input assembler 정점 데이터 지정
-		UINT vertexsize = sizeof(renderer::Vertex);
-		UINT offset = 0;
+		//UINT vertexsize = sizeof(renderer::Vertex);
+		//UINT offset = 0;
 		//꼭짓점 버퍼 배열을 입력 어셈블러 단계에 바인딩합니다.
-		m_cpContext->IASetVertexBuffers(0, 1, &renderer::triangleBuffer, &vertexsize, &offset);
+		//m_cpContext->IASetVertexBuffers(0, 1, &renderer::triangleBuffer, &vertexsize, &offset);
 
 		//UINT바이트인덱스
-		m_cpContext->IASetIndexBuffer(renderer::triangleIdxBuffer, DXGI_FORMAT_R32_UINT, 0);
-		m_cpContext->IASetInputLayout(renderer::triangleLayout);
+		//m_cpContext->IASetIndexBuffer(renderer::triangleIdxBuffer, DXGI_FORMAT_R32_UINT, 0);
+		// 
+		//퍼버 바인딩
+		//renderer::mesh->BindBuffer();
+		
+		//m_cpContext->IASetInputLayout(renderer::shader->GetInputLayout());
+		//토폴로지
+		//W::graphics::GetDevice()->BindPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		//어떻게 그릴지
-		m_cpContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		//m_cpContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		
 		//bind vs, ps
-		m_cpContext->VSSetShader(renderer::triangleVSShader, 0, 0);
-		m_cpContext->PSSetShader(renderer::trianglePSShader, 0, 0);
+		//m_cpContext->VSSetShader(renderer::triangleVSShader, 0, 0);
+		//m_cpContext->PSSetShader(renderer::trianglePSShader, 0, 0);
 
-		//m_cpContext->Draw(12, 0);
-		m_cpContext->DrawIndexed(3, 0, 0);
+		//renderer::shader->Binds();
+
+		//m_cpContext->Draw(3, 0);
+		//m_cpContext->DrawIndexed(renderer::mesh->GetIndexCount(), 0, 0);
 
 		//레더타겟에 있는 이미지를 화면에 그려준다
+		//m_cpSwapChain->Present(0, 0);
+	}
+
+	void GraphicDevice_Dx11::Present()
+	{
 		m_cpSwapChain->Present(0, 0);
 	}
 

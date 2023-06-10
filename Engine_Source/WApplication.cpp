@@ -6,7 +6,7 @@
 
 namespace W
 {
-	Vector4 pos = Vector4(0.f, 0.f, 0.f, 1.f);
+	
 
 	//0,0의 해상도도 있음
 	Application::Application()
@@ -29,12 +29,16 @@ namespace W
 		Render();
 	}
 
+
 	void Application::Initialize()
 	{
 		Time::Initiailize();
 		Input::Initialize();
 
 		renderer::Initialize();
+
+		m_pScene = new Scene();
+		m_pScene->Initialize();
 	}
 
 	void Application::Update()
@@ -42,27 +46,32 @@ namespace W
 		Time::Update();
 		Input::Update();
 
-		float fx = 0.f;
-		float fy = 0.f;
-
-		if (Input::GetKey(eKeyCode::RIGHT))
-			fx += 1.f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::LEFT))
-			fx -= 1.f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::UP))
-			fy += 1.f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::DOWN))
-			fy -= 1.f * Time::DeltaTime();
-		pos.x += fx;
-		pos.y += fy;
-
-		W::graphics::GetDevice()->SetConstantBuffer(W::renderer::triangleConstantBuffer, &pos, sizeof(Vector4));
-		W::graphics::GetDevice()->BindConstantBuffer(eShaderStage::VS, eCBType::Transform, W::renderer::triangleConstantBuffer);
+		m_pScene->Update();
+		//내 위치따라 상수버퍼 전달
+		//float fx = 0.f;
+		//float fy = 0.f;
+		//
+		//if (Input::GetKey(eKeyCode::RIGHT))
+		//	fx += 1.f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::LEFT))
+		//	fx -= 1.f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::UP))
+		//	fy += 1.f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::DOWN))
+		//	fy -= 1.f * Time::DeltaTime();
+		//
+		//pos.x += fx;
+		//pos.y += fy;
+		//
+		////상수버퍼 세팅은 설정한 데이터값을 요구 vector4
+		//W::graphics::GetDevice()->SetConstantBuffer(renderer::triangleConstantBuffer, &pos, sizeof(Vector4));
+		//W::graphics::GetDevice()->BindConstantBuffer(eShaderStage::VS, eCBType::Transform, renderer::triangleConstantBuffer);
 
 	}
 
 	void Application::LateUpdate()
 	{
+
 	}
 
 	void Application::Render()
@@ -70,6 +79,8 @@ namespace W
 		Time::Render();
 
 		graphicDevice->Draw();
+		m_pScene->Render();
+		graphicDevice->Present();
 	}
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)
