@@ -4,20 +4,27 @@
 namespace W
 {
 	using namespace W::enums;
+	using namespace W::math;
+
+	class GameObject;
 
 	class Component
 	{
 	public:
-		Component();
+		Component(eComponentType _eType);
 		~Component();
 
 		virtual void Initialize();
 		virtual void Update();
-		virtual void LadteUpdate();
+		virtual void LateUpdate();
 		virtual void Render();
+
+		GameObject* GetOwner() { return m_pOwner; }
+		void SetOwner(GameObject* _pGameObj) { m_pOwner = _pGameObj; }
 
 	private:
 		const eComponentType m_eType;
+		GameObject* m_pOwner;
 
 	};
 }

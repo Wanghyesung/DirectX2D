@@ -36,7 +36,6 @@ namespace W
 		UINT m_iWidth;
 		UINT m_iHeight;
 
-		Scene* m_pScene;
 	};
 }
 

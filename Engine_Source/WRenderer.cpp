@@ -5,6 +5,9 @@
 
 namespace renderer
 {
+	using namespace W;
+	using namespace W::graphics;
+
 	//삼각형 버퍼 수
 	Vertex vertexes[4] = {};
 
@@ -80,8 +83,10 @@ namespace renderer
 		////single
 		////application.GetDevice().get()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
 		//W::graphics::GetDevice()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
+
 		mesh = new W::Mesh();
 		mesh->CreateVertexBuffer(vertexes, 4);
+
 
 		//그리는 순서 지정 (사각형)
 		std::vector<UINT> indexes = {};
@@ -93,13 +98,12 @@ namespace renderer
 		indexes.push_back(2);
 		indexes.push_back(3);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
-
-
+	
 		//constant buffer
-		//constantBuffer = new W::graphics::ConstantBuffer(eCBType::Transform);
-		//constantBuffer->Create(sizeof(Vector4));
+		constantBuffer = new ConstantBuffer(eCBType::Transform);
+		constantBuffer->Create(sizeof(Vector4));
 		
-		//Vector4 pos(0.2f, 0.0f, 0.0f, 1.0f);
+		//Vector4 pos(0.2f, 0.0f, 1.f, 1.f);
 		//constantBuffer->SetData(&pos);
 		//constantBuffer->Bind(eShaderStage::VS);
 
@@ -146,23 +150,21 @@ namespace renderer
 	{
 		//삼각형 정점위치, 색깔 정하기
 		//-1~ 1 ndc좌표계로 입력
-		vertexes[0].Pos = Vector3(-0.5f, 0.5f, 0.f);
+		vertexes[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		
-		vertexes[1].Pos = Vector3(0.5f, 0.5f, 0.f);
-		vertexes[1].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		
-		vertexes[2].Pos = Vector3(0.5f, -0.5f, 0.f);
-		vertexes[2].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		
-		vertexes[3].Pos = Vector3(-0.5f, -0.5f, 0.f);
-		vertexes[3].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+
+		vertexes[1].Pos = Vector3(0.5f, 0.5f, 0.0f);
+		vertexes[1].Color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+
+		vertexes[2].Pos = Vector3(0.5f, -0.5f, 0.0f);
+		vertexes[2].Color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+
+		vertexes[3].Pos = Vector3(-0.5f, -0.5f, 0.0f);
+		vertexes[3].Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 
 		LoadBuffer();
 		LoadShader();
 		SetupState();
-
-		//InitializeCircle();
 	}
 
 	void Release()

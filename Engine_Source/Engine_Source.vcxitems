@@ -18,7 +18,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Engine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Enums.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WChildPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h" />
@@ -29,7 +28,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResources.h" />
@@ -38,10 +38,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WApplication.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WChildPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp" />
@@ -51,7 +51,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMesh.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMeshRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WResources.cpp" />
@@ -60,6 +61,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)WMath.inl" />

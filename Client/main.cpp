@@ -56,6 +56,13 @@
 //컴포넌트는 다른 컴포넌트의 주소를 가져와서 바꿀 수 있지만 ecs는 예외처리를 많이 해야함 한 배열에 다 묶여있기때문
 //스크립트도 유니티 compont 처럼 끌어서 쓸 수 있도록
 
+//트렌스폼은 위치데이터 저장-> 상수버퍼에 전달용
+//렌더 컴포넌트에서는 mesh shader을 통해서 그려줌 ex: mesh renderer
+//메테리얼 ((shader)vs,ps,texture)
+//위치 컴포넌트는 제일먼저 호출
+//위치 컴포넌트(상수버퍼셋팅 (호출용 위치관련된, 여러개의 상수버퍼 셋팅 vector4(*3)))
+
+
 W::Application application;
 
 #define MAX_LOADSTRING 100

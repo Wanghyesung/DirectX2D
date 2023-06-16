@@ -6,4 +6,15 @@
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Load">
+      <UniqueIdentifier>{3935af5c-781a-485f-b861-a577e1da5dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{974c994e-0aa6-4686-b726-c64ba41acb54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{ccb16c22-7d89-48d1-a1e0-e2dfac14ed65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
 </Project>

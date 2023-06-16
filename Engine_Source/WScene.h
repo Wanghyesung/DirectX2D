@@ -1,8 +1,7 @@
 #pragma once
 
 #include "WEntity.h"
-#include "WGameObject.h"
-#include "WPlayer.h"
+#include "WLayer.h"
 
 namespace W
 {
@@ -17,17 +16,10 @@ namespace W
 		virtual void LateUpdate();
 		virtual void Render();
 
-		bool Check();
-		void DeleteObject(GameObject* _pObj);
-		void SetPlayer(Player* _pPlayer) { m_pPlayer = _pPlayer; }
+		void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
 
 	private:
-		std::vector<GameObject*> m_vecGameObject;
-
-
-		Player* m_pPlayer;
-		float m_fCurTime;
-		float m_CreateTime;
+		std::vector<Layer> m_vecLayer;
 	};
 }
 

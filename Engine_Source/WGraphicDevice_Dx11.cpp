@@ -352,7 +352,7 @@ namespace W::graphics
 	{
 		m_cpContext->DrawIndexed(_iIndexCount, _iStartIndexLocation, _iBaseVertexLocation);
 	}
-	void GraphicDevice_Dx11::Draw()
+	void GraphicDevice_Dx11::ClearTarget()
 	{
 		//회색
 		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -360,7 +360,11 @@ namespace W::graphics
 		m_cpContext->ClearRenderTargetView(m_cpRenderTargetView.Get(), bgColor);
 		//깊이버퍼 지우기
 		m_cpContext->ClearDepthStencilView(m_cpDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0.0f);
-
+		//하나 이상의 렌더링 대상을 원자성으로 바인딩하고 깊이 스텐실 버퍼를 출력-병합 단계에 바인딩합니다.
+		m_cpContext->OMSetRenderTargets(1, m_cpRenderTargetView.GetAddressOf(), m_cpDepthStencilView.Get());
+	}
+	void GraphicDevice_Dx11::UpdateViewPort()
+	{
 		//뷰포트 업데이트
 		HWND hWnd = application.GetHwnd();
 		RECT winRect = {};
@@ -372,10 +376,12 @@ namespace W::graphics
 			, (float)(winRect.bottom - winRect.top)
 			, 0.0f, 1.0f
 		};
-		
+
 		BindViewPort(&m_tViewPort);
-		//하나 이상의 렌더링 대상을 원자성으로 바인딩하고 깊이 스텐실 버퍼를 출력-병합 단계에 바인딩합니다.
-		m_cpContext->OMSetRenderTargets(1, m_cpRenderTargetView.GetAddressOf(), m_cpDepthStencilView.Get());
+		
+	}
+	void GraphicDevice_Dx11::Draw()
+	{	
 		
 		// input assembler 정점 데이터 지정
 		//UINT vertexsize = sizeof(renderer::Vertex);
@@ -402,6 +408,8 @@ namespace W::graphics
 		//renderer::shader->Binds();
 
 		//m_cpContext->Draw(3, 0);
+		// ps에서 받은 정점들의 데이터들이 보간되기 때문에 픽셀이 중간값이 나옴
+		//래스터라이저에서 뒷면제거 외적의 결과로 앞두ㅣ를 판결하기 떄문애 외적의 결과에(먀주보고있으면 뒷면) 따라서 나오는개 달라짐
 		//m_cpContext->DrawIndexed(renderer::mesh->GetIndexCount(), 0, 0);
 
 		//레더타겟에 있는 이미지를 화면에 그려준다
@@ -414,7 +422,6 @@ namespace W::graphics
 	}
 
 
-	// ps에서 받은 정점들의 데이터들이 보간되기 때문에 픽셀이 중간값이 나옴
-	//래스터라잊에서 뒷면제거 외적의 결과로 앞두ㅣ를 판결하기 떄문애 외적의 결과에(먀주보고있으면 뒷면) 따라서 나오는개 달라짐
+	
 
 }

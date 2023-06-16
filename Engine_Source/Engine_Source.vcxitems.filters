@@ -31,9 +31,6 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{ce511c8c-e683-48b3-9fab-e31987ba1ecc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Script">
-      <UniqueIdentifier>{fa3a80e4-681b-46e7-9837-3ee00c75b316}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{80bf9b85-0f00-4929-a437-c2d01587f64d}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,21 @@
     </Filter>
     <Filter Include="GameObject\Component">
       <UniqueIdentifier>{948c9f28-5fdb-4125-a627-7a911581d1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{df7b43b2-a254-4683-9e4c-eba5933fa80f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manger">
+      <UniqueIdentifier>{435fc920-ff2b-40c5-978f-0ad56b5e57c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Transform">
+      <UniqueIdentifier>{e2acf9dc-b7e4-456d-a53f-6d1fac4260d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\MeshRenderer">
+      <UniqueIdentifier>{2b4fb0e3-61bf-4740-bfec-684101f203b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Script">
+      <UniqueIdentifier>{fa3a80e4-681b-46e7-9837-3ee00c75b316}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,23 +99,26 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp">
       <Filter>Scene\Layer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WScript.cpp">
-      <Filter>GameObject\Script</Filter>
+      <Filter>GameObject\Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WScene.cpp">
+      <Filter>Scene\Base</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WSceneManger.cpp">
+      <Filter>Scene\Manger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayer.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp">
+      <Filter>GameObject\Component\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WChildPlayer.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMeshRenderer.cpp">
+      <Filter>GameObject\Component\MeshRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,23 +176,26 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h">
       <Filter>Scene\Layer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WScript.h">
-      <Filter>GameObject\Script</Filter>
+      <Filter>GameObject\Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WScene.h">
+      <Filter>Scene\Base</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WSceneManger.h">
+      <Filter>Scene\Manger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayer.h">
-      <Filter>GameObject</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h">
+      <Filter>GameObject\Component\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WChildPlayer.h">
-      <Filter>GameObject</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMeshRenderer.h">
+      <Filter>GameObject\Component\MeshRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

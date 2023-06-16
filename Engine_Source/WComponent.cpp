@@ -2,8 +2,8 @@
 
 namespace W
 {
-	Component::Component():
-		m_eType(eComponentType::End)
+	Component::Component(eComponentType _eType) :
+		m_eType(_eType)
 	{
 	}
 	Component::~Component()
@@ -14,8 +14,9 @@ namespace W
 	}
 	void Component::Update()
 	{
+
 	}
-	void Component::LadteUpdate()
+	void Component::LateUpdate()
 	{
 	}
 	void Component::Render()

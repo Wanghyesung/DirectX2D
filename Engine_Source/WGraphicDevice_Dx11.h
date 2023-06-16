@@ -38,10 +38,11 @@ namespace W::graphics
 		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
 
 		void DrawIndexed(UINT _iIndexCount, UINT _iStartIndexLocation, INT _iBaseVertexLocation);
+		void ClearTarget();
+		void UpdateViewPort();
 		void Draw();
 		void Present();
-		//임시
-		//void DrawCircle();
+		
 
 	private:
 		// 실제 그래픽카드 하드웨어 객체

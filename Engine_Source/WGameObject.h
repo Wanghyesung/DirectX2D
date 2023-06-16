@@ -26,30 +26,42 @@ namespace W
 		virtual void LateUpdate();
 		virtual void Render();
 
+		template <typename T>
+		T* GetComponent()
+		{
+			T* component;
+			for (Component* comp : m_vecComponent)
+			{
+				component = dynamic_cast<T*>(comp);
+				if (component != nullptr)
+					return component;
+			}
 
-		void SetupState();
-		virtual void SetBuffer();
-		virtual void SetShader(std::string _strFunName);
-		virtual void ConstantBuffer();
+			return nullptr;
+		}
 
-		math::Vector3 GetPos() { return m_vPos; }
-		void SetPos(math::Vector3 _vPos) { m_vPos = _vPos; }
+		template<typename T>
+		T* AddComponent()
+		{
+			T* comp = new T();
+			
+			Component* buff =
+				dynamic_cast<Component*>(comp);
 
-		float GetColor() { return m_fColor; }
+			if (buff == nullptr)
+				return nullptr;
 
-		graphics::ConstantBuffer* GetConstBuffer() { return m_pConstantBuffer; }
-		Mesh* GetMesh() { return m_pMesh; }
-		Shader* GetShader() { return m_pShader; }
+			m_vecComponent.push_back(buff);
+			comp->SetOwner(this);
+
+			return comp;
+		}
+
+	
 
 	private:
 		eState m_eState;
-		//
-		math::Vector3 m_vPos;
-		float m_fColor;
-		graphics::ConstantBuffer* m_pConstantBuffer;
-		Mesh* m_pMesh;
-		Shader* m_pShader;
-
+		std::vector<Component*> m_vecComponent;
 	};
 }
 
