@@ -120,6 +120,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WMeshRenderer.cpp">
       <Filter>GameObject\Component\MeshRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h">
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WMeshRenderer.h">
       <Filter>GameObject\Component\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,17 +10,19 @@ struct VSIn
     //Ω√∏‡∆Ω¿∏∑Œ ±∏∫–
     float3 Pos : POSITION;
     float4 Color : COLOR;
+    float2 UV : TEXCOORD;
 };
 
 struct VSOut
 {
     float4 Pos : SV_Position;
     float4 Color : COLOR;
+    float2 UV : TEXCOORD;
 };
 
 cbuffer Transform : register(b0)
 {
-    float4 Pos;
+    float4 Position;
 }
 
 
@@ -34,9 +36,11 @@ VSOut main(VSIn In)
     //Out.Pos.x *= Pos.z;
     //Out.Pos.y *= Pos.z;
     
-    Out.Pos.x += Pos.x;
-    Out.Pos.y += Pos.y;
-    
+    //Out.Pos.x += Pos.x;
+    //Out.Pos.y += Pos.y;
+    //
+    //Out.Color = In.Color;
+    Out.UV = In.UV;
     Out.Color = In.Color;
 
     return Out;

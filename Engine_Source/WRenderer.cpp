@@ -2,6 +2,8 @@
 //#include "WApplication.h"
 
 //extern W::Application application;
+#include "WResources.h"
+#include "WTexture.h"
 
 namespace renderer
 {
@@ -41,7 +43,7 @@ namespace renderer
 	void SetupState()
 	{
 		//Iinput layout 정점 구조 정보를 넘겨줘야한다.
-		D3D11_INPUT_ELEMENT_DESC arrLayout[2] = {};
+		D3D11_INPUT_ELEMENT_DESC arrLayout[3] = {};
 		
 		arrLayout[0].AlignedByteOffset = 0;
 		arrLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
@@ -57,8 +59,14 @@ namespace renderer
 		arrLayout[1].SemanticName = "COLOR";
 		arrLayout[1].SemanticIndex = 0;
 
+		arrLayout[2].AlignedByteOffset = 28;
+		arrLayout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+		arrLayout[2].InputSlot = 0;
+		arrLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		arrLayout[2].SemanticName = "TEXCOORD";
+		arrLayout[2].SemanticIndex = 0;
 
-		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 2,
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
 			shader->GetVSCode(),
 			shader->GetInputLayoutAddressOf());
 	}
@@ -148,23 +156,33 @@ namespace renderer
 
 	void Initialize()
 	{
-		//삼각형 정점위치, 색깔 정하기
-		//-1~ 1 ndc좌표계로 입력
+		//텍스쳐에서 색가져오기samlestate, uv좌표 때문에 정점정보도 uv좌표를 넣어서 바뀌어야함 vertex도한 uv추가, inputlayout도 추가 (3개로)
 		vertexes[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertexes[0].UV = Vector2(0.0f, 0.0f);
 
 		vertexes[1].Pos = Vector3(0.5f, 0.5f, 0.0f);
 		vertexes[1].Color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes[1].UV = Vector2(1.0f, 0.0f);
 
 		vertexes[2].Pos = Vector3(0.5f, -0.5f, 0.0f);
 		vertexes[2].Color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertexes[2].UV = Vector2(1.0f, 1.0f);
 
 		vertexes[3].Pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[3].Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertexes[3].UV = Vector2(0.0f, 1.0f);
 
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+
+
+		//이미지로드 후 픽셀셰이두 묶기
+		Texture* pTex =
+			Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+
+		pTex->BindShader(eShaderStage::PS, 0);
 	}
 
 	void Release()

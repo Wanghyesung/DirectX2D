@@ -1,5 +1,10 @@
 #pragma once
-class Script
+
+namespace W
 {
-};
+	class Script
+	{
+	};
+}
+
 

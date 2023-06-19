@@ -16,11 +16,11 @@ namespace W
 		AddGameObject(eLayerType::Player, pPlayer);
 		pPlayer->AddComponent<MeshRenderer>();
 
-		GameObject* player2 = new GameObject();
-		AddGameObject(eLayerType::Player, player2);
-		player2->AddComponent<MeshRenderer>();
-
-		pPlayer->GetComponent<Transform>()->SetPosition(0.5f,0.5f,0.f);
+		//GameObject* player2 = new GameObject();
+		//AddGameObject(eLayerType::Player, player2);
+		//player2->AddComponent<MeshRenderer>();
+		//
+		//pPlayer->GetComponent<Transform>()->SetPosition(0.5f,0.5f,0.f);
 
 	}
 	void PlayScene::Update()

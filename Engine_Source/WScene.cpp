@@ -34,6 +34,14 @@ namespace W
 			layer.Render();
 		}
 	}
+	void Scene::OnEnter()
+	{
+
+	}
+	void Scene::OnExit()
+	{
+
+	}
 	void Scene::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
 	{
 		m_vecLayer[(UINT)_eType].AddGameObject(_pGameObj);

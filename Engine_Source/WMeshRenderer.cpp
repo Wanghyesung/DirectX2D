@@ -11,18 +11,22 @@ namespace W
 	}
 	MeshRenderer::~MeshRenderer()
 	{
+
 	}
 	void MeshRenderer::Initialize()
 	{
+
 	}
 	void MeshRenderer::Update()
 	{
+
 	}
 	void MeshRenderer::LateUpdate()
 	{
 	}
 	void MeshRenderer::Render()
 	{
+		//lateupdat나 update에서 돌리고 오면 mesh, shader에서 위치값이 겹쳐서 들어옴
 		Transform* pTransform = GetOwner()->GetComponent<Transform>();
 		pTransform->BindConstantBuffer();
 

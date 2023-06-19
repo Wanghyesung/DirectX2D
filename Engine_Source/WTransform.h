@@ -4,6 +4,10 @@
 
 namespace W
 {
+	//트렌스폼은 위치데이터 저장->상수버퍼에 전달용
+	//	위치 컴포넌트는 제일먼저 호출
+	//	위치 컴포넌트(상수버퍼셋팅(호출용 위치관련된, 여러개의 상수버퍼 셋팅 vector4(*3)))
+
 	class Transform : public Component
 	{
 	public:

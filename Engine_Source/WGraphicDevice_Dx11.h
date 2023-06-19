@@ -34,6 +34,7 @@ namespace W::graphics
 		void SetConstantBuffer(ID3D11Buffer* _buffer, void* _data, UINT _iSize);
 		void BindConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
 		void BindsConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
+		void BindShaderResource(eShaderStage _eStage, UINT _iStartSlot, ID3D11ShaderResourceView** _ppSRV);
 
 		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
 
@@ -43,6 +44,7 @@ namespace W::graphics
 		void Draw();
 		void Present();
 		
+		ID3D11Device* GetID3D11Device() { return m_cpDevice.Get(); }
 
 	private:
 		// 실제 그래픽카드 하드웨어 객체

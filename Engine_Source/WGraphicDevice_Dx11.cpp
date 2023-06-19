@@ -348,6 +348,34 @@ namespace W::graphics
 		m_cpContext->CSSetConstantBuffers((UINT)_eType, 1, &_buffer);
 
 	}
+	void GraphicDevice_Dx11::BindShaderResource(eShaderStage _eStage, UINT _iStartSlot, ID3D11ShaderResourceView** _ppSRV)
+	{
+		switch (_eStage)
+		{
+		case eShaderStage::VS:
+			m_cpContext->VSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::HS:
+			m_cpContext->HSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::DS:
+			m_cpContext->DSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::GS:
+			m_cpContext->GSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::PS:
+			m_cpContext->PSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::CS:
+			m_cpContext->CSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::END:
+			break;
+		default:
+			break;
+		}
+	}
 	void GraphicDevice_Dx11::DrawIndexed(UINT _iIndexCount, UINT _iStartIndexLocation, INT _iBaseVertexLocation)
 	{
 		m_cpContext->DrawIndexed(_iIndexCount, _iStartIndexLocation, _iBaseVertexLocation);

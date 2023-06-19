@@ -16,6 +16,9 @@ namespace W
 		virtual void LateUpdate();
 		virtual void Render();
 
+		virtual void OnEnter();
+		virtual void OnExit();
+
 		void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
 
 	private:

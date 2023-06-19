@@ -37,6 +37,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WSceneManger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h" />
   </ItemGroup>
@@ -60,6 +61,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WSceneManger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp" />
   </ItemGroup>
