@@ -23,7 +23,7 @@ namespace W
 
     Mesh::~Mesh()
     {
-        int a = 10;
+        
     }
 
     HRESULT Mesh::Load(const std::wstring& path)

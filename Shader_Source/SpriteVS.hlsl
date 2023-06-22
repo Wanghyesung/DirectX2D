@@ -37,13 +37,14 @@ VSOut main(VSIn In)
     //월드행렬
     float4 world = mul(float4(In.Pos, 1.f), World);
     //월드행렬 * 뷰행렬
-    //float4 view = mul(world, View);
+    float4 view = mul(world, View);
     //뷰행렬 * 투영행렬
-    //float4 proj = mul(view, Projection);
+    float4 proj = mul(view, Projection);
     
-    Out.Pos = world;
-    Out.UV = In.UV;
+    Out.Pos = proj;
     Out.Color = In.Color;
+    Out.UV = In.UV;
+    //Out.UV.x *= -1;
 
     return Out;
 }

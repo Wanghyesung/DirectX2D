@@ -56,5 +56,17 @@ namespace W::graphics
 		
 		GetDevice()->BindShaderResource(_eStage, _iStartSlot, m_cpSRV.GetAddressOf());
 	}
+	void Texture::Clear()
+	{
+		//전부 nullptr로 묶어서 지우기
+		ID3D11ShaderResourceView* srv = nullptr;
+
+		GetDevice()->BindShaderResource(eShaderStage::VS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::DS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::GS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::HS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::CS, 0, &srv);
+		GetDevice()->BindShaderResource(eShaderStage::PS, 0, &srv);
+	}
 }
 

@@ -1,6 +1,7 @@
 #include "WTransform.h"
 #include "WRenderer.h"
 #include "WConstantBuffer.h"
+#include "WCamera.h"
 namespace W
 {
 	using namespace W::graphics;
@@ -11,9 +12,11 @@ namespace W
 		m_vRotation(Vector3::Zero),
 		m_vScale(Vector3::One)
 	{
+
 	}
 	Transform::~Transform()
 	{
+
 	}
 	void Transform::Initialize()
 	{
@@ -50,6 +53,8 @@ namespace W
 	{
 		renderer::TransformCB trCB = {};
 		trCB.m_mWorld = m_vWorld;
+		trCB.m_mView = Camera::GetViewMatrix();
+		trCB.m_mProjection = Camera::GetProjectionMatrix();
 
 		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Transform];
 		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);

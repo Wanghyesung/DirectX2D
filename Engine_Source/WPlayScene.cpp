@@ -5,6 +5,7 @@
 #include "WMesh.h"
 #include "WMaterial.h"
 #include "WCameraScript.h"
+#include "WCamera.h"
 namespace W
 {
 	PlayScene::PlayScene()
@@ -15,19 +16,30 @@ namespace W
 	}
 	void PlayScene::Initialize()
 	{
-		GameObject* pPlayer = new GameObject();
-		AddGameObject(eLayerType::Player, pPlayer);
-		MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+		{
+			GameObject* pPlayer = new GameObject();
+			AddGameObject(eLayerType::Player, pPlayer);
+			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+			pPlayer->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+		}
 
-		pPlayer->AddComponent<WCameraScript>();
-		//GameObject* player2 = new GameObject();
-		//AddGameObject(eLayerType::Player, player2);
-		//player2->AddComponent<MeshRenderer>();
-		//
-		//pPlayer->GetComponent<Transform>()->SetPosition(0.5f,0.5f,0.f);
+		{
+			GameObject* pPlayer = new GameObject();
+			AddGameObject(eLayerType::Player, pPlayer);
+			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
+			pPlayer->GetComponent<Transform>()->SetPosition(2.f,0.f,0.f);
+		}
 
+		//camera object
+		GameObject* pCamera = new GameObject();
+		AddGameObject(eLayerType::Player, pCamera);
+		pCamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
+		Camera* pCameraComp = pCamera->AddComponent<Camera>();
+		pCamera->AddComponent<CameraScript>();
 	}
 	void PlayScene::Update()
 	{

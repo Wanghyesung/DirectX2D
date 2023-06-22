@@ -2,24 +2,53 @@
 #include "WTransform.h"
 #include "WGameObject.h"
 #include "WTime.h"
-
+#include "WInput.h"
 
 //여기서 오브젝트 로직
 namespace W
 {
-	WCameraScript::WCameraScript()
+	CameraScript::CameraScript()
 	{
 
 	}
-	WCameraScript::~WCameraScript()
+	CameraScript::~CameraScript()
 	{
 
 	}
-	void WCameraScript::Update()
+	void CameraScript::Update()
 	{
 		Transform* pTr = GetOwner()->GetComponent<Transform>();
 		Vector3 vPos = pTr->GetPosition();
-		vPos.x += 1.f * Time::DeltaTime();
-		pTr->SetPosition(vPos);
+		if (Input::GetKey(eKeyCode::W))
+		{
+			vPos.z += 5.0f * Time::DeltaTime();
+			pTr->SetPosition(vPos);
+		}
+		else if (Input::GetKey(eKeyCode::S))
+		{
+			vPos.z -= 5.0f * Time::DeltaTime();
+			pTr->SetPosition(vPos);
+		}
+		else if (Input::GetKey(eKeyCode::A))
+		{
+			vPos.x -= 5.0f * Time::DeltaTime();
+			pTr->SetPosition(vPos);
+		}
+		else if (Input::GetKey(eKeyCode::D))
+		{
+			vPos.x += 5.0f * Time::DeltaTime();
+			pTr->SetPosition(vPos);
+		}
+		else if (Input::GetKey(eKeyCode::Q))
+		{
+			vPos.y -= 5.0f * Time::DeltaTime();
+			pTr->SetPosition(vPos);
+		}
+		else if (Input::GetKey(eKeyCode::E))
+		{
+			vPos.y += 5.0f * Time::DeltaTime();
+			pTr->SetPosition(vPos);
+		}
+
 	}
 }

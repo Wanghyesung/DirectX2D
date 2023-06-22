@@ -10,7 +10,6 @@
 //16바이트로만 만들게
 #define CBUFFER(name, slot) static const int CB_GETBINDSLOT(name) = slot; struct alignas(16) name 
 
-
 //0번 슬롯 위치
 #define CBSLOT_TRANSFORM		0
 enum class eShaderStage

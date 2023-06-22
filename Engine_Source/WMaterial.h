@@ -15,6 +15,7 @@ namespace W::graphics
 		virtual HRESULT Load(const std::wstring& _strPath);
 			
 		void Binds();
+		void Clear();
 
 		void SetShader(std::shared_ptr<Shader> _pSahder) { m_pShader = _pSahder; }
 		void SetTexture(std::shared_ptr<Texture> _pTex) { m_pTex = _pTex; }

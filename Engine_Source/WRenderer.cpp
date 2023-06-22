@@ -179,13 +179,26 @@ namespace renderer
 		pSpriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		W::Resources::Insert(L"SpriteShader", pSpriteShader);
 
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+		//두 오브젝트 둘다 똑같은 메테리얼로 셋팅
+		{
+			std::shared_ptr<Texture> pTex =
+				Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
-		std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
-		pSpriteMaterial->SetShader(pSpriteShader);
-		pSpriteMaterial->SetTexture(pTex);
-		Resources::Insert(L"SpriteMaterial", pSpriteMaterial);
+			std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
+			pSpriteMaterial->SetShader(pSpriteShader);
+			pSpriteMaterial->SetTexture(pTex);
+			Resources::Insert(L"SpriteMaterial", pSpriteMaterial);
+		}
+
+		{
+			std::shared_ptr<Texture> pTex =
+				Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+
+			std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
+			pSpriteMaterial->SetShader(pSpriteShader);
+			pSpriteMaterial->SetTexture(pTex);
+			Resources::Insert(L"SpriteMaterial02", pSpriteMaterial);
+		}
 	}
 
 	

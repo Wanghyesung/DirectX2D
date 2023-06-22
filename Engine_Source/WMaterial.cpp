@@ -22,4 +22,8 @@ namespace W::graphics
 		m_pTex->BindShader(eShaderStage::PS, 0);
 		m_pShader->Binds();
 	}
+	void Material::Clear()
+	{
+		m_pTex->Clear();
+	}
 }

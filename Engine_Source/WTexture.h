@@ -22,6 +22,7 @@ namespace W::graphics
 
 		virtual HRESULT Load(const std::wstring& _strPath);
 		void BindShader(eShaderStage _eStage, UINT _iStartSlot);
+		void Clear();
 
 	private:
 		//scratchImage원본이미지의 정보들이 들어있는 확장자

@@ -3,11 +3,11 @@
 
 namespace W
 {
-	class WCameraScript : public Script
+	class CameraScript : public Script
 	{
 	public:
-		WCameraScript();
-		virtual ~WCameraScript();
+		CameraScript();
+		virtual ~CameraScript();
 
 		virtual void Update() override;
 
