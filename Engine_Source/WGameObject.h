@@ -2,9 +2,7 @@
 
 #include "WEntity.h"
 #include "WComponent.h"
-#include "WConstantBuffer.h"
-#include "WMesh.h"
-#include "WShader.h"
+#include "WScript.h"
 
 namespace W
 {
@@ -37,6 +35,14 @@ namespace W
 					return component;
 			}
 
+			for (Component* script : m_vecScript)
+			{
+				component = dynamic_cast<T*>(script);
+				if (component != nullptr)
+					return component;
+			}
+
+
 			return nullptr;
 		}
 
@@ -48,10 +54,17 @@ namespace W
 			Component* buff =
 				dynamic_cast<Component*>(comp);
 
+			Script* script =
+				dynamic_cast<Script*>(buff);
+
 			if (buff == nullptr)
 				return nullptr;
 
-			m_vecComponent.push_back(buff);
+			if (script == nullptr)
+				m_vecComponent.push_back(buff);
+			else
+				m_vecScript.push_back(script);
+
 			comp->SetOwner(this);
 
 			return comp;
@@ -62,6 +75,7 @@ namespace W
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;
+		std::vector<Script*> m_vecScript;
 	};
 }
 

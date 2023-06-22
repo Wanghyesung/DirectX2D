@@ -4,6 +4,7 @@
 namespace W::graphics
 {
 	Texture::Texture():
+		Resource(enums::eResourceType::Texture),
 		m_Image{},
 		m_cpTexture(nullptr),
 		m_cpSRV(nullptr),
@@ -12,6 +13,7 @@ namespace W::graphics
 	}
 	Texture::~Texture()
 	{
+		
 	}
 	HRESULT Texture::Load(const std::wstring& _strPath)
 	{

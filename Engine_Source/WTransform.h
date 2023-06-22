@@ -33,10 +33,22 @@ namespace W
 		Vector3 GetRotation() { return m_vRotation; }
 		Vector3 GetScale() { return m_vScale; }
 
+		Vector3 Foward() { return m_vFoward; }
+		Vector3 Right() { return m_vRight; }
+		Vector3 Up() { return m_vUp; }
+
 	private:
 		Vector3 m_vPosition;
 		Vector3 m_vRotation;
 		Vector3 m_vScale;
+
+		//내 각도의 방향
+		Vector3 m_vUp;
+		Vector3 m_vFoward;
+		Vector3 m_vRight;
+
+		//내 오브젝트 월드 행렬
+		Matrix m_vWorld;
 
 	};
 

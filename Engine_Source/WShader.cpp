@@ -4,6 +4,7 @@
 namespace W
 {
 	Shader::Shader():
+		Resource(enums::eResourceType::Shader),
 		m_tInputLayout(nullptr),
 		m_eTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	{

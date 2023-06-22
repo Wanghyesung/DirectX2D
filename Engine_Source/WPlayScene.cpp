@@ -1,7 +1,10 @@
 #include "WPlayScene.h"
 #include "WTransform.h"
+#include "WResources.h"
 #include "WMeshRenderer.h"
-
+#include "WMesh.h"
+#include "WMaterial.h"
+#include "WCameraScript.h"
 namespace W
 {
 	PlayScene::PlayScene()
@@ -14,8 +17,11 @@ namespace W
 	{
 		GameObject* pPlayer = new GameObject();
 		AddGameObject(eLayerType::Player, pPlayer);
-		pPlayer->AddComponent<MeshRenderer>();
+		MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 
+		pPlayer->AddComponent<WCameraScript>();
 		//GameObject* player2 = new GameObject();
 		//AddGameObject(eLayerType::Player, player2);
 		//player2->AddComponent<MeshRenderer>();

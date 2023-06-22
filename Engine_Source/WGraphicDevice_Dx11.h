@@ -22,7 +22,7 @@ namespace W::graphics
 		bool CompileFromfile(const std::wstring& _wstrFileName, const std::string& _strFunName, const std::string& _strVersion, ID3DBlob** _ppCod);
 		bool CreateVertexShader(const void* _pShaderByteCode, SIZE_T _BytecodeLength, ID3D11VertexShader** _ppVertexShader);
 		bool CreatePixelShader(const void* _pShaderByteCode, SIZE_T _BytecodeLength, ID3D11PixelShader** _ppPixelShader);
-
+		bool CreateSampler(const D3D11_SAMPLER_DESC* _pSamplerDesc, ID3D11SamplerState** _ppSamplerState);
 
 		
 		void BindInputLayout(ID3D11InputLayout* _pInputLayout);
@@ -35,7 +35,7 @@ namespace W::graphics
 		void BindConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
 		void BindsConstantBuffer(eShaderStage _eStage, eCBType _eType, ID3D11Buffer* _buffer);
 		void BindShaderResource(eShaderStage _eStage, UINT _iStartSlot, ID3D11ShaderResourceView** _ppSRV);
-
+		void BindSampler(eShaderStage _eStage, UINT _iStartSlot, ID3D11SamplerState** _ppSamplers);
 		void BindViewPort(D3D11_VIEWPORT* _viewPort);//뷰포트로 전환
 
 		void DrawIndexed(UINT _iIndexCount, UINT _iStartIndexLocation, INT _iBaseVertexLocation);

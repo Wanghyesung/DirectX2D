@@ -18,7 +18,7 @@ namespace W::graphics
 	{
 	public:
 		Texture();
-		~Texture();
+		virtual ~Texture();
 
 		virtual HRESULT Load(const std::wstring& _strPath);
 		void BindShader(eShaderStage _eStage, UINT _iStartSlot);

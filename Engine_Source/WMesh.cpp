@@ -11,6 +11,7 @@
 namespace W
 {
     Mesh::Mesh() :
+        Resource(enums::eResourceType::Mesh),
         m_cpVertexBuffer(nullptr),
         m_cpIndexBuffer(nullptr),
         m_tVBDesc{},
@@ -22,7 +23,7 @@ namespace W
 
     Mesh::~Mesh()
     {
-
+        int a = 10;
     }
 
     HRESULT Mesh::Load(const std::wstring& path)
@@ -74,6 +75,10 @@ namespace W
         //½ÃÀÛ ½½·Ô
         GetDevice()->BindVertexBuffer(0, m_cpVertexBuffer.GetAddressOf(), &iStride, &iOffset);
         GetDevice()->BindIndexBuffer(m_cpIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+    }
+    void Mesh::Render()
+    {
+        GetDevice()->DrawIndexed(m_iIndexCount, 0, 0);
     }
 }
 

@@ -2,7 +2,8 @@
 
 #include "WComponent.h"
 #include "WMesh.h"
-#include "WShader.h"
+//#include "WShader.h"
+#include "WMaterial.h"
 
 namespace W
 {
@@ -19,9 +20,13 @@ namespace W
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		void SetMesh(std::shared_ptr<Mesh> _pMesh) { m_pMesh = _pMesh; }
+		void SetMaterial(std::shared_ptr<Material> _pMaterial) { m_pMaterial = _pMaterial; }
+
 	private:
-		Mesh* m_pMesh;
-		Shader* m_pShader;
+		std::shared_ptr<Mesh> m_pMesh;
+		//Shader* m_pShader;
+		std::shared_ptr<Material> m_pMaterial;
 	};
 }
 

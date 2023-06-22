@@ -8,17 +8,17 @@ namespace W
 	{
 	public:
 		template <typename T>
-		static T* Find(const std::wstring& _strKey)
+		static std::shared_ptr<T> Find(const std::wstring& _strKey)
 		{
 			//리소스맵에서 데이터를 탐색한다 데이터가 있다면 해당데이터를 반환하고
 			//데이터가 없다면 end를 반환해준다.
-			std::map<std::wstring, Resource*>::iterator iter = m_mapResources.find(_strKey);
+			std::map<std::wstring, std::shared_ptr<Resource>>::iterator iter = m_mapResources.find(_strKey);
 
 			//찾고자 하는 데이터가 존재한다면
 			//해당타입으로 형변환하여 반환
 			if (iter != m_mapResources.end())
 			{
-				return dynamic_cast<T*>(iter->second);
+				return std::dynamic_pointer_cast<T>(iter->second);
 			}
 
 			//데이터 없다면 널을 반환
@@ -26,17 +26,17 @@ namespace W
 		}
 
 		template <typename T>
-		static T* Load(const std::wstring& _strKey, const std::wstring& _strPath)
+		static std::shared_ptr<T> Load(const std::wstring& _strKey, const std::wstring& _strPath)
 		{
 			// 키값으로 탐색
-			T* resource = Resources::Find<T>(_strKey);
+			std::shared_ptr<T> resource = Resources::Find<T>(_strKey);
 			if (resource != nullptr)
 			{
 				return resource;
 			}
 
 			// 해당 리소스가 없다면
-			resource = new T();
+			resource = std::make_shared<T>();
 			if (FAILED(resource->Load(_strPath)))
 			{
 				assert(false);
@@ -47,26 +47,28 @@ namespace W
 			resource->SetPath(_strPath);
 			m_mapResources.insert(std::make_pair(_strKey, resource));
 
-			return dynamic_cast<T*>(resource);
+			return std::dynamic_pointer_cast<T>(resource);
 		}
 
 		template <typename T>
-		static void Insert(const std::wstring& _strKey, T* _pResource)
+		static void Insert(const std::wstring& _strKey, std::shared_ptr<T> _pResource)
 		{
 			m_mapResources.insert(std::make_pair(_strKey, _pResource));
 		}
 
-		static void Release()
-		{
-			for (auto pair : m_mapResources)
-			{
-				delete pair.second;
-				pair.second = nullptr;
-			}
-		}
+		//static void Release()
+		//{
+		//	for (auto pair : m_mapResources)
+		//	{
+		//		delete pair.second;
+		//		pair.second = nullptr;
+		//	}
+		//}
 
 	private:
-		static std::map<std::wstring, Resource*> m_mapResources;
+		static std::map<std::wstring, std::shared_ptr<Resource>> m_mapResources;
+		//리소스같은 경우엔 로드된 리소스하나를 모두가 쓰기 때문에 sharedptr이 적합 쓰고 있는
+		//리소스가 전부 해제되야 그떄 해제됨
 	};
 }
 

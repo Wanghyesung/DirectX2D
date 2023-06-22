@@ -214,6 +214,14 @@ namespace W::graphics
 
 		return true;
 	}
+
+	bool GraphicDevice_Dx11::CreateSampler(const D3D11_SAMPLER_DESC* _pSamplerDesc, ID3D11SamplerState** _ppSamplerState)
+	{
+		if(FAILED(m_cpDevice->CreateSamplerState(_pSamplerDesc,_ppSamplerState)))
+			return false;
+
+		return true;
+	}
 	
 
 	bool GraphicDevice_Dx11::CreateTexture(const D3D11_TEXTURE2D_DESC* _desc, void* _pdata)
@@ -369,6 +377,34 @@ namespace W::graphics
 			break;
 		case eShaderStage::CS:
 			m_cpContext->CSSetShaderResources(_iStartSlot, 1, _ppSRV);
+			break;
+		case eShaderStage::END:
+			break;
+		default:
+			break;
+		}
+	}
+	void GraphicDevice_Dx11::BindSampler(eShaderStage _eStage, UINT _iStartSlot, ID3D11SamplerState** _ppSamplers)
+	{
+		switch (_eStage)
+		{
+		case eShaderStage::VS:
+			m_cpContext->VSSetSamplers(_iStartSlot, 1, _ppSamplers);
+			break;
+		case eShaderStage::HS:
+			m_cpContext->HSSetSamplers(_iStartSlot, 1, _ppSamplers);
+			break;
+		case eShaderStage::DS:
+			m_cpContext->DSSetSamplers(_iStartSlot, 1, _ppSamplers);
+			break;
+		case eShaderStage::GS:
+			m_cpContext->GSSetSamplers(_iStartSlot, 1, _ppSamplers);
+			break;
+		case eShaderStage::PS:
+			m_cpContext->PSSetSamplers(_iStartSlot, 1, _ppSamplers);
+			break;
+		case eShaderStage::CS:
+			m_cpContext->CSSetSamplers(_iStartSlot, 1, _ppSamplers);
 			break;
 		case eShaderStage::END:
 			break;

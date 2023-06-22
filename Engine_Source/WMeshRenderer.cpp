@@ -11,7 +11,7 @@ namespace W
 	}
 	MeshRenderer::~MeshRenderer()
 	{
-
+		int a = 10;
 	}
 	void MeshRenderer::Initialize()
 	{
@@ -33,11 +33,9 @@ namespace W
 		//mMesh->BindBuffer();
 		//mShader->Binds();
 
-		renderer::mesh->BindBuffer();
-		renderer::shader->Binds();
-		GetDevice()->DrawIndexed(renderer::mesh->GetIndexCount(), 0, 0);
-
-		
-
+		m_pMesh->BindBuffer();
+		m_pMaterial->Binds();
+		m_pMesh->Render();
+		//GetDevice()->DrawIndexed(renderer::mesh->GetIndexCount(), 0, 0);
 	}
 }

@@ -18,6 +18,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Engine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Enums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCameraScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h" />
@@ -26,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMeshRenderer.h" />
@@ -43,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCameraScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp" />
@@ -50,6 +55,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMeshRenderer.cpp" />

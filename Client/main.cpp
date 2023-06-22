@@ -13,6 +13,8 @@
 #include "Client.h"
 #include "WApplication.h"
 #include "WRenderer.h"
+#include "WResources.h"
+#include "WSceneManger.h"
 
 //키 이동, shader 색, 랜덤한게 생성, 먹으면 크기 늘어나게 (분열은 선택)
 
@@ -64,18 +66,34 @@
 //헤더 인라인 include, lib파일 추가(#pragma)모드 따로해서
 
 
+//샘플링작업을 해주지않아도 비주얼스튜디오에서 알아서 보간처리를 해줌
+//안티에일리어싱 (계단현상을 없애기) 샘플링 알고리즘
+//Point 픽셀 그대로 가져오기
+//비등방성
+//만든 샘플링도 다른 texutre와 똑같이 shader와 묶어준다
+//메테리얼, 렌더패스 텍스쳐를 셰이더러를 통해서 어떻게 그릴지 정함
+//텍스쳐 쉐이더 전부 메테리얼이 가지고있게
+//상수버퍼또한 위치기반만있는것이아니라 다른 정보도 넘겨줄수있게 배열로
+//오브젝트 생성시 mesh, meshrender초기화
+//메테리얼을 만들때마다 shader, texture또한 만들어서 넣어주기
+
+//스킬립트형 component 배열로 컴포넌트 추가할때 따로 푸쉬
+//둘중에 먼저 update될지 순서를 설정
+//오브젝트 로직은 스크립트에서
+//std라이브러리의 자료형을 캐스팅하기 위해서는 pointcast로
+//리소스 관련한 데이터는 sharedptr로
+
+//게임안의 모든 벡터의 중심은 월드좌표계(0,0)를 기준으로
+//cos함수 비용이 많이 들기 때문에 벡터 두개(단위벡터) 내적해서 각도를 구하는게 비용이 싸다
+//cos구하고 acos을 통해서 각도를 구할수있음
+//SRT(월드행렬)
 
 
-
-
-
-
-
-
-
-
-
-
+//alignas(16)16바이트로만 사용
+//transform에서 월드행렬, 카메라에서 뷰행렬 투영행렬 관리
+//view porjection은 똑같이 
+//srt의 순서아 맞춰서 달라지면 공전
+//
 W::Application application;
 
 #define MAX_LOADSTRING 100
@@ -99,7 +117,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetBreakAlloc(282);
     // TODO: 여기에 코드를 입력합니다.
     
     // 전역 문자열을 초기화합니다.
@@ -139,6 +158,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     renderer::Release();
+    //W::Resources::Release();//전부 shadered_ptr로 바꿈 알아서 해제
+    W::SceneManger::Release();
 
     return (int)msg.wParam;
 }

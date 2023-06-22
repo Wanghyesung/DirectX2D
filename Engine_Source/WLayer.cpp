@@ -8,6 +8,14 @@ namespace W
 	}
 	Layer::~Layer()
 	{
+		for (GameObject* gameObj : m_vecGameObject)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			delete gameObj;
+			gameObj = nullptr;
+		}
 	}
 	void Layer::Initialize()
 	{

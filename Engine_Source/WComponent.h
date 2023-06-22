@@ -12,7 +12,7 @@ namespace W
 	{
 	public:
 		Component(eComponentType _eType);
-		~Component();
+		virtual ~Component();
 
 		virtual void Initialize();
 		virtual void Update();

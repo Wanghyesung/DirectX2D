@@ -20,6 +20,7 @@ namespace W
 		bool CreateIndexBuffer(void* _data, UINT _iCount);
 
 		void BindBuffer(); //buffer 파이브라인에 묶어준다.
+		void Render();
 
 		UINT GetIndexCount() { return m_iIndexCount; }
 

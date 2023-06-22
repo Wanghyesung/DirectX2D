@@ -4,6 +4,7 @@
 //extern W::Application application;
 #include "WResources.h"
 #include "WTexture.h"
+#include "WMaterial.h"
 
 namespace renderer
 {
@@ -16,12 +17,12 @@ namespace renderer
 	//input layout (정점 정보)
 	//ID3D11InputLayout* triangleLayout = nullptr;
 
-	W::Mesh* mesh = nullptr;//mesh class로 대체
+	//W::Mesh* mesh = nullptr;//mesh class로 대체
 
 	//정점 버퍼
 	//ID3D11Buffer* triangleBuffer = nullptr;
 	//ID3D11Buffer* triangleIdxBuffer = nullptr;
-	W::graphics::ConstantBuffer* constantBuffer = nullptr;
+	W::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::END] = {};
 
 	//에러 blop
 	//ID3DBlob* errorBlob = nullptr;
@@ -34,8 +35,8 @@ namespace renderer
 
 	//픽셀 셰이더 코드 -> 2진 코드
 	//ID3DBlob* trianglePSBlob = nullptr;
-	W::Shader* shader = nullptr;//shader class로 대체
-
+	//W::Shader* shader = nullptr;//shader class로 대체
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_cpSamplerState[(UINT)eSamplerType::End] = {};
 	//ID3D11PixelShader* trianglePSShader = nullptr;
 
 
@@ -66,9 +67,29 @@ namespace renderer
 		arrLayout[2].SemanticName = "TEXCOORD";
 		arrLayout[2].SemanticIndex = 0;
 
+		std::shared_ptr<Shader> pShader = W::Resources::Find<Shader>(L"TriangleShader");
+
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
-			shader->GetVSCode(),
-			shader->GetInputLayoutAddressOf());
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+		
+		pShader = W::Resources::Find<Shader>(L"SpriteShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+
+		//smapler state 어떻게 그릴지 옵션
+		D3D11_SAMPLER_DESC desc = {};
+		desc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+		desc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+		desc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;//원본 그대로
+		GetDevice()->CreateSampler(&desc, m_cpSamplerState[(UINT)eSamplerType::Point].GetAddressOf());
+		GetDevice()->BindSampler(eShaderStage::PS,0, m_cpSamplerState[(UINT)eSamplerType::Point].GetAddressOf());
+		
+		desc.Filter = D3D11_FILTER_ANISOTROPIC;//안티에일리어싱
+		GetDevice()->CreateSampler(&desc, m_cpSamplerState[(UINT)eSamplerType::Anisotropic].GetAddressOf());
+		GetDevice()->BindSampler(eShaderStage::PS, 1, m_cpSamplerState[(UINT)eSamplerType::Anisotropic].GetAddressOf());
 	}
 
 
@@ -92,9 +113,10 @@ namespace renderer
 		////application.GetDevice().get()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
 		//W::graphics::GetDevice()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
 
-		mesh = new W::Mesh();
-		mesh->CreateVertexBuffer(vertexes, 4);
+		std::shared_ptr<Mesh> pMesh = std::make_shared<Mesh>();
+		Resources::Insert(L"RectMesh", pMesh);
 
+		pMesh->CreateVertexBuffer(vertexes, 4);
 
 		//그리는 순서 지정 (사각형)
 		std::vector<UINT> indexes = {};
@@ -105,11 +127,11 @@ namespace renderer
 		indexes.push_back(0);
 		indexes.push_back(2);
 		indexes.push_back(3);
-		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		pMesh->CreateIndexBuffer(indexes.data(), indexes.size());
 	
 		//constant buffer
-		constantBuffer = new ConstantBuffer(eCBType::Transform);
-		constantBuffer->Create(sizeof(Vector4));
+		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
+		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
 		
 		//Vector4 pos(0.2f, 0.0f, 1.f, 1.f);
 		//constantBuffer->SetData(&pos);
@@ -147,9 +169,23 @@ namespace renderer
 		//application.GetDevice().get()->CreateShader();
 		//W::graphics::GetDevice()->CreateShader();
 
-		shader = new W::Shader();
-		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
-		shader->Create(eShaderStage::PS, L"TrianglePs.hlsl", "main");
+		std::shared_ptr<Shader> pShader = std::make_shared<Shader>();
+		pShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
+		pShader->Create(eShaderStage::PS, L"TrianglePs.hlsl", "main");
+		W::Resources::Insert(L"TriangleShader", pShader);
+
+		std::shared_ptr<Shader> pSpriteShader = std::make_shared<Shader>();
+		pSpriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
+		pSpriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
+		W::Resources::Insert(L"SpriteShader", pSpriteShader);
+
+		std::shared_ptr<Texture> pTex =
+			Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+
+		std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
+		pSpriteMaterial->SetShader(pSpriteShader);
+		pSpriteMaterial->SetTexture(pTex);
+		Resources::Insert(L"SpriteMaterial", pSpriteMaterial);
 	}
 
 	
@@ -179,8 +215,11 @@ namespace renderer
 
 
 		//이미지로드 후 픽셀셰이두 묶기
-		Texture* pTex =
+		std::shared_ptr<Texture> pTex =
 			Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		
+		pTex =
+			Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
 		pTex->BindShader(eShaderStage::PS, 0);
 	}
@@ -215,30 +254,16 @@ namespace renderer
 		//if (trianglePSShader != nullptr)
 		//	trianglePSShader->Release();
 
-		delete mesh;
-		delete shader;
-		delete constantBuffer;
-	}
+		
+		for (ConstantBuffer* buff : constantBuffer)
+		{
+			if (buff == nullptr)
+				continue;
 
-	//void InitializeCircle()
-	//{
-	//	//원
-	//	float de = 0.f;
-	//	//cosf(radian);
-	//	//sinf(radian);
-	//	for (UINT i = 0; i < 360; ++i)
-	//	{
-	//		float ra = (3.14159265f * de) / 180.f;
-	//		float x = cosf(ra)/2.f;
-	//		float y = sinf(ra)/2.f;
-	//
-	//		Circlevertexes[i].Pos = Vector3(0.5f + x, -0.3f + y, 0.f);
-	//		Circlevertexes[i].Color = Vector4(0.f, 1.f, 0.f, 1.f);
-	//
-	//		de += 1.f;
-	//	}
-	//
-	//}
+			delete buff;
+			buff = nullptr;
+		}
+	}
 
 
 }

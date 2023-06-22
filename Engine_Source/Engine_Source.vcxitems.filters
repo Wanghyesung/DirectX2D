@@ -123,6 +123,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCameraScript.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h">
@@ -203,6 +208,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h">
       <Filter>Resource</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCameraScript.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)WMath.inl">
