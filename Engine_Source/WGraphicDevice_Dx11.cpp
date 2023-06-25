@@ -419,7 +419,7 @@ namespace W::graphics
 	void GraphicDevice_Dx11::ClearTarget()
 	{
 		//회색
-		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.f };
 		//백버퍼 지우기
 		m_cpContext->ClearRenderTargetView(m_cpRenderTargetView.Get(), bgColor);
 		//깊이버퍼 지우기

@@ -55,6 +55,18 @@
     <Filter Include="GameObject\Component\Script">
       <UniqueIdentifier>{fa3a80e4-681b-46e7-9837-3ee00c75b316}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Leafre">
+      <UniqueIdentifier>{ffa95d8f-a859-47f1-b7ec-9e3fee8fa906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Ground">
+      <UniqueIdentifier>{6cd00392-3e47-4b61-b400-75f3bf61a093}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Valley">
+      <UniqueIdentifier>{2d370c47-a133-4eb7-9977-4394f8ce94ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Cave">
+      <UniqueIdentifier>{372b3a2f-cc69-4ffb-96b7-160258117907}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">
@@ -93,9 +105,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WGameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
@@ -128,6 +137,21 @@
       <Filter>GameObject\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp">
+      <Filter>Scene\Leafre</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene.cpp">
+      <Filter>Scene\Valley</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WGround.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp">
+      <Filter>Scene\Cave</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h">
@@ -178,9 +202,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WGameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
@@ -213,6 +234,21 @@
       <Filter>GameObject\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h">
+      <Filter>Scene\Leafre</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene.h">
+      <Filter>Scene\Valley</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WGround.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h">
+      <Filter>Scene\Cave</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)WMath.inl">

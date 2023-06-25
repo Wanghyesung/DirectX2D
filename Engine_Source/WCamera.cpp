@@ -36,7 +36,7 @@ namespace W
 		m_fAspectRatio(1.f),
 		m_fNear(1.f),
 		m_fFal(1000.f),
-		m_fSize(5.f)
+		m_fSize(10.f)
 	{
 	}
 	Camera::~Camera()
@@ -83,8 +83,8 @@ namespace W
 	{
 		RECT tRect = {};
 		GetClientRect(application.GetHwnd(), &tRect);
-		float fWidth = tRect.right - tRect.left;
-		float fHeight = tRect.bottom - tRect.top;
+		float fWidth = tRect.right - tRect.left; //1400
+		float fHeight = tRect.bottom - tRect.top; //750
 		m_fAspectRatio = fWidth / fHeight; //가로 / 세로
 
 		if (_eType == eProjectionType::OrthoGraphic)
@@ -93,6 +93,7 @@ namespace W
 			float fOrthorGraphicRatio = m_fSize / 1000.f;
 			fWidth *= fOrthorGraphicRatio;
 			fHeight *= fOrthorGraphicRatio;
+
 			//왼손좌표계 투영행렬
 			m_mProjection = Matrix::CreateOrthographicLH(fWidth, fHeight, m_fNear, m_fFal);
 		}

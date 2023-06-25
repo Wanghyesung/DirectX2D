@@ -1,16 +1,30 @@
 #include "WSceneManger.h"
 #include "WPlayScene.h"
-
+#include "WLeafreScene.h"
+#include "WValleyScene.h"
+#include "WCaveScene.h"
 namespace W
 {
 	Scene* SceneManger::m_pActiveScene = nullptr;
 	std::map<std::wstring, Scene*> SceneManger::m_mapScene = {};
 	void SceneManger::Initialize()
 	{
-		m_pActiveScene = new PlayScene();
-		m_mapScene.insert(std::make_pair(L"PlayScene",m_pActiveScene));
+		m_pActiveScene = nullptr;
+		PlayScene* pPlayScene = new PlayScene();
+		m_mapScene.insert(std::make_pair(L"PlayScene", pPlayScene));
+		LeafreScene* pLeaf  = new LeafreScene();
+		m_mapScene.insert(std::make_pair(L"Leafre", pLeaf));
+		ValleyScene* pValleyScene = new ValleyScene();
+		m_mapScene.insert(std::make_pair(L"Valley", pValleyScene));
+		CaveScene* pCaveSene = new CaveScene();
+		m_mapScene.insert(std::make_pair(L"Cave", pCaveSene));
 
-		m_pActiveScene->Initialize();
+		m_pActiveScene = pCaveSene;
+
+		pPlayScene->Initialize();
+		pLeaf->Initialize();
+		pValleyScene->Initialize();
+		pCaveSene->Initialize();
 	}
 	void SceneManger::Update()
 	{

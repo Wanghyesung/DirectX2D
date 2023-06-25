@@ -78,16 +78,27 @@ namespace renderer
 			pShader->GetVSCode(),
 			pShader->GetInputLayoutAddressOf());
 
+
+		pShader = W::Resources::Find<Shader>(L"BackgroundShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+
+		pShader = W::Resources::Find<Shader>(L"GroundShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+
 		//smapler state 어떻게 그릴지 옵션
 		D3D11_SAMPLER_DESC desc = {};
 		desc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 		desc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 		desc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
-		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;//원본 그대로
+		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 		GetDevice()->CreateSampler(&desc, m_cpSamplerState[(UINT)eSamplerType::Point].GetAddressOf());
-		GetDevice()->BindSampler(eShaderStage::PS,0, m_cpSamplerState[(UINT)eSamplerType::Point].GetAddressOf());
-		
-		desc.Filter = D3D11_FILTER_ANISOTROPIC;//안티에일리어싱
+		GetDevice()->BindSampler(eShaderStage::PS, 0, m_cpSamplerState[(UINT)eSamplerType::Point].GetAddressOf());
+
+		desc.Filter = D3D11_FILTER_ANISOTROPIC;
 		GetDevice()->CreateSampler(&desc, m_cpSamplerState[(UINT)eSamplerType::Anisotropic].GetAddressOf());
 		GetDevice()->BindSampler(eShaderStage::PS, 1, m_cpSamplerState[(UINT)eSamplerType::Anisotropic].GetAddressOf());
 	}
@@ -95,23 +106,7 @@ namespace renderer
 
 	void LoadBuffer()
 	{
-		//D3D11_BUFFER_DESC triangleDesc = {};
-		////버퍼를 읽고 쓰는 방법을 식별합니다.(CPU에서나 GPU에서 읽기 쓰기가 가능한지?)
-		////GPU(읽기 전용)와 CPU(쓰기 전용)에서 모두 액세스할 수 있는 리소스입니다. 
-		//triangleDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-		////전체 바이트 수
-		//triangleDesc.ByteWidth = sizeof(Vertex) * 3;
-		////버퍼가 파이프라인에 바인딩되는 방법을 식별합니다.
-		//triangleDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-		////CPU 액세스가 필요한경우 아니면 0
-		//triangleDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
-		//
-		//D3D11_SUBRESOURCE_DATA triangleData = {};
-		////내 점점 버퍼
-		//triangleData.pSysMem = vertexes;
-		////single
-		////application.GetDevice().get()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
-		//W::graphics::GetDevice()->CreateBuffer(&triangleBuffer, &triangleDesc, &triangleData);
+		
 
 		std::shared_ptr<Mesh> pMesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", pMesh);
@@ -133,34 +128,6 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
 		
-		//Vector4 pos(0.2f, 0.0f, 1.f, 1.f);
-		//constantBuffer->SetData(&pos);
-		//constantBuffer->Bind(eShaderStage::VS);
-
-		//인덱스 버퍼
-		//D3D11_BUFFER_DESC triangleIdxDesc = {};
-		//triangleIdxDesc.ByteWidth = sizeof(UINT) * indexes.size(); //바이트 크기
-		//triangleIdxDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
-		//triangleIdxDesc.Usage = D3D11_USAGE_DEFAULT;//cpu사용 X
-		//triangleIdxDesc.CPUAccessFlags = 0;
-		//
-		//D3D11_SUBRESOURCE_DATA triangleIdxData = {};
-		//triangleIdxData.pSysMem = indexes.data();
-		//W::graphics::GetDevice()->CreateBuffer(&triangleIdxBuffer, &triangleIdxDesc, &triangleIdxData);
-
-		//상수 버퍼
-		//D3D11_BUFFER_DESC triangleCSDesc = {};
-		//triangleCSDesc.ByteWidth = sizeof(Vector4);//16바이트만 데이터 셋팅
-		//triangleCSDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
-		//triangleCSDesc.Usage = D3D11_USAGE_DYNAMIC;//cpu읽기
-		//triangleCSDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-		//
-		//W::graphics::GetDevice()->CreateBuffer(&triangleConstantBuffer, &triangleCSDesc, nullptr);
-
-		//bind
-		//Vector4 pos = Vector4(0.3f, 0.0f, 0.0f, 1.0f);
-		//W::graphics::GetDevice()->SetConstantBuffer(triangleConstantBuffer, &pos, sizeof(Vector4));
-		//W::graphics::GetDevice()->BindConstantBuffer(eShaderStage::VS, eCBType::Transform, triangleConstantBuffer);
 
 	}
 
@@ -179,6 +146,54 @@ namespace renderer
 		pSpriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		W::Resources::Insert(L"SpriteShader", pSpriteShader);
 
+		std::shared_ptr<Shader> pBackShader = std::make_shared<Shader>();
+		pBackShader->Create(eShaderStage::VS, L"BackgroundVS.hlsl", "main");
+		pBackShader->Create(eShaderStage::PS, L"BackgroundPS.hlsl", "main");
+		W::Resources::Insert(L"BackgroundShader", pBackShader);
+
+		std::shared_ptr<Shader> pGroundShader = std::make_shared<Shader>();
+		pGroundShader->Create(eShaderStage::VS, L"BackgroundVS.hlsl", "main");
+		pGroundShader->Create(eShaderStage::PS, L"BackgroundPS.hlsl", "main");
+		W::Resources::Insert(L"GroundShader", pGroundShader);
+
+		//background
+		{
+			std::shared_ptr<Texture> pTex =
+				Resources::Load<Texture>(L"LeafreTex", L"..\\Resources\\Texture\\background\\Leafre_1.png");
+			std::shared_ptr<Material> pBackgroundMater = std::make_shared<Material>();
+			pBackgroundMater->SetShader(pBackShader);
+			pBackgroundMater->SetTexture(pTex);
+			Resources::Insert(L"LeafeMater", pBackgroundMater);
+
+			//
+			std::shared_ptr<Texture> pValleyTex =
+				Resources::Load<Texture>(L"dragonValleyTex", L"..\\Resources\\Texture\\background\\dragonValley.png");
+			std::shared_ptr<Material> pValleyMater = std::make_shared<Material>();
+			pValleyMater->SetShader(pBackShader);
+			pValleyMater->SetTexture(pValleyTex);
+			Resources::Insert(L"dragonValleyMater", pValleyMater);
+
+
+			std::shared_ptr<Texture> pWoodCaveTex =
+				Resources::Load<Texture>(L"WoodCaveTex", L"..\\Resources\\Texture\\background\\woodCave.png");
+			std::shared_ptr<Material> pWoodMater = std::make_shared<Material>();
+			pWoodMater->SetShader(pBackShader);
+			pWoodMater->SetTexture(pWoodCaveTex);
+			Resources::Insert(L"WoodCaveMater", pWoodMater);
+		}
+
+		//ground
+		{
+			std::shared_ptr<Texture> pTex =
+				Resources::Load<Texture>(L"GroundTex", L"..\\Resources\\Texture\\Ground\\0.png");
+
+			std::shared_ptr<Material> pGroundMater = std::make_shared<Material>();
+			pGroundMater->SetShader(pGroundShader);
+			pGroundMater->SetTexture(pTex);
+
+			Resources::Insert(L"GroundMater", pGroundMater);
+		}
+		
 		//두 오브젝트 둘다 똑같은 메테리얼로 셋팅
 		{
 			std::shared_ptr<Texture> pTex =
@@ -230,43 +245,35 @@ namespace renderer
 		//이미지로드 후 픽셀셰이두 묶기
 		std::shared_ptr<Texture> pTex =
 			Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
-		
-		pTex =
-			Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
 		pTex->BindShader(eShaderStage::PS, 0);
+
+		std::shared_ptr<Texture> pLink =
+			Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+		pLink->BindShader(eShaderStage::PS, 0);
+
+		std::shared_ptr<Texture> pTexBack =
+			Resources::Load<Texture>(L"LeafreTex", L"..\\Resources\\Texture\\background\\Leafre_1.png");
+		pTexBack->BindShader(eShaderStage::PS, 0);
+
+		//ground
+		std::shared_ptr<Texture> pGround =
+			Resources::Load<Texture>(L"GroundTex", L"..\\Resources\\Texture\\Ground\\0.png");
+		pTexBack->BindShader(eShaderStage::PS, 0);
+
+		std::shared_ptr<Texture> pValleyTex =
+			Resources::Load<Texture>(L"dragonValleyTex", L"..\\Resources\\Texture\\background\\dragonValley.png");
+		pValleyTex->BindShader(eShaderStage::PS, 0);
+
+		std::shared_ptr<Texture> pWoodCaveTex =
+			Resources::Load<Texture>(L"WoodCaveTex", L"..\\Resources\\Texture\\background\\woodCave.png");
+		pWoodCaveTex->BindShader(eShaderStage::PS, 0);
+		
 	}
 
 	void Release()
 	{
-		//if (triangleLayout != nullptr)
-		//	triangleLayout->Release();
-
-		//스마트 포인터 사용
-		//if (triangleBuffer != nullptr)
-		//	triangleBuffer->Release();
-		//
-		//if (triangleIdxBuffer != nullptr)
-		//	triangleIdxBuffer->Release();
-
-		//if (triangleConstantBuffer != nullptr)
-		//	triangleConstantBuffer->Release();
-
-		//if (errorBlob != nullptr)
-		//	errorBlob->Release();
-		//
-		//if (triangleVSBlob != nullptr)
-		//	triangleVSBlob->Release();
-		//
-		//if (triangleVSShader != nullptr)
-		//	triangleVSShader->Release();
-		//
-		//if (trianglePSBlob != nullptr)
-		//	trianglePSBlob->Release();
-
-		//if (trianglePSShader != nullptr)
-		//	trianglePSShader->Release();
-
+		
 		
 		for (ConstantBuffer* buff : constantBuffer)
 		{

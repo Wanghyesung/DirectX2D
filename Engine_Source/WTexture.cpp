@@ -19,7 +19,7 @@ namespace W::graphics
 	{
 		wchar_t szExtension[50] = {};
 		_wsplitpath_s(_strPath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExtension, 50);
-
+		
 		std::wstring extension = szExtension;
 		if (extension == L".dds" || extension == L".DDS")
 		{
@@ -46,7 +46,7 @@ namespace W::graphics
 			, m_cpSRV.GetAddressOf()
 		);
 		m_cpSRV->GetResource((ID3D11Resource**)m_cpTexture.GetAddressOf());
-
+		
 		return S_OK;
 	}
 	void Texture::BindShader(eShaderStage _eStage, UINT _iStartSlot)

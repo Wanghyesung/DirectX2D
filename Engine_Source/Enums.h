@@ -17,6 +17,8 @@ namespace W::enums
 
 	enum class eLayerType
 	{
+		Background,
+		Ground,
 		Player,
 		Monster,
 		UI,

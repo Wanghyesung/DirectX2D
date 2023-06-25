@@ -1,10 +1,3 @@
-//∫§≈Õ∑Œ ≥—∞‹¡Ÿ∞≈¿” float4 æ∆¥‘
-//struct Vertex[3]
-//{
-//    Vector3 pos;
-//    Vector4 color;
-//};
-
 struct VSIn
 {
     //Ω√∏‡∆Ω¿∏∑Œ ±∏∫–
@@ -43,7 +36,7 @@ VSOut main(VSIn In)
     
     Out.Pos = proj;
     Out.Color = In.Color;
-  
+    
     Out.UV = In.UV;
     //Out.UV.x *= -1;
 

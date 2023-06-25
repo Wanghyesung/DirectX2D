@@ -31,7 +31,7 @@ namespace W
 			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			pPlayer->GetComponent<Transform>()->SetPosition(2.f,0.f,0.f);
+			pPlayer->GetComponent<Transform>()->SetPosition(0.5f,0.f,0.f);
 		}
 
 		//camera object

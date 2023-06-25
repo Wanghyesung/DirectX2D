@@ -2,6 +2,7 @@
 
 #include "WEntity.h"
 #include "WLayer.h"
+#include "WGraphicDevice_Dx11.h"
 
 namespace W
 {
@@ -18,6 +19,8 @@ namespace W
 
 		virtual void OnEnter();
 		virtual void OnExit();
+		
+		virtual void CreateBackground() {};
 
 		void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
 
