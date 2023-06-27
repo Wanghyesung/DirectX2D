@@ -1,12 +1,15 @@
 #include "WShader.h"
-
+#include "WRenderer.h"
 
 namespace W
 {
 	Shader::Shader():
 		Resource(enums::eResourceType::Shader),
 		m_tInputLayout(nullptr),
-		m_eTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+		m_eTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST),
+		m_eRSType(eRSType::SolidBack),
+		m_eDSType(eDSType::Less),
+		m_eBSType(eBSType::AlphaBlend)
 	{
 
 	}
@@ -59,6 +62,15 @@ namespace W
 
 		GetDevice()->BindVertexShader(m_cpVS.Get());
 		GetDevice()->BindPixelShader(m_cpPS.Get());
+
+		//레이터라이저 단계
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> cpRSstate = renderer::m_cpRasterizerStates[(UINT)m_eRSType];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> cpDSstate = renderer::m_cpDepthStencilStates[(UINT)m_eDSType];
+		Microsoft::WRL::ComPtr<ID3D11BlendState> cpBSstate = renderer::m_cpBlendStates[(UINT)m_eBSType];
+
+		GetDevice()->BindRasterizeState(cpRSstate.Get());
+		GetDevice()->BindDepthStencilState(cpDSstate.Get());
+		GetDevice()->BindBlendState(cpBSstate.Get());
 	}
 }
 

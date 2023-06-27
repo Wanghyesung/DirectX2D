@@ -14,6 +14,11 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Engine.h" />
@@ -49,6 +54,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene_2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCameraScript.cpp" />

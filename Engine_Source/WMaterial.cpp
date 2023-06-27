@@ -19,8 +19,11 @@ namespace W::graphics
 	}
 	void Material::Binds()
 	{
-		m_pTex->BindShader(eShaderStage::PS, 0);
-		m_pShader->Binds();
+		if (m_pTex)
+			m_pTex->BindShader(eShaderStage::PS, 0);
+
+		if (m_pShader)
+			m_pShader->Binds();
 	}
 	void Material::Clear()
 	{

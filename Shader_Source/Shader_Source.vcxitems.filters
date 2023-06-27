@@ -27,5 +27,8 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)BackgroundVS.hlsl">
       <Filter>VS</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)ObjectPS.hlsl">
+      <Filter>PS</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

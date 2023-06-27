@@ -85,8 +85,8 @@ namespace W
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"LeafeMater"));
 			pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
-			//1.471 : 1
-			pBackGround->GetComponent<Transform>()->SetScale(16.f, 5.f, 1.f);
+			//1.829 : 1
+			pBackGround->GetComponent<Transform>()->SetScale(1.829f * 13.f, 1.f * 13.f, 1.f);
 		}
 	}
 }

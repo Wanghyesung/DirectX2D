@@ -37,6 +37,32 @@ enum class eSamplerType
 	End,
 };
 
+enum class eRSType
+{
+	SolidBack,
+	SolidFront,
+	SolidNone,
+	WireframeNone,
+	End,
+};
+
+enum class eDSType
+{
+	Less,
+	Greater,
+	NoWrite,
+	None,
+	End,
+};
+
+enum class eBSType
+{
+	Default,
+	AlphaBlend,
+	OneOne,
+	End,
+};
+
 //버퍼의 공통적으로 받는 ID3D11buffer, 옵션 다 받을 수 있게
 struct GpuBuffer
 {

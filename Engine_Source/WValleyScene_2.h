@@ -1,14 +1,13 @@
 #pragma once
-
 #include "WScene.h"
 
 namespace W
 {
-	class ValleyScene : public Scene
+	class ValleyScene_2 : public Scene
 	{
 	public:
-		ValleyScene();
-		virtual ~ValleyScene();
+		ValleyScene_2();
+		virtual ~ValleyScene_2();
 
 		virtual void Initialize();
 		virtual void Update();
@@ -20,10 +19,7 @@ namespace W
 
 		virtual void CreateBackground() override;
 	private:
-
 	};
 }
-
-
 
 

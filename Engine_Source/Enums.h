@@ -20,6 +20,7 @@ namespace W::enums
 		Background,
 		Ground,
 		Player,
+		Ladder,
 		Monster,
 		UI,
 		End,

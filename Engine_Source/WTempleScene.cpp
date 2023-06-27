@@ -1,29 +1,29 @@
-#include "WCaveScene.h"
-#include "WShader.h"
-#include "WMeshRenderer.h"
-#include "WMesh.h"
+#include "WTempleScene.h"
 #include "WResources.h"
+#include "WShader.h"
 #include "WGameObject.h"
+#include "WMesh.h"
+#include "WMaterial.h"
+#include "WMeshRenderer.h"
 #include "WTransform.h"
-#include "WCamera.h"
-#include "WCameraScript.h"
-#include "WGround.h"
 #include "WInput.h"
 #include "WSceneManger.h"
-
+#include "WCamera.h"
+#include "WCameraScript.h"
 namespace W
 {
-	CaveScene::CaveScene()
+	TempleScene::TempleScene()
 	{
 
 	}
-	CaveScene::~CaveScene()
+	TempleScene::~TempleScene()
 	{
 
 	}
-	void CaveScene::Initialize()
+	void TempleScene::Initialize()
 	{
 		CreateBackground();
+
 
 		GameObject* pCamera = new GameObject();
 		AddGameObject(eLayerType::Player, pCamera);
@@ -31,41 +31,42 @@ namespace W
 		Camera* pCameraComp = pCamera->AddComponent<Camera>();
 		pCamera->AddComponent<CameraScript>();
 	}
-	void CaveScene::Update()
+	void TempleScene::Update()
 	{
 		Scene::Update();
 
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			SceneManger::LoadScene(L"Temple");
+			SceneManger::LoadScene(L"Valley2");
 		}
+
 	}
-	void CaveScene::LateUpdate()
+	void TempleScene::LateUpdate()
 	{
 		Scene::LateUpdate();
 	}
-	void CaveScene::Render()
+	void TempleScene::Render()
 	{
 		Scene::Render();
 	}
-	void CaveScene::OnEnter()
+
+	void TempleScene::OnEnter()
 	{
 
 	}
-	void CaveScene::OnExit()
+	void TempleScene::OnExit()
 	{
 
 	}
-	void CaveScene::CreateBackground()
+	void TempleScene::CreateBackground()
 	{
 		GameObject* pBackGround = new GameObject();
 		AddGameObject(eLayerType::Background, pBackGround);
 		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(Resources::Find<Material>(L"WoodCaveMater"));
-		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
-		//14::10
-		pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.2f, 10.f * 1.2f, 1.f);
-		
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"TempleMater"));
+		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
+		//2.5 : 1
+		pBackGround->GetComponent<Transform>()->SetScale(2.5f * 8.f, 1.f * 8.f, 1.f);
 	}
 }

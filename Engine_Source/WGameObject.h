@@ -70,7 +70,7 @@ namespace W
 			return comp;
 		}
 
-	
+		void SetState(eState _eState) { m_eState = _eState; }
 
 	private:
 		eState m_eState;

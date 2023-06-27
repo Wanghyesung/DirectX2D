@@ -23,6 +23,9 @@ namespace W
 		ID3D11InputLayout* GetInputLayout() { return m_tInputLayout; }
 		ID3D11InputLayout** GetInputLayoutAddressOf() { return &m_tInputLayout; }
 
+		void SetRSState(eRSType _eType) { m_eRSType = _eType; }
+		void SetDSState(eDSType _eType) { m_eDSType = _eType; }
+		void SetBSState(eBSType _eType) { m_eBSType = _eType; }
 	private:
 		ID3D11InputLayout* m_tInputLayout;
 		D3D11_PRIMITIVE_TOPOLOGY m_eTopology;
@@ -39,7 +42,9 @@ namespace W
 		Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_cpGS;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader> m_cpPS;
 
-
+		eRSType m_eRSType;
+		eDSType m_eDSType;
+		eBSType m_eBSType;
 	};
 }
 

@@ -222,8 +222,31 @@ namespace W::graphics
 
 		return true;
 	}
-	
 
+	bool GraphicDevice_Dx11::CreateRasterizeState(const D3D11_RASTERIZER_DESC* _pRasterizerDesc, ID3D11RasterizerState** _ppRasterizerState)
+	{
+		if(FAILED(m_cpDevice->CreateRasterizerState(_pRasterizerDesc,_ppRasterizerState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* _pDepthStencilDesc, ID3D11DepthStencilState** _ppDepthStencilState)
+	{
+		if (FAILED(m_cpDevice->CreateDepthStencilState(_pDepthStencilDesc, _ppDepthStencilState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateBlendState(const D3D11_BLEND_DESC* _pBlendStateDesc, ID3D11BlendState** _ppBlendState)
+	{
+		if (FAILED(m_cpDevice->CreateBlendState(_pBlendStateDesc, _ppBlendState)))
+			return false;
+
+		return true;
+	}
+	
 	bool GraphicDevice_Dx11::CreateTexture(const D3D11_TEXTURE2D_DESC* _desc, void* _pdata)
 	{
 		//2d 텍스쳐 옵션
@@ -271,6 +294,18 @@ namespace W::graphics
 		//뷰포트 개수
 		m_cpContext->RSSetViewports(1, _viewPort);
 
+	}
+	void GraphicDevice_Dx11::BindRasterizeState(ID3D11RasterizerState* _pRasterizerState)
+	{
+		m_cpContext->RSSetState(_pRasterizerState);
+	}
+	void GraphicDevice_Dx11::BindDepthStencilState(ID3D11DepthStencilState* _pDepthStencilState)
+	{
+		m_cpContext->OMSetDepthStencilState(_pDepthStencilState,0);
+	}
+	void GraphicDevice_Dx11::BindBlendState(ID3D11BlendState* _pBlendState)
+	{
+		m_cpContext->OMSetBlendState(_pBlendState, nullptr, 0xffffffff);
 	}
 	void GraphicDevice_Dx11::BindInputLayout(ID3D11InputLayout* _pInputLayout)
 	{
@@ -417,9 +452,9 @@ namespace W::graphics
 		m_cpContext->DrawIndexed(_iIndexCount, _iStartIndexLocation, _iBaseVertexLocation);
 	}
 	void GraphicDevice_Dx11::ClearTarget()
-	{
+	{				
 		//회색
-		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.f };
+		FLOAT bgColor[4] = { 0.5f, 0.5f, 0.5f, 0.5f };
 		//백버퍼 지우기
 		m_cpContext->ClearRenderTargetView(m_cpRenderTargetView.Get(), bgColor);
 		//깊이버퍼 지우기

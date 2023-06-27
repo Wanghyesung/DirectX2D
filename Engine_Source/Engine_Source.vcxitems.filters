@@ -67,6 +67,15 @@
     <Filter Include="Scene\Cave">
       <UniqueIdentifier>{372b3a2f-cc69-4ffb-96b7-160258117907}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Temple">
+      <UniqueIdentifier>{716b31e9-fe67-450e-8b13-6a5bf9ef82b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object">
+      <UniqueIdentifier>{6d5b19be-952c-485a-8773-f81b7878c060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Ladder">
+      <UniqueIdentifier>{2bc3a4c9-aaa1-4ec7-b18e-ef38d00f3433}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">
@@ -151,6 +160,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp">
       <Filter>Scene\Cave</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene_2.cpp">
+      <Filter>Scene\Valley</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp">
+      <Filter>Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp">
+      <Filter>Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp">
+      <Filter>Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp">
+      <Filter>GameObject\Object\Ladder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +272,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h">
       <Filter>Scene\Cave</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h">
+      <Filter>Scene\Valley</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h">
+      <Filter>Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h">
+      <Filter>Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h">
+      <Filter>Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h">
+      <Filter>GameObject\Object\Ladder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
