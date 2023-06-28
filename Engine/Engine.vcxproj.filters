@@ -2,18 +2,21 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LoadScene.h">
+      <Filter>Contents\Load</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Load">
+    <Filter Include="Contents">
+      <UniqueIdentifier>{3b307390-cc1e-4083-869d-a32d27fe6618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Load">
       <UniqueIdentifier>{3935af5c-781a-485f-b861-a577e1da5dad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{974c994e-0aa6-4686-b726-c64ba41acb54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script">
+    <Filter Include="Contents\Script">
       <UniqueIdentifier>{ccb16c22-7d89-48d1-a1e0-e2dfac14ed65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

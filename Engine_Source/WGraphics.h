@@ -63,6 +63,14 @@ enum class eBSType
 	End,
 };
 
+enum class eRenderingMode
+{
+	Opaque,
+	CutOut,
+	Transparent,
+	End,
+};
+
 //버퍼의 공통적으로 받는 ID3D11buffer, 옵션 다 받을 수 있게
 struct GpuBuffer
 {

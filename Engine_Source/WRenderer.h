@@ -4,6 +4,7 @@
 #include "WMesh.h"
 #include "WShader.h"
 #include "WConstantBuffer.h"
+#include "WCamera.h"
 
 using namespace W::math;
 namespace renderer
@@ -42,6 +43,9 @@ namespace renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_cpDepthStencilStates[(UINT)eDSType::End];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> m_cpBlendStates[(UINT)eBSType::End];
 
+	extern std::vector<W::Camera*> vecCameras;
+
+	void Render();
 	void Initialize();
 	void Release();
 }

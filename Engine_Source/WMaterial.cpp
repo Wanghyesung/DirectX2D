@@ -6,7 +6,8 @@ namespace W::graphics
 	Material::Material() :
 		Resource(W::enums::eResourceType::Material),
 		m_pShader(nullptr),
-		m_pTex(nullptr)
+		m_pTex(nullptr),
+		m_eMode(eRenderingMode::Opaque)
 	{
 	}
 	Material::~Material()

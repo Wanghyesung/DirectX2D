@@ -2,7 +2,7 @@
 #include "WTransform.h"
 #include "WGameObject.h"
 #include "WApplication.h"
-
+#include "WRenderer.h"
 //씬 쪼개기
 
 //메테리얼 바뀔때마다 해당 텍스쳐(shader와 바인딩된) 초기화 
@@ -36,13 +36,20 @@ namespace W
 		m_fAspectRatio(1.f),
 		m_fNear(1.f),
 		m_fFal(1000.f),
-		m_fSize(10.f)
+		m_fSize(10.f),
+		m_bitLayerMask{},
+		m_vecOpaqueGameObjects{},
+		m_vecCutOutGameObjects{},
+		m_vecTransparentGameObjects{}
 	{
 	}
 	Camera::~Camera()
 	{
 	}
-	
+	void Camera::Initialize()
+	{
+		EnableLayerMask();
+	}
 	void Camera::Update()
 	{
 	}
@@ -51,9 +58,66 @@ namespace W
 		//lateupdate마다 내 카메라의 뷰행렬, 투영행렬 구하기
 		CreateViewMatrix();
 		CreateProjectionMatrix(m_eType);
+
+		//업데이트마다 오브젝트에 카메라추가하고 그리기
+		RegisterCameraInRenderer();
 	}
 	void Camera::Render()
 	{
+		SortGameObjects();
+
+		//투명 -> 반투명 -> 불투명
+		RenderOpaque();
+		RenderCutOut();
+		RenderTransparent();
+	}
+
+	void Camera::RegisterCameraInRenderer()
+	{
+		renderer::vecCameras.push_back(this);
+	}
+
+	void Camera::TrunLayerMask(eLayerType _eType, bool _bEnable)
+	{
+		m_bitLayerMask.set((UINT)_eType, _bEnable);
+	}
+
+	void Camera::SortGameObjects()
+	{
+		//
+	}
+
+	void Camera::RenderOpaque()
+	{
+		for (GameObject* gameObj : m_vecOpaqueGameObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			gameObj->Render();
+		}
+	}
+
+	void Camera::RenderCutOut()
+	{
+		for (GameObject* gameObj : m_vecCutOutGameObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			gameObj->Render();
+		}
+	}
+
+	void Camera::RenderTransparent()
+	{
+		for (GameObject* gameObj : m_vecTransparentGameObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			gameObj->Render();
+		}
 	}
 
 	bool Camera::CreateViewMatrix()
@@ -105,8 +169,6 @@ namespace W
 
 		return true;
 	}
-	void Camera::Initialize()
-	{
-	}
-
+	
+	
 }

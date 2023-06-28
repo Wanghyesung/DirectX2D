@@ -6,6 +6,7 @@
 #include "WTexture.h"
 #include "WMaterial.h"
 
+
 namespace renderer
 {
 	using namespace W;
@@ -33,6 +34,8 @@ namespace renderer
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_cpRasterizerStates[(UINT)eRSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_cpDepthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> m_cpBlendStates[(UINT)eBSType::End] = {};
+
+	std::vector<W::Camera*> vecCameras = {};
 
 	void SetupState()
 	{
@@ -367,6 +370,19 @@ namespace renderer
 		//pLink->BindShader(eShaderStage::PS, 0);
 		
 	}
+	void Render()
+	{
+		for (Camera* cam : vecCameras)
+		{
+			if (cam == nullptr)
+				continue;
+
+			cam->Render();
+		}
+		//물체 그리고 벡터 지우기
+		vecCameras.clear();
+	}
+
 
 	void Release()
 	{

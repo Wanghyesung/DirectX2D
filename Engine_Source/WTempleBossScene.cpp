@@ -37,7 +37,7 @@ namespace W
 
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			SceneManger::LoadScene(L"Valley2");
+			SceneManger::LoadScene(L"Leafre");
 		}
 	}
 	void TempleBossScene::LateUpdate()

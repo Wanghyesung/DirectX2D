@@ -14,18 +14,17 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WNPC.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Engine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Enums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WCameraScript.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h" />
@@ -34,8 +33,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WGround.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WInput.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h" />
@@ -48,21 +45,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WSceneManger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene_2.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WNPC.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCameraScript.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp" />
@@ -70,8 +70,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WGround.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WInput.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WMesh.cpp" />
@@ -84,10 +82,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WSceneManger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)WMath.inl" />

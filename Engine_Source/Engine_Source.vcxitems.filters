@@ -31,20 +31,8 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{ce511c8c-e683-48b3-9fab-e31987ba1ecc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{80bf9b85-0f00-4929-a437-c2d01587f64d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Layer">
-      <UniqueIdentifier>{cc1eed11-7465-434d-ac65-e28a404e965a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component">
       <UniqueIdentifier>{948c9f28-5fdb-4125-a627-7a911581d1d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Base">
-      <UniqueIdentifier>{df7b43b2-a254-4683-9e4c-eba5933fa80f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Manger">
-      <UniqueIdentifier>{435fc920-ff2b-40c5-978f-0ad56b5e57c9}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Component\Transform">
       <UniqueIdentifier>{e2acf9dc-b7e4-456d-a53f-6d1fac4260d8}</UniqueIdentifier>
@@ -55,26 +43,41 @@
     <Filter Include="GameObject\Component\Script">
       <UniqueIdentifier>{fa3a80e4-681b-46e7-9837-3ee00c75b316}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Leafre">
-      <UniqueIdentifier>{ffa95d8f-a859-47f1-b7ec-9e3fee8fa906}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Ground">
       <UniqueIdentifier>{6cd00392-3e47-4b61-b400-75f3bf61a093}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Valley">
-      <UniqueIdentifier>{2d370c47-a133-4eb7-9977-4394f8ce94ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Cave">
-      <UniqueIdentifier>{372b3a2f-cc69-4ffb-96b7-160258117907}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Temple">
-      <UniqueIdentifier>{716b31e9-fe67-450e-8b13-6a5bf9ef82b0}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Object">
       <UniqueIdentifier>{6d5b19be-952c-485a-8773-f81b7878c060}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Object\Ladder">
       <UniqueIdentifier>{2bc3a4c9-aaa1-4ec7-b18e-ef38d00f3433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\NPC">
+      <UniqueIdentifier>{0a8a2d0b-e718-452c-9185-6803c29e640d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{24a130a2-435e-4a0d-85f8-d941399dc338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manger">
+      <UniqueIdentifier>{1308aa51-1b44-4f91-b0a0-ff40d3d5f1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{c55fbbbc-d5b1-4533-b6c6-fe7d38d3417a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Layer">
+      <UniqueIdentifier>{787d6bef-6115-4718-a7a4-e1bce08bb04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Temple">
+      <UniqueIdentifier>{350b77dd-487c-463f-be8a-6904909d2986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Cave">
+      <UniqueIdentifier>{053b81ef-63de-47c5-9223-e8b785438402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Leafre">
+      <UniqueIdentifier>{12cef424-f8bf-4cf9-a6a8-d17a1fc07350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Valley">
+      <UniqueIdentifier>{58824926-0784-4e92-a38d-fe2fcb783bc9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,20 +120,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp">
-      <Filter>Scene\Layer</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WScript.cpp">
       <Filter>GameObject\Component\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WScene.cpp">
-      <Filter>Scene\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WSceneManger.cpp">
-      <Filter>Scene\Manger</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
@@ -146,23 +137,41 @@
       <Filter>GameObject\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp">
-      <Filter>Scene\Leafre</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WGameObject.cpp">
       <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene.cpp">
-      <Filter>Scene\Valley</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WGround.cpp">
       <Filter>GameObject\Ground</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp">
+      <Filter>GameObject\Object\Ladder</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WNPC.cpp">
+      <Filter>GameObject\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WSceneManger.cpp">
+      <Filter>Scene\Manger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WScene.cpp">
+      <Filter>Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp">
+      <Filter>Scene\Layer</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp">
       <Filter>Scene\Cave</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp">
+      <Filter>Scene\Leafre</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene.cpp">
+      <Filter>Scene\Valley</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene_2.cpp">
       <Filter>Scene\Valley</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp">
+      <Filter>Scene\Temple</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp">
       <Filter>Scene\Temple</Filter>
@@ -170,11 +179,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp">
       <Filter>Scene\Temple</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp">
-      <Filter>Scene\Temple</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp">
-      <Filter>GameObject\Object\Ladder</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,20 +235,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h">
-      <Filter>Scene\Layer</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WScript.h">
       <Filter>GameObject\Component\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WScene.h">
-      <Filter>Scene\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WSceneManger.h">
-      <Filter>Scene\Manger</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
@@ -258,23 +252,41 @@
       <Filter>GameObject\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h">
-      <Filter>Scene\Leafre</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WGameObject.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene.h">
-      <Filter>Scene\Valley</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WGround.h">
       <Filter>GameObject\Ground</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h">
+      <Filter>GameObject\Object\Ladder</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WNPC.h">
+      <Filter>GameObject\Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WSceneManger.h">
+      <Filter>Scene\Manger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WScene.h">
+      <Filter>Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h">
+      <Filter>Scene\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h">
       <Filter>Scene\Cave</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h">
+      <Filter>Scene\Leafre</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene.h">
+      <Filter>Scene\Valley</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h">
       <Filter>Scene\Valley</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h">
+      <Filter>Scene\Temple</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h">
       <Filter>Scene\Temple</Filter>
@@ -282,11 +294,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h">
       <Filter>Scene\Temple</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h">
-      <Filter>Scene\Temple</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h">
-      <Filter>GameObject\Object\Ladder</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

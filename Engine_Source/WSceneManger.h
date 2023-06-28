@@ -13,6 +13,22 @@ namespace W
 		static void Render();
 		static void Release();
 
+		template <typename T>
+		static bool CreateScene(std::wstring name)
+		{
+			T* scene = new T();
+
+			std::map<std::wstring, Scene*>::iterator iter
+				= m_mapScene.find(name);
+
+			if (iter != m_mapScene.end())
+				return false;
+
+			m_mapScene.insert(std::make_pair(name, scene));
+			m_pActiveScene = scene;
+			scene->Initialize();
+			return true;
+		}
 		static Scene* GetActiveScene() { return m_pActiveScene; }
 		static Scene* LoadScene(std::wstring _strName);
 

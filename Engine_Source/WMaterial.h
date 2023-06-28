@@ -19,12 +19,14 @@ namespace W::graphics
 
 		void SetShader(std::shared_ptr<Shader> _pSahder) { m_pShader = _pSahder; }
 		void SetTexture(std::shared_ptr<Texture> _pTex) { m_pTex = _pTex; }
+		void SetRenderinMode(eRenderingMode _eMode) { m_eMode = _eMode; }
+		eRenderingMode GetRenderinMode() { return m_eMode; }
 
 	private:
 		std::shared_ptr<Shader> m_pShader;
 		std::shared_ptr<Texture> m_pTex;
 
-
+		eRenderingMode m_eMode;
 	};
 }
 

@@ -19,6 +19,9 @@ namespace W
 
 		virtual void CreateBackground() override;
 
+	private:
+		void setobject();
+
 	};
 }
 

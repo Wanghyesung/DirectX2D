@@ -15,6 +15,7 @@
 #include "WRenderer.h"
 #include "WResources.h"
 #include "WSceneManger.h"
+#include "LoadScene.h"
 
 //키 이동, shader 색, 랜덤한게 생성, 먹으면 크기 늘어나게 (분열은 선택)
 
@@ -173,7 +174,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-    WNDCLASSEXW wcex;
+    WNDCLASSEXW wcex = {};
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
@@ -207,7 +208,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, 1400, 700, nullptr, nullptr, hInstance, nullptr);
+        CW_USEDEFAULT, 0, 1400, 750, nullptr, nullptr, hInstance, nullptr);
 
     if (!hWnd)
     {
@@ -219,6 +220,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     UpdateWindow(hWnd);
 
     application.Initialize();
+    W::InitializeScenes();
 
     return TRUE;
 }

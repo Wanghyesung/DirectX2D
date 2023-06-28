@@ -13,6 +13,9 @@
 #include "WSceneManger.h"
 #include "WLadder.h"
 
+
+
+
 namespace W
 {
 	TempleScene_2::TempleScene_2()
@@ -55,7 +58,7 @@ namespace W
 
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			SceneManger::LoadScene(L"Leafre");
+			SceneManger::LoadScene(L"TempleBoss");
 		}
 	}
 	void TempleScene_2::LateUpdate()

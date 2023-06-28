@@ -65,7 +65,7 @@ namespace W
 		pMeshRender->SetMaterial(Resources::Find<Material>(L"WoodCaveMater"));
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
 		//14::10
-		pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.2f, 10.f * 1.2f, 1.f);
+		pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.f, 10.f * 1.f, 1.f);
 		
 	}
 }

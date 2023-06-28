@@ -6,8 +6,6 @@
 #include "WSceneManger.h"
 namespace W
 {
-	
-
 	//0,0의 해상도도 있음
 	Application::Application()
 		:graphicDevice(nullptr),
@@ -61,7 +59,7 @@ namespace W
 		graphicDevice->UpdateViewPort();
 
 		SceneManger::Render();
-
+		//renderer::Render();
 		graphicDevice->Present();
 	}
 

@@ -20,6 +20,7 @@ namespace W::enums
 		Background,
 		Ground,
 		Player,
+		NPC,
 		Ladder,
 		Monster,
 		UI,
@@ -34,5 +35,7 @@ namespace W::enums
 		Mesh,
 		End,
 	};
+
+
 
 }
