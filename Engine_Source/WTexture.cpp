@@ -35,6 +35,7 @@ namespace W::graphics
 		{
 			if (FAILED(LoadFromWICFile(_strPath.c_str(), WIC_FLAGS::WIC_FLAGS_IGNORE_SRGB, nullptr, m_Image)))
 				return S_FALSE;
+			//WIC_FLAGS_IGNORE_SRGB
 		}
 
 		CreateShaderResourceView

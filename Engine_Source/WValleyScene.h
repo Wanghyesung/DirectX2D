@@ -19,8 +19,9 @@ namespace W
 		virtual void OnExit();
 
 		virtual void CreateBackground() override;
-	private:
 
+	private:
+		void setobject();
 	};
 }
 

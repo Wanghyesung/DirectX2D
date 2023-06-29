@@ -14,6 +14,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
@@ -55,6 +56,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />

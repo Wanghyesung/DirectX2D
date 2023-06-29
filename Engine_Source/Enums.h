@@ -17,11 +17,13 @@ namespace W::enums
 
 	enum class eLayerType
 	{
+		Default,
 		Background,
 		Ground,
 		Player,
 		NPC,
 		Ladder,
+		Object,
 		Monster,
 		UI,
 		End,

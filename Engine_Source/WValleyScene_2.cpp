@@ -17,12 +17,12 @@ namespace W
 	ValleyScene_2::ValleyScene_2()
 	{
 		std::shared_ptr<Texture> pLadder9 =
-			Resources::Load<Texture>(L"LadderTex9", L"..\\Resources\\Texture\\Object\\ladder\\9.png");
+			Resources::Load<Texture>(L"Ladder9BaseTex", L"..\\Resources\\Texture\\Object\\ladder\\9_base.png");
 
 		std::shared_ptr<Material> pLadderMater9 = std::make_shared<Material>();
 		pLadderMater9->SetShader(Resources::Find<Shader>(L"ObjectShader"));
 		pLadderMater9->SetTexture(pLadder9);
-		Resources::Insert(L"LadderMater9", pLadderMater9);
+		Resources::Insert(L"LadderBaseMater9", pLadderMater9);
 	}
 	ValleyScene_2::~ValleyScene_2()
 	{
@@ -81,9 +81,9 @@ namespace W
 		AddGameObject(eLayerType::Ladder, pLadder0);
 		MeshRenderer* pLadderMeshRender0 = pLadder0->AddComponent<MeshRenderer>();
 		pLadderMeshRender0->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pLadderMeshRender0->SetMaterial(Resources::Find<Material>(L"LadderMater9"));
-		pLadder0->GetComponent<Transform>()->SetPosition(-2.f,-0.68f,-1.f);
-		pLadder0->GetComponent<Transform>()->SetScale(1.f * 0.5f, 4.f * 0.5f, 0.f);
+		pLadderMeshRender0->SetMaterial(Resources::Find<Material>(L"LadderBaseMater9"));
+		pLadder0->GetComponent<Transform>()->SetPosition(-2.f,-0.6f,-1.f);
+		pLadder0->GetComponent<Transform>()->SetScale(1.f * 0.5f, 4.f * 0.7f, 0.f);
 
 	}
 }

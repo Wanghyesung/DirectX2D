@@ -23,7 +23,7 @@ float4 main(VSOut In) : SV_TARGET
     //return In.Color;
     float4 color = (float4) 0.f;
     color = albedoTexture.Sample(anisotropicSampler, In.UV);
-    
+   
     //들어오는 UV좌표로 텍스쳐 보간해서 리턴
     
     return color;

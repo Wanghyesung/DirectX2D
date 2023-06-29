@@ -79,6 +79,24 @@
     <Filter Include="Scene\Valley">
       <UniqueIdentifier>{58824926-0784-4e92-a38d-fe2fcb783bc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Object\Cage">
+      <UniqueIdentifier>{d321a986-396e-4b10-9332-914dd1f0e4cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{5321b12e-d27d-4004-a3b0-1ebe919e3f27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\ConstantBuffer">
+      <UniqueIdentifier>{38e1aa90-7ad6-4ccc-ba1f-ed6713875509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{047b6c82-99a7-4d37-bc76-1ba3fa465c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Camera">
+      <UniqueIdentifier>{57f5dce3-be7f-48c5-8645-f44cdae18e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{dd4779db-4960-48a8-a52a-77b52bd8ad65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">
@@ -108,15 +126,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WRenderer.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMesh.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WShader.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
@@ -132,11 +141,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCameraScript.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -182,6 +189,24 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WPlayScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCage.cpp">
+      <Filter>GameObject\Object\Cage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp">
+      <Filter>Resource\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h">
@@ -223,15 +248,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WRenderer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WShader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
@@ -247,11 +263,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WCameraScript.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -296,6 +310,24 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WPlayScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h">
+      <Filter>Resource\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCage.h">
+      <Filter>GameObject\Object\Cage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h">
+      <Filter>Resource\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace W
 	TempleScene_2::TempleScene_2()
 	{
 		std::shared_ptr<Texture> pLadder0 =
-			Resources::Load<Texture>(L"LadderTex0", L"..\\Resources\\Texture\\Object\\ladder\\4.png");
+			Resources::Load<Texture>(L"LadderTex4", L"..\\Resources\\Texture\\Object\\ladder\\4base.png");
 
 		std::shared_ptr<Material> pLadderMater0 = std::make_shared<Material>();
 		pLadderMater0->SetShader(Resources::Find<Shader>(L"ObjectShader"));
@@ -29,7 +29,7 @@ namespace W
 		Resources::Insert(L"LadderMater0", pLadderMater0);
 
 		std::shared_ptr<Texture> pLadder1 =
-			Resources::Load<Texture>(L"LadderTex1", L"..\\Resources\\Texture\\Object\\ladder\\4_.png");
+			Resources::Load<Texture>(L"LadderTex4_", L"..\\Resources\\Texture\\Object\\ladder\\4_base.png");
 
 		std::shared_ptr<Material> pLadderMater1 = std::make_shared<Material>();
 		pLadderMater1->SetShader(Resources::Find<Shader>(L"ObjectShader"));
@@ -93,16 +93,16 @@ namespace W
 		MeshRenderer* pLadderMeshRenderer = pLadder0->AddComponent<MeshRenderer>();
 		pLadderMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pLadderMeshRenderer->SetMaterial(Resources::Find<Material>(L"LadderMater0"));
-		pLadder0->GetComponent<Transform>()->SetPosition(-7.f,-0.15f,-1.f);
-		pLadder0->GetComponent<Transform>()->SetScale(1.f * 0.5f,4.f * 0.5f,0.f);
+		pLadder0->GetComponent<Transform>()->SetPosition(-7.f,-0.02f,-1.f);
+		pLadder0->GetComponent<Transform>()->SetScale(1.f * 0.5f, 5.f * 0.4f, 0.f);
 
 		Ladder* pLadder1 = new Ladder();
 		AddGameObject(eLayerType::Ladder, pLadder1);
 		MeshRenderer* pLadderMeshRenderer1 = pLadder1->AddComponent<MeshRenderer>();
 		pLadderMeshRenderer1->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pLadderMeshRenderer1->SetMaterial(Resources::Find<Material>(L"LadderMater1"));
-		pLadder1->GetComponent<Transform>()->SetPosition(7.f, -0.15f, -1.f);
-		pLadder1->GetComponent<Transform>()->SetScale(1.f * 0.5f, 4.f * 0.5f, 0.f);
+		pLadder1->GetComponent<Transform>()->SetPosition(7.f, -0.02f, -1.f);
+		pLadder1->GetComponent<Transform>()->SetScale(1.f * 0.5f, 5.f * 0.4f, 0.f);
 
 
 		Ladder* pLadder2 = new Ladder();
@@ -110,15 +110,15 @@ namespace W
 		MeshRenderer* pLadderMeshRenderer2 = pLadder2->AddComponent<MeshRenderer>();
 		pLadderMeshRenderer2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pLadderMeshRenderer2->SetMaterial(Resources::Find<Material>(L"LadderMater0"));
-		pLadder2->GetComponent<Transform>()->SetPosition(-6.f, -4.1f, -1.f);
-		pLadder2->GetComponent<Transform>()->SetScale(1.f * 0.5f, 4.f * 0.5f, 0.f);
+		pLadder2->GetComponent<Transform>()->SetPosition(-6.f, -4.0f, -1.f);
+		pLadder2->GetComponent<Transform>()->SetScale(1.f * 0.5f, 5.f * 0.4f, 0.f);
 
 		Ladder* pLadder3 = new Ladder();
 		AddGameObject(eLayerType::Ladder, pLadder3);
 		MeshRenderer* pLadderMeshRenderer3 = pLadder3->AddComponent<MeshRenderer>();
 		pLadderMeshRenderer3->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pLadderMeshRenderer3->SetMaterial(Resources::Find<Material>(L"LadderMater1"));
-		pLadder3->GetComponent<Transform>()->SetPosition(6.f, -4.f, -1.f);
-		pLadder3->GetComponent<Transform>()->SetScale(1.f * 0.5f, 4.f * 0.5f, 0.f);
+		pLadder3->GetComponent<Transform>()->SetPosition(6.f, -3.9f, -1.f);
+		pLadder3->GetComponent<Transform>()->SetScale(1.f * 0.5f, 5.f * 0.4f, 0.f);
 	}
 }
