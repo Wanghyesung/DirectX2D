@@ -16,9 +16,12 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)WCage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCaveStartScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMoveScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WMoveScene_2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WNPC.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleStartScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h" />
@@ -58,9 +62,12 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCaveStartScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMoveScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WMoveScene_2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WNPC.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp" />
@@ -87,6 +94,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleStartScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp" />

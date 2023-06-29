@@ -12,6 +12,10 @@
 //레이어마다 카메라를 따로 적용가능 
 //SceneMgr -> camera(render)로 렌더순서대로 렌더링
 
+
+//불투명 투명 순서를 정해도 깊이버퍼에선 똑같은 z값으로 먼저 그려진 
+// 얘를 그리기 때문에 그 자리에 또 같은 z값의 물체를 그리지 않음
+//z정렬 해서 그리는 순서를 맞춰야함ㅇ
 namespace W
 {
 	class Camera : public Component

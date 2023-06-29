@@ -32,13 +32,13 @@
 //#include "CommonInclude.h"
 //
 ////디버그일떄 Debug파일에 정적라이브러리를 참조하고 Release일때는 Release파일에 정적라이브럴리 참조
-//#ifdef _DEBUG
-//#pragma comment ("..\\x64\\Debug\\Client_Source.lib");
-//
-//#else
-//#pragma comment ("..\\x64\\Release\\Client_Source.lib");
-//
-//#endif
+#ifdef _DEBUG
+#pragma comment (lib,"..\\x64\\Debug\\Engine.lib")
+
+#else
+#pragma comment (lib, "..\\x64\\Release\\Engine.lib")
+
+#endif
 
 
 //셰이더 만들어진 후 셋팅

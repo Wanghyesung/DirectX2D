@@ -11,6 +11,7 @@
 #include "WCamera.h"
 #include "WCameraScript.h"
 #include "WLadder.h"
+#include "WNPC.h"
 
 namespace W
 {
@@ -23,6 +24,14 @@ namespace W
 		pLadderMater9->SetShader(Resources::Find<Shader>(L"ObjectShader"));
 		pLadderMater9->SetTexture(pLadder9);
 		Resources::Insert(L"LadderBaseMater9", pLadderMater9);
+
+		std::shared_ptr<Texture> pNPCTex4 =
+			Resources::Load<Texture>(L"NPCTex4", L"..\\Resources\\Texture\\NPC\\npc4.png");
+
+		std::shared_ptr<Material> pNPCMater = std::make_shared<Material>();
+		pNPCMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		pNPCMater->SetTexture(pNPCTex4);
+		Resources::Insert(L"NPCMater4", pNPCMater);
 	}
 	ValleyScene_2::~ValleyScene_2()
 	{
@@ -32,6 +41,16 @@ namespace W
 	{
 		CreateBackground();
 		setobject();
+
+		NPC* pNPC = new NPC();
+		AddGameObject(eLayerType::NPC, pNPC);
+		MeshRenderer* pNPCRenderer = pNPC->AddComponent<MeshRenderer>();
+		pNPCRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pNPCRenderer->SetMaterial(Resources::Find<Material>(L"NPCMater4"));
+		pNPC->GetComponent<Transform>()->SetPosition(6.f, 2.48f, -1.f);
+		pNPC->GetComponent<Transform>()->SetScale(1.147f * 1.f, 1.f * 1.f, 0.f);
+		//1.147 : 1
+
 
 		GameObject* pCamera = new GameObject();
 		AddGameObject(eLayerType::Player, pCamera);

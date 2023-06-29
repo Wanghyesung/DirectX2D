@@ -1,5 +1,5 @@
 #pragma once
-#include "WSceneManger.h"
+#include "..\Engine_Source\WSceneManger.h"
 #include "WPlayScene.h"
 #include "WPlayScene.h"
 #include "WLeafreScene.h"
@@ -9,11 +9,16 @@
 #include "WTempleScene.h"
 #include "WTempleScene_2.h"
 #include "WTempleBossScene.h"
+#include "WMoveScene.h"
+#include "WMoveScene_2.h"
+#include "WCaveStartScene.h"
+#include "WTempleStartScene.h"
 
 #ifdef _DEBUG
-#pragma comment(lib, "..\\x64\\Debug\\Engine.lib")
+#pragma comment (lib,"..\\x64\\Debug\\Engine.lib")
+
 #else
-#pragma comment(lib, "..\\x64\\Release\\Engine.lib")
+#pragma comment (lib, "..\\x64\\Release\\Engine.lib")
 #endif
 
 
@@ -29,5 +34,6 @@ namespace W
 		SceneManger::CreateScene<TempleScene>(L"Temple");
 		SceneManger::CreateScene<TempleScene_2>(L"Temple2");
 		SceneManger::CreateScene<TempleBossScene>(L"TempleBoss");
+		SceneManger::CreateScene<MoveScene>(L"Move1");
 	}
 }

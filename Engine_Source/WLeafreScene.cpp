@@ -115,9 +115,11 @@ namespace W
 	}
 	void LeafreScene::OnEnter()
 	{
+
 	}
 	void LeafreScene::OnExit()
 	{
+
 	}
 	void LeafreScene::CreateBackground()
 	{
