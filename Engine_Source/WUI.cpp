@@ -41,22 +41,8 @@ namespace W
 	}
 	void UI::LateUpdate()
 	{
-		if (m_pParentUI != nullptr)
-		{
-			Transform* pParentTransform = m_pParentUI->GetComponent<Transform>();
-			Vector3 vParentPos = pParentTransform->GetPosition();
-			if (vParentPos != m_vParntUIPos)
-			{
-				m_vParntUIPos = vParentPos;
 
-				Transform* pTransform = GetComponent<Transform>();
-				Vector3 vPos = pTransform->GetPosition();
-
-				vPos.x += vParentPos.x;
-				vPos.y += vParentPos.y;
-				pTransform->SetPosition(vPos);
-			}
-		}
+		MoveToParent();
 
 		//여기서 부모 UI랑 같이 움직이게
 		GameObject::LateUpdate();
@@ -140,5 +126,27 @@ namespace W
 		}
 
 
+	}
+	void UI::MoveToParent()
+	{
+		if (m_pParentUI != nullptr)
+		{
+			Vector3 vFinalPos = {};
+
+			Transform* pParentTransform = m_pParentUI->GetComponent<Transform>();
+			Vector3 vParentPos = pParentTransform->GetPosition();
+			if (vParentPos != m_vParntUIPos)
+			{
+				m_vParntUIPos = vParentPos;
+
+				Transform* pTransform = GetComponent<Transform>();
+				Vector3 vPos = pTransform->GetPosition();
+
+				vFinalPos = vPos + vParentPos;
+				//vPos.x += vParentPos.x;
+				//vPos.y += vParentPos.y;
+				pTransform->SetPosition(vFinalPos);
+			}
+		}
 	}
 }

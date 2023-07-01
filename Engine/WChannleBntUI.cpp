@@ -1,5 +1,4 @@
 #include "WChannleBntUI.h"
-#include "WResources.h"
 
 namespace W
 {
@@ -40,9 +39,11 @@ namespace W
 	}
 	void ChannleBntUI::MouseOn()
 	{
+		int a = 10;
 	}
 	void ChannleBntUI::MouseLbtnDown()
 	{
+		int a = 10;
 	}
 	void ChannleBntUI::MouseLbtnUp()
 	{

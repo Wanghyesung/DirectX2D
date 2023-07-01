@@ -4,6 +4,7 @@
 #include "WInput.h"
 #include "WRenderer.h"
 #include "WSceneManger.h"
+#include "UIManger.h"
 namespace W
 {
 	//0,0의 해상도도 있음
@@ -43,6 +44,7 @@ namespace W
 		Input::Update();
 
 		SceneManger::Update();
+		UIManger::Update();
 	}
 
 	void Application::LateUpdate()

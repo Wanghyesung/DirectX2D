@@ -1,14 +1,13 @@
 #pragma once
-
 #include "WUI.h"
 
 namespace W
 {
-	class ChannleBntUI : public UI
+	class StarUI : public UI
 	{
 	public:
-		ChannleBntUI();
-		virtual ~ChannleBntUI();
+		StarUI();
+		virtual ~StarUI();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -23,6 +22,7 @@ namespace W
 	private:
 
 	};
+
 }
 
 

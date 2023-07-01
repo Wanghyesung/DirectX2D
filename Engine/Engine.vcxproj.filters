@@ -45,10 +45,46 @@
       <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="WInterfaceUI.h">
-      <Filter>Contents\UI</Filter>
+      <Filter>Contents\UI\Interface</Filter>
     </ClInclude>
     <ClInclude Include="WChannleBntUI.h">
-      <Filter>Contents\UI</Filter>
+      <Filter>Contents\UI\Interface\Channle</Filter>
+    </ClInclude>
+    <ClInclude Include="WSystemUI.h">
+      <Filter>Contents\UI\Interface\System</Filter>
+    </ClInclude>
+    <ClInclude Include="WMenuUI.h">
+      <Filter>Contents\UI\Interface\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="WShopUI.h">
+      <Filter>Contents\UI\Interface\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="WStarUI.h">
+      <Filter>Contents\UI\Interface\Star</Filter>
+    </ClInclude>
+    <ClInclude Include="WInvenUI.h">
+      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
+    </ClInclude>
+    <ClInclude Include="WEquipUI.h">
+      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="WCharUI.h">
+      <Filter>Contents\UI\Interface\Extra\Char</Filter>
+    </ClInclude>
+    <ClInclude Include="WStatUI.h">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="WQuestUI.h">
+      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
+    </ClInclude>
+    <ClInclude Include="WSKillUI.h">
+      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="WLevelUI.h">
+      <Filter>Contents\UI\Interface\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="WGaugeUI.h">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -93,10 +129,46 @@
       <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="WInterfaceUI.cpp">
-      <Filter>Contents\UI</Filter>
+      <Filter>Contents\UI\Interface</Filter>
     </ClCompile>
     <ClCompile Include="WChannleBntUI.cpp">
-      <Filter>Contents\UI</Filter>
+      <Filter>Contents\UI\Interface\Channle</Filter>
+    </ClCompile>
+    <ClCompile Include="WSystemUI.cpp">
+      <Filter>Contents\UI\Interface\System</Filter>
+    </ClCompile>
+    <ClCompile Include="WMenuUI.cpp">
+      <Filter>Contents\UI\Interface\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="WShopUI.cpp">
+      <Filter>Contents\UI\Interface\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="WStarUI.cpp">
+      <Filter>Contents\UI\Interface\Star</Filter>
+    </ClCompile>
+    <ClCompile Include="WInvenUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
+    </ClCompile>
+    <ClCompile Include="WEquipUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="WCharUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Char</Filter>
+    </ClCompile>
+    <ClCompile Include="WStatUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="WQuestUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="WSKillUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="WLevelUI.cpp">
+      <Filter>Contents\UI\Interface\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="WGaugeUI.cpp">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +204,57 @@
     </Filter>
     <Filter Include="Contents\UI\Interface">
       <UniqueIdentifier>{88744d0b-0e0a-4b42-8f50-5638699784ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Channle">
+      <UniqueIdentifier>{68d047e0-eaad-40c1-b5e3-cc4a149b4856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\System">
+      <UniqueIdentifier>{5520e8df-d8a6-4d6d-b86c-73b68633cf88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Shop">
+      <UniqueIdentifier>{ccc61f3b-6936-46f4-b6b9-8bd4846204cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Star">
+      <UniqueIdentifier>{51a6b7d5-d4d1-479a-8456-60a5a4da8fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Menu">
+      <UniqueIdentifier>{370d0dec-79f0-48be-9417-a6ab001fa59f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra">
+      <UniqueIdentifier>{fd3670e0-ed09-482c-8db8-cdbd824fe2b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill">
+      <UniqueIdentifier>{b14b477c-decd-4ef3-aea8-25d400789cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Quest">
+      <UniqueIdentifier>{4ee4eece-175a-4dfa-9ec6-ead2a35496f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Inven">
+      <UniqueIdentifier>{bdddee6e-ed3d-4969-b89a-26401601a2bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Stat">
+      <UniqueIdentifier>{cb03f8bf-0372-468a-91d9-58aa1978846d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Equip">
+      <UniqueIdentifier>{b04d6b4b-1f40-4f72-ae9f-aa564e7d4a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Char">
+      <UniqueIdentifier>{f064c1ff-f82a-4523-b2e8-facce364f55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Level">
+      <UniqueIdentifier>{0ab7a315-1a4d-43b6-a756-079506b6707c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Gauge">
+      <UniqueIdentifier>{00b29464-04a4-4845-98c0-a895b60071d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Gauge\HP">
+      <UniqueIdentifier>{810dacef-827c-4a2d-a92f-12b3b17e6bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Gauge\MP">
+      <UniqueIdentifier>{8deb13e5-1132-43fb-9a1f-c7f55a10b77f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Gauge\EXP">
+      <UniqueIdentifier>{57b11561-8a84-47cf-8bd3-17033a4aa72f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "WUI.h"
-
 namespace W
 {
-	class ChannleBntUI : public UI
+	class GaugeUI : public UI
 	{
 	public:
-		ChannleBntUI();
-		virtual ~ChannleBntUI();
+		GaugeUI();
+		virtual ~GaugeUI();
+
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -20,7 +20,6 @@ namespace W
 		virtual void MouseLbtnUp()override;
 		virtual void MouseLbtnClicked()override;
 
-	private:
 
 	};
 }

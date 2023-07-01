@@ -4,11 +4,11 @@
 
 namespace W
 {
-	class ChannleBntUI : public UI
+	class QuestUI : public UI
 	{
 	public:
-		ChannleBntUI();
-		virtual ~ChannleBntUI();
+		QuestUI();
+		virtual ~QuestUI();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -19,7 +19,6 @@ namespace W
 		virtual void MouseLbtnDown()override;
 		virtual void MouseLbtnUp()override;
 		virtual void MouseLbtnClicked()override;
-
 	private:
 
 	};

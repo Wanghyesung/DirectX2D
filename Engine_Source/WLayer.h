@@ -16,7 +16,8 @@ namespace W
 		virtual void Render();
 
 		void AddGameObject(GameObject* _pGameObj);
-		const std::vector<GameObject*> GetGameObjects() { return m_vecGameObject; }
+		std::vector<GameObject*> GetGameObjects() { return m_vecGameObject; }
+
 	private:
 		std::vector<GameObject*> m_vecGameObject;
 	};
