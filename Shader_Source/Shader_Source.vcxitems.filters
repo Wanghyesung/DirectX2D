@@ -30,5 +30,11 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)ObjectPS.hlsl">
       <Filter>PS</Filter>
     </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)UIPS.hlsl">
+      <Filter>PS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)UIVS.hlsl">
+      <Filter>VS</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

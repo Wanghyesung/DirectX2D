@@ -3,6 +3,9 @@
 #include "WGameObject.h"
 #include "WApplication.h"
 #include "WRenderer.h"
+#include "WScene.h"
+#include "WSceneManger.h"
+#include "WMeshRenderer.h"
 //씬 쪼개기
 
 //메테리얼 바뀔때마다 해당 텍스쳐(shader와 바인딩된) 초기화 
@@ -27,8 +30,17 @@ extern W::Application application;
 
 namespace W
 {
-	Matrix Camera::m_mView = Matrix::Identity;
-	Matrix Camera::m_mProjection = Matrix::Identity;
+	bool CompareZSort(GameObject* a, GameObject* b)
+	{
+		if (a->GetComponent<Transform>()->GetPosition().z
+			< b->GetComponent<Transform>()->GetPosition().z)
+			return false;
+
+		return true;
+	}
+
+	Matrix Camera::View = Matrix::Identity;
+	Matrix Camera::Projection = Matrix::Identity;
 
 	Camera::Camera():
 		Component(eComponentType::Camera),
@@ -40,15 +52,20 @@ namespace W
 		m_bitLayerMask{},
 		m_vecOpaqueGameObjects{},
 		m_vecCutOutGameObjects{},
-		m_vecTransparentGameObjects{}
+		m_vecTransparentGameObjects{},
+		m_mView{},
+		m_mProjection{}
 	{
+		//레이어 마스크 전부 true로 초기화
+		EnableLayerMasks();
 	}
 	Camera::~Camera()
 	{
+		
 	}
 	void Camera::Initialize()
 	{
-		EnableLayerMask();
+		
 	}
 	void Camera::Update()
 	{
@@ -64,14 +81,23 @@ namespace W
 	}
 	void Camera::Render()
 	{
-		SortGameObjects();
+		//각각의 카메라마다 다른 뷰,투영행렬
+		View = m_mView;
+		Projection = m_mProjection;
 
-		//투명 -> 반투명 -> 불투명
+		AlphaSortGameObjects();
+		ZSortTransparencyGameObjects();
 		RenderOpaque();
+
+		//불투명 먼저 그리고 같은 z값에 투명을 그리면 z값 우선순위에서 밀려서 안그려짐
+		//z버퍼 끄기
+		DisablDepthStencilState();
+		//투명 -> 반투명 -> 불투명
 		RenderCutOut();
 		RenderTransparent();
+		EnableDepthStencilState();
 	}
-
+	
 	void Camera::RegisterCameraInRenderer()
 	{
 		renderer::vecCameras.push_back(this);
@@ -82,10 +108,71 @@ namespace W
 		m_bitLayerMask.set((UINT)_eType, _bEnable);
 	}
 
-	void Camera::SortGameObjects()
+	void Camera::AlphaSortGameObjects()
 	{
-		//
+		// 렌더링 되기 전에 다 지우고 다시 정렬
+		m_vecOpaqueGameObjects.clear();
+		m_vecCutOutGameObjects.clear();
+		m_vecTransparentGameObjects.clear();
+
+		Scene* pScene = SceneManger::GetActiveScene();
+		for (size_t i = 0; i < (UINT)eLayerType::End; i++)
+		{
+			//레이어마스크 true인 오브젝트만 렌더링
+			if (m_bitLayerMask[i] == true)
+			{
+				Layer& layer = pScene->GetLayer((eLayerType)i);
+				const std::vector<GameObject*> vecGameObjects =
+					layer.GetGameObjects();
+
+				DivideAlphaBlendGameObjects(vecGameObjects);
+			}
+		}
+
 	}
+
+	void Camera::ZSortTransparencyGameObjects()
+	{
+		std::sort(m_vecCutOutGameObjects.begin(),
+			m_vecCutOutGameObjects.end(),
+			CompareZSort);
+
+		std::sort(m_vecTransparentGameObjects.begin(),
+			m_vecTransparentGameObjects.end(),
+			CompareZSort);
+
+	}
+	
+	void Camera::DivideAlphaBlendGameObjects(const std::vector<GameObject*> _vecGameObj)
+	{
+		for (GameObject* obj : _vecGameObj)
+		{
+			MeshRenderer* pMeshRender =
+				obj->GetComponent<MeshRenderer>();
+
+			if (pMeshRender == nullptr)
+				continue;
+
+			std::shared_ptr<Material> spMater = pMeshRender->GetMaterial();
+			eRenderingMode eMode = spMater->GetRenderinMode();
+
+			switch (eMode)
+			{
+			case eRenderingMode::Opaque:
+				m_vecOpaqueGameObjects.push_back(obj);
+				break;
+			case eRenderingMode::CutOut:
+				m_vecCutOutGameObjects.push_back(obj);
+				break;
+			case eRenderingMode::Transparent:
+				m_vecTransparentGameObjects.push_back(obj);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
 
 	void Camera::RenderOpaque()
 	{
@@ -170,5 +257,18 @@ namespace W
 		return true;
 	}
 	
+	void Camera::EnableDepthStencilState()
+	{
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
+			= renderer::m_cpDepthStencilStates[(UINT)eDSType::Less];
+		GetDevice()->BindDepthStencilState(dsState.Get());
+	}
+
+	void Camera::DisablDepthStencilState()
+	{
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
+			= renderer::m_cpDepthStencilStates[(UINT)eDSType::None];
+		GetDevice()->BindDepthStencilState(dsState.Get());
+	}
 	
 }

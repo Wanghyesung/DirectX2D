@@ -22,6 +22,7 @@ namespace W
 
 		void SetMesh(std::shared_ptr<Mesh> _pMesh) { m_pMesh = _pMesh; }
 		void SetMaterial(std::shared_ptr<Material> _pMaterial) { m_pMaterial = _pMaterial; }
+		std::shared_ptr<Material> GetMaterial() { return m_pMaterial;}
 
 	private:
 		std::shared_ptr<Mesh> m_pMesh;

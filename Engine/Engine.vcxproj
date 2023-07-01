@@ -154,9 +154,39 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScene.h" />
+    <ClInclude Include="WCameraScript.h" />
+    <ClInclude Include="WCaveScene.h" />
+    <ClInclude Include="WCaveStartScene.h" />
+    <ClInclude Include="WChannleBntUI.h" />
+    <ClInclude Include="WInterfaceUI.h" />
+    <ClInclude Include="WLeafreScene.h" />
+    <ClInclude Include="WMoveScene.h" />
+    <ClInclude Include="WMoveScene_2.h" />
+    <ClInclude Include="WPlayScene.h" />
+    <ClInclude Include="WTempleBossScene.h" />
+    <ClInclude Include="WTempleScene.h" />
+    <ClInclude Include="WTempleScene_2.h" />
+    <ClInclude Include="WTempleStartScene.h" />
+    <ClInclude Include="WValleyScene.h" />
+    <ClInclude Include="WValleyScene_2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="WCameraScript.cpp" />
+    <ClCompile Include="WCaveScene.cpp" />
+    <ClCompile Include="WCaveStartScene.cpp" />
+    <ClCompile Include="WChannleBntUI.cpp" />
+    <ClCompile Include="WInterfaceUI.cpp" />
+    <ClCompile Include="WLeafreScene.cpp" />
+    <ClCompile Include="WMoveScene.cpp" />
+    <ClCompile Include="WMoveScene_2.cpp" />
+    <ClCompile Include="WPlayScene.cpp" />
+    <ClCompile Include="WTempleBossScene.cpp" />
+    <ClCompile Include="WTempleScene.cpp" />
+    <ClCompile Include="WTempleScene_2.cpp" />
+    <ClCompile Include="WTempleStartScene.cpp" />
+    <ClCompile Include="WValleyScene.cpp" />
+    <ClCompile Include="WValleyScene_2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

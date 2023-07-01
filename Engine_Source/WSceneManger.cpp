@@ -1,4 +1,5 @@
 #include "WSceneManger.h"
+#include "WCamera.h"
 //#include "WPlayScene.h"
 //#include "WLeafreScene.h"
 //#include "WValleyScene.h"

@@ -18,6 +18,7 @@ namespace W::enums
 	enum class eLayerType
 	{
 		Default,
+		Camera,
 		Background,
 		Ground,
 		Player,
@@ -38,6 +39,11 @@ namespace W::enums
 		End,
 	};
 
-
+	enum class eCameraType
+	{
+		Object,
+		UI,
+		None,
+	};
 
 }

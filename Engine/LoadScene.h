@@ -28,12 +28,15 @@ namespace W
 	{
 		SceneManger::CreateScene<PlayScene>(L"PlayScene");
 		SceneManger::CreateScene<LeafreScene>(L"Leafre");
-		SceneManger::CreateScene<ValleyScene>(L"Valley");
 		SceneManger::CreateScene<ValleyScene_2>(L"Valley2");
+		SceneManger::CreateScene<CaveStartScene>(L"Start1");
 		SceneManger::CreateScene<CaveScene>(L"Cave");
 		SceneManger::CreateScene<TempleScene>(L"Temple");
 		SceneManger::CreateScene<TempleScene_2>(L"Temple2");
+		SceneManger::CreateScene<TempleStartScene>(L"Start2");
 		SceneManger::CreateScene<TempleBossScene>(L"TempleBoss");
 		SceneManger::CreateScene<MoveScene>(L"Move1");
+		SceneManger::CreateScene<MoveScene_2>(L"Move2");
+		SceneManger::CreateScene<ValleyScene>(L"Valley");
 	}
 }

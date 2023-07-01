@@ -67,18 +67,6 @@
     <Filter Include="Scene\Layer">
       <UniqueIdentifier>{787d6bef-6115-4718-a7a4-e1bce08bb04f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Temple">
-      <UniqueIdentifier>{350b77dd-487c-463f-be8a-6904909d2986}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Cave">
-      <UniqueIdentifier>{053b81ef-63de-47c5-9223-e8b785438402}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Leafre">
-      <UniqueIdentifier>{12cef424-f8bf-4cf9-a6a8-d17a1fc07350}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Valley">
-      <UniqueIdentifier>{58824926-0784-4e92-a38d-fe2fcb783bc9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Object\Cage">
       <UniqueIdentifier>{d321a986-396e-4b10-9332-914dd1f0e4cd}</UniqueIdentifier>
     </Filter>
@@ -97,8 +85,8 @@
     <Filter Include="Resource\Material">
       <UniqueIdentifier>{dd4779db-4960-48a8-a52a-77b52bd8ad65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Move">
-      <UniqueIdentifier>{3b319f96-40b0-4ded-a28b-ecddd790a1b6}</UniqueIdentifier>
+    <Filter Include="UI">
+      <UniqueIdentifier>{b130f63c-321a-475a-be85-57688e346cf8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +132,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WCameraScript.cpp">
-      <Filter>GameObject\Component</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -168,27 +153,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp">
       <Filter>Scene\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WCaveScene.cpp">
-      <Filter>Scene\Cave</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WLeafreScene.cpp">
-      <Filter>Scene\Leafre</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene.cpp">
-      <Filter>Scene\Valley</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WValleyScene_2.cpp">
-      <Filter>Scene\Valley</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene.cpp">
-      <Filter>Scene\Temple</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleScene_2.cpp">
-      <Filter>Scene\Temple</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPlayScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCage.cpp">
       <Filter>GameObject\Object\Cage</Filter>
     </ClCompile>
@@ -207,20 +171,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp">
       <Filter>Resource\Material</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleBossScene.cpp">
-      <Filter>Scene\Temple</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WUI.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WCaveStartScene.cpp">
-      <Filter>Scene\Cave</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WTempleStartScene.cpp">
-      <Filter>Scene\Temple</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMoveScene.cpp">
-      <Filter>Scene\Move</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMoveScene_2.cpp">
-      <Filter>Scene\Move</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)UIManger.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,9 +233,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WCameraScript.h">
-      <Filter>GameObject\Component</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -302,27 +254,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h">
       <Filter>Scene\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WCaveScene.h">
-      <Filter>Scene\Cave</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WLeafreScene.h">
-      <Filter>Scene\Leafre</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene.h">
-      <Filter>Scene\Valley</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WValleyScene_2.h">
-      <Filter>Scene\Valley</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene.h">
-      <Filter>Scene\Temple</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleScene_2.h">
-      <Filter>Scene\Temple</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPlayScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h">
       <Filter>Resource\ConstantBuffer</Filter>
     </ClInclude>
@@ -341,20 +272,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h">
       <Filter>Resource\Material</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleBossScene.h">
-      <Filter>Scene\Temple</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WUI.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WCaveStartScene.h">
-      <Filter>Scene\Cave</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WTempleStartScene.h">
-      <Filter>Scene\Temple</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMoveScene.h">
-      <Filter>Scene\Move</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMoveScene_2.h">
-      <Filter>Scene\Move</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)UIManger.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

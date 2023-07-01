@@ -85,6 +85,11 @@ namespace renderer
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
 			pShader->GetVSCode(),
 			pShader->GetInputLayoutAddressOf());
+
+		pShader = W::Resources::Find<Shader>(L"UIShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
 #pragma endregion
 
 #pragma region Sampler State
@@ -250,6 +255,11 @@ namespace renderer
 		pObjcetShader->Create(eShaderStage::PS, L"ObjectPS.hlsl", "main");
 		W::Resources::Insert(L"ObjectShader", pObjcetShader);
 
+		std::shared_ptr<Shader> pUIShader = std::make_shared<Shader>();
+		pUIShader->Create(eShaderStage::VS, L"UIVS.hlsl", "main");
+		pUIShader->Create(eShaderStage::PS, L"UIPS.hlsl", "main");
+		W::Resources::Insert(L"UIShader", pUIShader);
+
 #pragma region background
 		{
 			std::shared_ptr<Texture> pTex =
@@ -329,6 +339,7 @@ namespace renderer
 			std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
 			pSpriteMaterial->SetShader(pSpriteShader);
 			pSpriteMaterial->SetTexture(pTex);
+			pSpriteMaterial->SetRenderinMode(eRenderingMode::Transparent);
 			Resources::Insert(L"SpriteMaterial02", pSpriteMaterial);
 		}
 	}

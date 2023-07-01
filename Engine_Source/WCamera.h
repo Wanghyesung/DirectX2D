@@ -5,9 +5,8 @@
 
 //UI카메라(이동X), 캐릭터 카메라 따로
 //renderer render함수에서 카메라 렌더호출
-//cutoutmode 투명, 투명하지않은것들을 같이
 //Scene, camerascript engine쪽으로 이동
-//opaque 투명 cutout 부분 부투명 transparnt불투명 순으로 렌더 지금은 먼저 만들어진 순서대로
+//opaque 뷸투명 cutout 부분 부투명 transparnt투명 순으로 렌더 지금은 먼저 만들어진 순서대로
 //렌더렁모드순서대로 정렬후 렌더타입 순서대로 렌더
 //레이어마다 카메라를 따로 적용가능 
 //SceneMgr -> camera(render)로 렌더순서대로 렌더링
@@ -27,13 +26,14 @@ namespace W
 			OrthoGraphic,
 			None,
 		};
+		
 
 		Camera();
 		virtual ~Camera();
 
-		static Matrix GetViewMatrix() { return m_mView; }
-		static Matrix GetProjectionMatrix() { return m_mProjection; }
-	
+		static Matrix GetViewMatrix() { return View; }
+		static Matrix GetProjectionMatrix() { return Projection; }
+
 		bool CreateViewMatrix();
 		bool CreateProjectionMatrix(eProjectionType _eType);
 		void RegisterCameraInRenderer();
@@ -43,22 +43,30 @@ namespace W
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		
+
 		void TrunLayerMask(eLayerType _eType, bool _bEnable = true);
-		void EnableLayerMask() { m_bitLayerMask.set(); }
+		void EnableLayerMasks() { m_bitLayerMask.set(); }
 		void DisableLayerMasks() { m_bitLayerMask.reset(); }
-		
-		void SortGameObjects();
+
+		void AlphaSortGameObjects();
+		void ZSortTransparencyGameObjects();
+		void DivideAlphaBlendGameObjects(const std::vector<GameObject*> _vecGameObj);
 		void RenderOpaque();
 		void RenderCutOut();
 		void RenderTransparent();
+
+		void EnableDepthStencilState();
+		void DisablDepthStencilState();
 
 	private:
 		//월드행렬은 오브젝트마다 다르지만
 		//뷰 공간과 투영행렬은 모든 오븍제트들에게 똑같이
 		//적용되기 때문에 static으로
-		static Matrix m_mView;
-		static Matrix m_mProjection;
+		Matrix m_mView;
+		Matrix m_mProjection;
+
+		static Matrix View;
+		static Matrix Projection;
 
 		eProjectionType m_eType;
 		float m_fAspectRatio;//종횡비

@@ -10,7 +10,8 @@ namespace W
 		Component(eComponentType::Transform),
 		m_vPosition(Vector3::Zero),
 		m_vRotation(Vector3::Zero),
-		m_vScale(Vector3::One)
+		m_vScale(Vector3::One),
+		m_pParentTransform(nullptr)
 	{
 
 	}
@@ -44,6 +45,11 @@ namespace W
 		m_vUp = Vector3::TransformNormal(Vector3::Up, mRotation);
 		m_vFoward = Vector3::TransformNormal(Vector3::Forward, mRotation);
 		m_vRight = Vector3::TransformNormal(Vector3::Right, mRotation);
+
+		//내 로컬 -> 월드 -> 부모 행렬
+		if (m_pParentTransform)
+			m_vWorld *= m_pParentTransform->m_vWorld;
+
 	}
 	void Transform::Render()
 	{

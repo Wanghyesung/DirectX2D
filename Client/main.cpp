@@ -11,10 +11,10 @@
 
 #include "framework.h"
 #include "Client.h"
-#include "WApplication.h"
-#include "WRenderer.h"
-#include "WResources.h"
-#include "WSceneManger.h"
+#include "..\Engine_Source\WApplication.h"
+#include "..\Engine_Source\WRenderer.h"
+#include "..\Engine_Source\WResources.h"
+//#include "WSceneManger.h"
 #include "LoadScene.h"
 
 //키 이동, shader 색, 랜덤한게 생성, 먹으면 크기 늘어나게 (분열은 선택)

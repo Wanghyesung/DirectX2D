@@ -58,8 +58,8 @@ namespace W
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
 
-		SceneManger::Render();
-		//renderer::Render();
+		//SceneManger::Render();
+		renderer::Render();
 		graphicDevice->Present();
 	}
 

@@ -5,9 +5,99 @@
     <ClInclude Include="LoadScene.h">
       <Filter>Contents\Load</Filter>
     </ClInclude>
+    <ClInclude Include="WPlayScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="WCaveScene.h">
+      <Filter>Contents\Scene\Cave</Filter>
+    </ClInclude>
+    <ClInclude Include="WCaveStartScene.h">
+      <Filter>Contents\Scene\Cave</Filter>
+    </ClInclude>
+    <ClInclude Include="WLeafreScene.h">
+      <Filter>Contents\Scene\Leafre</Filter>
+    </ClInclude>
+    <ClInclude Include="WMoveScene.h">
+      <Filter>Contents\Scene\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="WMoveScene_2.h">
+      <Filter>Contents\Scene\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="WTempleBossScene.h">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="WTempleScene.h">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="WTempleScene_2.h">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="WTempleStartScene.h">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClInclude>
+    <ClInclude Include="WValleyScene.h">
+      <Filter>Contents\Scene\Valley</Filter>
+    </ClInclude>
+    <ClInclude Include="WValleyScene_2.h">
+      <Filter>Contents\Scene\Valley</Filter>
+    </ClInclude>
+    <ClInclude Include="WCameraScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="WInterfaceUI.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="WChannleBntUI.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="WPlayScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="WCaveScene.cpp">
+      <Filter>Contents\Scene\Cave</Filter>
+    </ClCompile>
+    <ClCompile Include="WCaveStartScene.cpp">
+      <Filter>Contents\Scene\Cave</Filter>
+    </ClCompile>
+    <ClCompile Include="WLeafreScene.cpp">
+      <Filter>Contents\Scene\Leafre</Filter>
+    </ClCompile>
+    <ClCompile Include="WMoveScene.cpp">
+      <Filter>Contents\Scene\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="WMoveScene_2.cpp">
+      <Filter>Contents\Scene\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="WTempleBossScene.cpp">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="WTempleScene.cpp">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="WTempleScene_2.cpp">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="WTempleStartScene.cpp">
+      <Filter>Contents\Scene\Temple</Filter>
+    </ClCompile>
+    <ClCompile Include="WValleyScene.cpp">
+      <Filter>Contents\Scene\Valley</Filter>
+    </ClCompile>
+    <ClCompile Include="WValleyScene_2.cpp">
+      <Filter>Contents\Scene\Valley</Filter>
+    </ClCompile>
+    <ClCompile Include="WCameraScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="WInterfaceUI.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="WChannleBntUI.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -18,6 +108,30 @@
     </Filter>
     <Filter Include="Contents\Script">
       <UniqueIdentifier>{ccb16c22-7d89-48d1-a1e0-e2dfac14ed65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{5320ced3-98e5-4f3b-a161-790e348625a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Cave">
+      <UniqueIdentifier>{735468d0-d587-4778-9167-b4941705c8a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Leafre">
+      <UniqueIdentifier>{386690a1-ad02-4a07-baed-214f0e7da814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Temple">
+      <UniqueIdentifier>{dc1aa036-ec8d-4cbc-9d38-07666422a6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Valley">
+      <UniqueIdentifier>{b6881b7f-30b1-4181-99e1-acfa27b42da2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Move">
+      <UniqueIdentifier>{a1327966-6d29-4c7b-9c87-e9b64670578b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{923d25ad-6dfc-4388-9627-2cdef72811db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface">
+      <UniqueIdentifier>{88744d0b-0e0a-4b42-8f50-5638699784ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

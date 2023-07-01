@@ -466,16 +466,25 @@ namespace W::graphics
 	{
 		//뷰포트 업데이트
 		HWND hWnd = application.GetHwnd();
+
+		//임시
+		//float fHeight = application.GetHeight();
+		//float fWidth = application.GetWidth();
+
 		RECT winRect = {};
 		GetClientRect(hWnd, &winRect);
+
+		//float fDiffY = abs(fHeight - (float)(winRect.bottom - winRect.top));
+		//float fDiffX = abs(fWidth - (winRect.right - winRect.left));
+
 		m_tViewPort =
 		{
 			0.0f, 0.0f
-			, (float)(winRect.right - winRect.left)
-			, (float)(winRect.bottom - winRect.top)
+			, (float)(winRect.right - winRect.left)// + fDiffX
+			,(float)750.f
+			//, (float)(winRect.bottom - winRect.top)// + fDiffY
 			, 0.0f, 1.0f
 		};
-
 		BindViewPort(&m_tViewPort);
 		
 	}

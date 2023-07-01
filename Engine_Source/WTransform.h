@@ -12,7 +12,7 @@ namespace W
 	{
 	public:
 		Transform();
-		~Transform();
+		virtual ~Transform();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -37,6 +37,9 @@ namespace W
 		Vector3 Right() { return m_vRight; }
 		Vector3 Up() { return m_vUp; }
 
+		void SetParent(Transform* transform) { m_pParentTransform = transform; }
+		Transform* GetParent() { return m_pParentTransform; }
+
 	private:
 		Vector3 m_vPosition;
 		Vector3 m_vRotation;
@@ -49,6 +52,8 @@ namespace W
 
 		//내 오브젝트 월드 행렬
 		Matrix m_vWorld;
+
+		Transform* m_pParentTransform;
 
 	};
 

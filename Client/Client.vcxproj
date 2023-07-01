@@ -61,7 +61,6 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\Engine_Source\Engine_Source.vcxitems" Label="Shared" />
     <Import Project="..\Editor_Source\Editor_Source.vcxitems" Label="Shared" />
     <Import Project="..\Editor_Source\Editor_Source.vcxitems" Label="Shared" />
   </ImportGroup>
