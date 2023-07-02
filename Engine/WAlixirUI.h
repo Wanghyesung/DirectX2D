@@ -1,13 +1,14 @@
 #pragma once
-#include "WUI.h"
+
+#include "WItemUI.h"
 
 namespace W
 {
-	class InvenUI : public UI
+	class AlixirUI : public ItemUI
 	{
 	public:
-		InvenUI();
-		virtual ~InvenUI();
+		AlixirUI();
+		virtual ~AlixirUI();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -20,7 +21,7 @@ namespace W
 		virtual void MouseLbtnClicked()override;
 
 	private:
-		
+
 
 	};
 }

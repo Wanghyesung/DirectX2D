@@ -42,13 +42,13 @@ namespace W
 		{
 			HWND hWnd = application.GetHwnd();
 
-			RECT tRect = {};
-			GetClientRect(hWnd, &tRect);
-			Vector2 MousePos = Input::GetMousePos();
-			math::Vector3 vMousePos(MousePos.x, MousePos.y, 0.f);
-
-			math::Viewport view(0.f, 0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
-			vMousePos = view.Unproject(vMousePos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+			//RECT tRect = {};
+			//GetClientRect(hWnd, &tRect);
+			Vector2 vMousePos = Input::GetMousePos();
+			//math::Vector3 vMousePos(MousePos.x, MousePos.y, 0.f);
+			//
+			//math::Viewport view(0.f, 0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
+			//vMousePos = view.Unproject(vMousePos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
 
 			wchar_t szFloat[50] = {};
 			float FPS = 1.0f / (float)m_dDeltaTime;

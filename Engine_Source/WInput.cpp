@@ -1,7 +1,7 @@
 #include "WInput.h"
 
 #include "WApplication.h"
-
+#include "WCamera.h"
 
 extern W::Application application;
 
@@ -66,8 +66,16 @@ namespace W
 			GetCursorPos(&mousePos);
 
 			ScreenToClient(application.GetHwnd(), &mousePos);
-			m_vMousePos.x = mousePos.x;
-			m_vMousePos.y = mousePos.y;
+			math::Vector3 vMousePos(mousePos.x, mousePos.y, 0.f);
+
+			RECT tRect = {};
+			GetClientRect(application.GetHwnd(), &tRect);
+
+			math::Viewport view(0.f, 0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
+			vMousePos = view.Unproject(vMousePos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+
+			m_vMousePos.x = vMousePos.x;
+			m_vMousePos.y = vMousePos.y;
 		}
 		else
 		{

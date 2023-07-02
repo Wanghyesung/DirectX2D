@@ -1,5 +1,5 @@
 #include "WInvenUI.h"
-
+#include "WInterfaceUI.h"
 namespace W
 {
 	InvenUI::InvenUI()
@@ -37,14 +37,22 @@ namespace W
 	}
 	void InvenUI::MouseOn()
 	{
+
 	}
 	void InvenUI::MouseLbtnDown()
 	{
+		UI* pParentUI = GetParentUI();
+		InterfaceUI* pInterfaceUI = dynamic_cast<InterfaceUI*>(pParentUI);
+
+		if (pInterfaceUI != nullptr)
+			pInterfaceUI->ActiveInventory();
 	}
 	void InvenUI::MouseLbtnUp()
 	{
+
 	}
 	void InvenUI::MouseLbtnClicked()
 	{
+
 	}
 }

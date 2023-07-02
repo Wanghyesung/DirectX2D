@@ -3,12 +3,13 @@
 
 namespace W
 {
+	class Inventory;
+
 	class InterfaceUI : public UI
 	{
 	public:
 		InterfaceUI();
 		virtual ~InterfaceUI();
-
 
 		virtual void Initialize();
 		virtual void Update();
@@ -20,6 +21,9 @@ namespace W
 		virtual void MouseLbtnUp();//UI안에서 땠을 때
 		virtual void MouseLbtnClicked();//UI안에서 누르고 떘을 떄
 
+		void ActiveInventory();
+	private:
+		Inventory* m_pInventory;
 	};
 
 }

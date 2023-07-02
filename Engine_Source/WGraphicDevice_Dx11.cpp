@@ -481,8 +481,8 @@ namespace W::graphics
 		{
 			0.0f, 0.0f
 			, (float)(winRect.right - winRect.left)// + fDiffX
-			,(float)750.f
-			//, (float)(winRect.bottom - winRect.top)// + fDiffY
+			//,(float)750.f
+			, (float)(winRect.bottom - winRect.top)// + fDiffY
 			, 0.0f, 1.0f
 		};
 		BindViewPort(&m_tViewPort);

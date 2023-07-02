@@ -102,17 +102,17 @@ namespace W
 	}
 	void UI::MouseOnCheck()
 	{
-		RECT tRect = {};
-		GetClientRect(application.GetHwnd(), &tRect);
+		//RECT tRect = {};
+		//GetClientRect(application.GetHwnd(), &tRect);
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vScale = pTransform->GetScale();
 		Vector3 vPos = pTransform->GetPosition();
 
-		Vector2 MousePos = Input::GetMousePos();
-		math::Vector3 vMousePos(MousePos.x, MousePos.y, 0.f);
+		Vector2 vMousePos = Input::GetMousePos();
+		//math::Vector3 vMousePos(MousePos.x, MousePos.y, 0.f);
 
-		math::Viewport view(0.f,0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
-		vMousePos = view.Unproject(vMousePos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+		//math::Viewport view(0.f,0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
+		//vMousePos = view.Unproject(vMousePos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
 		
 	
 		if ((vPos.x - vScale.x/2.f) <= vMousePos.x && vMousePos.x <= (vPos.x + vScale.x/2.f) &&

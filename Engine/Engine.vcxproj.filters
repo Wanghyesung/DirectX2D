@@ -86,6 +86,15 @@
     <ClInclude Include="WGaugeUI.h">
       <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClInclude>
+    <ClInclude Include="WInventory.h">
+      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
+    </ClInclude>
+    <ClInclude Include="WItemUI.h">
+      <Filter>Contents\UI\ItemUI</Filter>
+    </ClInclude>
+    <ClInclude Include="WAlixirUI.h">
+      <Filter>Contents\UI\ItemUI\Potion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -169,6 +178,15 @@
     </ClCompile>
     <ClCompile Include="WGaugeUI.cpp">
       <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClCompile>
+    <ClCompile Include="WInventory.cpp">
+      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
+    </ClCompile>
+    <ClCompile Include="WItemUI.cpp">
+      <Filter>Contents\UI\ItemUI</Filter>
+    </ClCompile>
+    <ClCompile Include="WAlixirUI.cpp">
+      <Filter>Contents\UI\ItemUI\Potion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +273,15 @@
     </Filter>
     <Filter Include="Contents\UI\Interface\Gauge\EXP">
       <UniqueIdentifier>{57b11561-8a84-47cf-8bd3-17033a4aa72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Item">
+      <UniqueIdentifier>{ec43df9d-b9c0-4da4-90bb-b685a6f85b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\ItemUI">
+      <UniqueIdentifier>{64f531d4-5c81-48e0-96c0-49b7c3651a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\ItemUI\Potion">
+      <UniqueIdentifier>{89b91c99-324a-42c2-a53b-30ab2461e60f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

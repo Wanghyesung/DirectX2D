@@ -13,9 +13,11 @@
 #include "WStatUI.h"
 #include "WQuestUI.h"
 #include "WSKillUI.h"
+#include "WInventory.h"
 namespace W
 {
-	InterfaceUI::InterfaceUI()
+	InterfaceUI::InterfaceUI():
+		m_pInventory(nullptr)
 	{
 		std::shared_ptr<Texture> pInterfaceTex =
 			Resources::Load<Texture>(L"InterfaceTex", L"..\\Resources\\Texture\\UI\\Interface\\back_0.png");
@@ -32,6 +34,7 @@ namespace W
 	void InterfaceUI::Initialize()
 	{
 		//ÀÚ½ÄUI
+#pragma region ChildUI
 		ChannleBntUI* pChannleUI = new ChannleBntUI();
 		//Vector3 vPos = this->GetComponent<Transform>()->GetPosition();
 		//pChannleUI->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -0.1f) + vPos);
@@ -95,6 +98,20 @@ namespace W
 		pLevelUI->GetComponent<Transform>()->SetScale(6.844 * 0.35f, 1.f * 0.35f, 0.f); //6.844 : 1
 		AddChildUI(pLevelUI);
 
+		GaugeUI* pGaugeUI = new GaugeUI();
+		pGaugeUI->GetComponent<Transform>()->SetPosition(-2.9f, -0.18f, -0.01f);
+		pGaugeUI->GetComponent<Transform>()->SetScale(1.0935 * 3.f, 0.1f * 3.f, 0.f); //10.935 : 1
+		AddChildUI(pGaugeUI);
+#pragma endregion
+
+
+#pragma region Extra UI
+		m_pInventory = new Inventory();
+		m_pInventory->GetComponent<Transform>()->SetPosition(-2.9f, 3.f, -0.01f);
+		m_pInventory->GetComponent<Transform>()->SetScale(0.518f * 3.8f, 1.f * 3.8f, 0.f); //0.518 : 1
+		AddChildUI(m_pInventory);
+
+#pragma endregion
 	}
 	void InterfaceUI::Update()
 	{
@@ -123,6 +140,17 @@ namespace W
 	void InterfaceUI::MouseLbtnClicked()
 	{
 
+	}
+
+	void InterfaceUI::ActiveInventory()
+	{
+		if (m_pInventory != nullptr)
+		{
+			if (m_pInventory->m_bRenderOn)
+				m_pInventory->m_bRenderOn = false;
+			else
+				m_pInventory->m_bRenderOn = true;
+		}
 	}
 
 }

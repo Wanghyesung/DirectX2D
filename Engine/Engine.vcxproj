@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScene.h" />
+    <ClInclude Include="WAlixirUI.h" />
     <ClInclude Include="WCameraScript.h" />
     <ClInclude Include="WCaveScene.h" />
     <ClInclude Include="WCaveStartScene.h" />
@@ -162,7 +163,9 @@
     <ClInclude Include="WEquipUI.h" />
     <ClInclude Include="WGaugeUI.h" />
     <ClInclude Include="WInterfaceUI.h" />
+    <ClInclude Include="WInventory.h" />
     <ClInclude Include="WInvenUI.h" />
+    <ClInclude Include="WItemUI.h" />
     <ClInclude Include="WLeafreScene.h" />
     <ClInclude Include="WLevelUI.h" />
     <ClInclude Include="WMenuUI.h" />
@@ -184,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="WAlixirUI.cpp" />
     <ClCompile Include="WCameraScript.cpp" />
     <ClCompile Include="WCaveScene.cpp" />
     <ClCompile Include="WCaveStartScene.cpp" />
@@ -192,7 +196,9 @@
     <ClCompile Include="WEquipUI.cpp" />
     <ClCompile Include="WGaugeUI.cpp" />
     <ClCompile Include="WInterfaceUI.cpp" />
+    <ClCompile Include="WInventory.cpp" />
     <ClCompile Include="WInvenUI.cpp" />
+    <ClCompile Include="WItemUI.cpp" />
     <ClCompile Include="WLeafreScene.cpp" />
     <ClCompile Include="WLevelUI.cpp" />
     <ClCompile Include="WMenuUI.cpp" />

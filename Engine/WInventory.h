@@ -1,13 +1,14 @@
 #pragma once
-#include "WUI.h"
 
+#include "WUI.h"
+#include "WItemUI.h"
 namespace W
 {
-	class InvenUI : public UI
+	class Inventory : public UI
 	{
 	public:
-		InvenUI();
-		virtual ~InvenUI();
+		Inventory();
+		virtual ~Inventory();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -19,10 +20,19 @@ namespace W
 		virtual void MouseLbtnUp()override;
 		virtual void MouseLbtnClicked()override;
 
+		ItemUI* FindItem(std::wstring _strName);
+		void AddItem(ItemUI* _pItem, std::wstring _strName);
+
 	private:
-		
+		void SetItemPos(ItemUI* _pItem);
 
+	private:
+		bool m_bRenderOn;
+		std::map<std::wstring , ItemUI*> m_mapItems;
+
+
+		friend class InterfaceUI;
 	};
-}
 
+}
 
