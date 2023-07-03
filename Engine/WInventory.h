@@ -22,14 +22,22 @@ namespace W
 
 		ItemUI* FindItem(std::wstring _strName);
 		void AddItem(ItemUI* _pItem, std::wstring _strName);
+		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
 
 	private:
-		void SetItemPos(ItemUI* _pItem);
+		bool setitemposition(ItemUI* _pItem);
 
 	private:
 		bool m_bRenderOn;
-		std::map<std::wstring , ItemUI*> m_mapItems;
+		std::map<std::wstring, ItemUI*> m_mapItems;
 
+		bool m_bTargetOn;
+
+		Vector2 m_vDragStartPos;
+
+		Vector2 m_vUIStartPosition;
+		Vector2 m_vUIEndPosition;
+		Vector2 m_vUIDiffPosition;
 
 		friend class InterfaceUI;
 	};

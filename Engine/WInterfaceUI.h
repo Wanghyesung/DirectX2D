@@ -4,6 +4,7 @@
 namespace W
 {
 	class Inventory;
+	class ItemUI;
 
 	class InterfaceUI : public UI
 	{
@@ -22,8 +23,26 @@ namespace W
 		virtual void MouseLbtnClicked();//UI안에서 누르고 떘을 떄
 
 		void ActiveInventory();
+
+		void AddItem(ItemUI* _pItem, std::wstring _strName);
+		ItemUI* FindItem(std::wstring _strName);
+
+	private:
+		bool setitemposition(ItemUI* _pItem);
+
 	private:
 		Inventory* m_pInventory;
+
+		//2.28 -3.21
+		Vector2 m_vUIStartPosition;
+		
+		//3.3 -3.55
+		Vector2 m_vUIEndPosition;
+		
+		// 0.255 //0.34
+		Vector2 m_vUIDiffPosition;
+
+		std::map<std::wstring, ItemUI*> m_mapItems;
 	};
 
 }

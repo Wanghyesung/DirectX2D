@@ -7,8 +7,8 @@ namespace W
 		m_bTargetOn(false),
 		m_vDragStartPos(Vector2::One),
 		m_vDragEndPos(Vector2::One),
-		m_iItemIndexX(0),
-		m_iItemIndexY(0)
+		m_iItemIndexX(-1),
+		m_iItemIndexY(-1)
 	{
 	}
 	ItemUI::~ItemUI()
@@ -24,6 +24,14 @@ namespace W
 	}
 	void ItemUI::LateUpdate()
 	{	
+		UI::LateUpdate();
+	}
+	void ItemUI::Render()
+	{
+		UI::Render();
+	}
+	void ItemUI::MouseOn()
+	{
 		if (m_bTargetOn)
 		{
 			Transform* pTransform = GetComponent<Transform>();
@@ -34,18 +42,10 @@ namespace W
 
 			pTransform->SetPosition(vPosisition);
 
+			MoveToParent(vDiff);
+
 			m_vDragStartPos = Input::GetMousePos();
 		}
-
-		UI::LateUpdate();
-	}
-	void ItemUI::Render()
-	{
-		UI::Render();
-	}
-	void ItemUI::MouseOn()
-	{
-
 	}
 	void ItemUI::MouseLbtnDown()
 	{

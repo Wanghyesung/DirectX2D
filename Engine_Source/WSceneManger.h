@@ -32,6 +32,7 @@ namespace W
 		static Scene* GetActiveScene() { return m_pActiveScene; }
 		static Scene* LoadScene(std::wstring _strName);
 
+		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj){ m_pActiveScene->AddGameObject(_eType, _pGameObj);}
 	private:
 		static Scene* m_pActiveScene;
 		static std::map<std::wstring, Scene*> m_mapScene;

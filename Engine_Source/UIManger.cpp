@@ -3,9 +3,12 @@
 #include "WLayer.h"
 #include "WInput.h"
 #include "WGameObject.h"
+#include "WTransform.h"
+
 
 namespace W
 {
+
 	UI* UIManger::m_pFoucseUI = nullptr;
 
 	void UIManger::Update()

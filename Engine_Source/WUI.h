@@ -3,10 +3,10 @@
 #include "WResources.h"
 namespace W
 {
-
 	class UI : public GameObject
 	{
 	public:
+
 		UI();
 		virtual ~UI();
 
@@ -21,10 +21,16 @@ namespace W
 		virtual void MouseLbtnClicked();//UI안에서 누르고 떘을 떄
 
 		UI* GetParentUI() { return m_pParentUI; }
-		void AddChildUI(UI* _pUI);
+		void AddChildUI(UI* _pUI, bool _bMove = true);
+		void DeleteChildUI(UI* _pUI);
+
+		void MoveUI(UI* _pUI);
+		void MoveToParent(Vector2 _vDiff);
 
 		bool IsLBntDown() { return m_bLbntDown; }
 		bool IsMosueOn() { return m_bMouseOn; }
+
+		const std::vector<UI*> GetChildUI() { return m_vecChildUI; }
 
 	private:
 		//자식 UI 업데이트
@@ -34,15 +40,14 @@ namespace W
 
 		void MouseOnCheck();
 
-		void MoveToParent();
+		//void MoveToParent();
 
-		const std::vector<UI*> GetChildUI() { return m_vecChildUI; }
 	private:
 		//내 자식 UI
 		std::vector<UI*> m_vecChildUI;
 		//내 부모 UI
 		UI* m_pParentUI;
-		Vector3 m_vParntUIPos;
+
 		bool m_bMouseOn;
 		bool m_bLbntDown;
 

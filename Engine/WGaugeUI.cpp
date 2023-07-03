@@ -1,4 +1,9 @@
 #include "WGaugeUI.h"
+#include "WHP.h"
+#include "WMP.h"
+#include "WEXP.h"
+#include "WTransform.h"
+#include "WCoverGaugeUI.h"
 
 namespace W
 {
@@ -21,6 +26,26 @@ namespace W
 	}
 	void GaugeUI::Initialize()
 	{
+		HP* pHP = new HP();
+		pHP->GetComponent<Transform>()->SetPosition(-0.69f,0.072f,-0.2f);
+		pHP->GetComponent<Transform>()->SetScale(7.1f * 0.195f, 0.7f * 0.195f, -0.1f); //71 : 7
+		AddChildUI(pHP);
+
+		MP* pMP = new MP();
+		pMP->GetComponent<Transform>()->SetPosition(0.96f, 0.072f, -0.2f);
+		pMP->GetComponent<Transform>()->SetScale(7.1f * 0.195f, 0.7f * 0.195f, -0.1f); //71 : 7
+		AddChildUI(pMP);
+
+		EXP* pEXP = new EXP();
+		pEXP->GetComponent<Transform>()->SetPosition(0.135f, -0.088f, -0.2f);
+		pEXP->GetComponent<Transform>()->SetScale(21.f * 0.145f, 1.f * 0.145f, -0.1f); //71 : 7
+		AddChildUI(pEXP);
+
+		CoverGaugeUI* pCover = new CoverGaugeUI();
+		pCover->GetComponent<Transform>()->SetPosition(0.125f,0.f, -0.3f);
+		pCover->GetComponent<Transform>()->SetScale(11.f* 0.273f,1.f * 0.273f,0.f); //11 : 1
+		AddChildUI(pCover);
+
 	}
 	void GaugeUI::Update()
 	{

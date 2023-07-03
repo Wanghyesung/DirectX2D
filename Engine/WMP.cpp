@@ -1,50 +1,51 @@
-#include "WLevelUI.h"
+#include "WMP.h"
 
 namespace W
 {
-	LevelUI::LevelUI()
+	MP::MP()
 	{
 		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"LevelTex0", L"..\\Resources\\Texture\\UI\\Interface\\level_back_0.png");
+			Resources::Load<Texture>(L"MPTex", L"..\\Resources\\Texture\\UI\\Interface\\MP.png");
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
 		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
 		pMater->SetTexture(pTex);
-		Resources::Insert(L"LevelMater0", pMater);
+		Resources::Insert(L"MPMater", pMater);
 
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pMater);
 	}
-	LevelUI::~LevelUI()
+	MP::~MP()
 	{
+
 	}
-	void LevelUI::Initialize()
+	void MP::Initialize()
 	{
+
 	}
-	void LevelUI::Update()
+	void MP::Update()
 	{
 		UI::Update();
 	}
-	void LevelUI::LateUpdate()
+	void MP::LateUpdate()
 	{
 		UI::LateUpdate();
 	}
-	void LevelUI::Render()
+	void MP::Render()
 	{
 		UI::Render();
 	}
-	void LevelUI::MouseOn()
+	void MP::MouseOn()
 	{
 	}
-	void LevelUI::MouseLbtnDown()
-	{
-		int a = 10;
-	}
-	void LevelUI::MouseLbtnUp()
+	void MP::MouseLbtnDown()
 	{
 	}
-	void LevelUI::MouseLbtnClicked()
+	void MP::MouseLbtnUp()
+	{
+	}
+	void MP::MouseLbtnClicked()
 	{
 	}
 }

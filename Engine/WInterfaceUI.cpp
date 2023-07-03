@@ -14,10 +14,16 @@
 #include "WQuestUI.h"
 #include "WSKillUI.h"
 #include "WInventory.h"
+#include "WSceneManger.h"
+#include "WAlixirUI.h"
 namespace W
 {
 	InterfaceUI::InterfaceUI():
-		m_pInventory(nullptr)
+		m_pInventory(nullptr),
+		m_mapItems{},
+		m_vUIStartPosition(Vector2::One),
+		m_vUIEndPosition(Vector2::One),
+		m_vUIDiffPosition(Vector2::One)
 	{
 		std::shared_ptr<Texture> pInterfaceTex =
 			Resources::Load<Texture>(L"InterfaceTex", L"..\\Resources\\Texture\\UI\\Interface\\back_0.png");
@@ -33,6 +39,20 @@ namespace W
 	}
 	void InterfaceUI::Initialize()
 	{
+		//위치 정보 셋팅
+		//2.28 -3.21
+		m_vUIStartPosition = Vector2(2.28f, -3.21f);
+		//3.3 -3.55
+		m_vUIEndPosition = Vector2(3.3f, -3.55f);
+		// 0.255 //0.34
+		m_vUIDiffPosition = Vector2(0.255f, 0.34f);
+
+		AlixirUI* pAlixir = new AlixirUI();
+		Transform* pAlixirTransform = pAlixir->GetComponent<Transform>();
+		pAlixirTransform->SetPosition(-0.68f, 1.2f, -0.3f);
+		pAlixirTransform->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
+		AddItem(pAlixir, pAlixir->GetName());
+
 		//자식UI
 #pragma region ChildUI
 		ChannleBntUI* pChannleUI = new ChannleBntUI();
@@ -94,23 +114,22 @@ namespace W
 		AddChildUI(pSKillUI);
 
 		LevelUI* pLevelUI = new LevelUI();
-		pLevelUI->GetComponent<Transform>()->SetPosition(-5.8f, -0.18f, -0.01f);
+		pLevelUI->GetComponent<Transform>()->SetPosition(-5.8f, -0.23f, -0.01f);
 		pLevelUI->GetComponent<Transform>()->SetScale(6.844 * 0.35f, 1.f * 0.35f, 0.f); //6.844 : 1
 		AddChildUI(pLevelUI);
 
 		GaugeUI* pGaugeUI = new GaugeUI();
-		pGaugeUI->GetComponent<Transform>()->SetPosition(-2.9f, -0.18f, -0.01f);
+		pGaugeUI->GetComponent<Transform>()->SetPosition(-2.9f, -0.23f, -0.01f);
 		pGaugeUI->GetComponent<Transform>()->SetScale(1.0935 * 3.f, 0.1f * 3.f, 0.f); //10.935 : 1
 		AddChildUI(pGaugeUI);
+		pGaugeUI->Initialize();
 #pragma endregion
 
 
 #pragma region Extra UI
 		m_pInventory = new Inventory();
-		m_pInventory->GetComponent<Transform>()->SetPosition(-2.9f, 3.f, -0.01f);
-		m_pInventory->GetComponent<Transform>()->SetScale(0.518f * 3.8f, 1.f * 3.8f, 0.f); //0.518 : 1
-		AddChildUI(m_pInventory);
-
+		SceneManger::AddGameObject(eLayerType::UI, m_pInventory);
+		m_pInventory->Initialize();
 #pragma endregion
 	}
 	void InterfaceUI::Update()
@@ -152,5 +171,79 @@ namespace W
 				m_pInventory->m_bRenderOn = true;
 		}
 	}
+
+	void InterfaceUI::AddItem(ItemUI* _pItem, std::wstring _strName)
+	{
+		ItemUI* pItem = FindItem(_strName);
+
+		//있음
+		if (pItem != nullptr)
+			return;
+
+		if (setitemposition(_pItem))
+		{
+			AddChildUI(_pItem, false);
+			m_mapItems.insert(std::make_pair(_strName, _pItem));
+		}
+		
+	}
+
+	ItemUI* InterfaceUI::FindItem(std::wstring _strName)
+	{
+		std::map<std::wstring, ItemUI*>::iterator iter =
+			m_mapItems.find(_strName);
+
+		if(iter == m_mapItems.end())
+			return nullptr;
+
+		return iter->second;
+	}
+
+	bool InterfaceUI::setitemposition(ItemUI* _pItem)
+	{
+		Transform* pTransform = GetComponent<Transform>();
+		Vector3 vPosition = pTransform->GetPosition();
+
+		Transform* PItemTranform = _pItem->GetComponent<Transform>();
+		Vector3 vItemPosition = PItemTranform->GetPosition();
+
+		//1 : 1시작점
+		Vector2 vStartPosition = m_vUIStartPosition;
+		for (UINT y = 0; y < 2; ++y)
+		{
+			vStartPosition.y += y * m_vUIDiffPosition.y;
+			for (UINT x = 0; x < 4; ++x)
+			{
+				vStartPosition.x += x * m_vUIDiffPosition.x;
+				std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+
+				//처음 들어온 아이템이라면
+				if (iter == m_mapItems.end())
+				{
+					PItemTranform->SetPosition(vStartPosition.x, vStartPosition.y, vItemPosition.z);
+					_pItem->SetItemIndex(x, y);
+					return true;
+				}
+
+				for (iter; iter != m_mapItems.end(); ++iter)
+				{
+					ItemUI* pITem = iter->second;
+					UINT ITEM_X = pITem->GetInterindexX();
+					UINT ITEM_Y = pITem->GetInterIndexY();
+
+					//빈칸
+					if (ITEM_X != x && ITEM_Y != y)
+					{
+						PItemTranform->SetPosition(vStartPosition.x, vStartPosition.y, vItemPosition.z);
+						_pItem->SetInterIndex(x, y);
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 
 }

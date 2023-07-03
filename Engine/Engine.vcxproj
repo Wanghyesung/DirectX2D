@@ -160,8 +160,11 @@
     <ClInclude Include="WCaveStartScene.h" />
     <ClInclude Include="WChannleBntUI.h" />
     <ClInclude Include="WCharUI.h" />
+    <ClInclude Include="WCoverGaugeUI.h" />
     <ClInclude Include="WEquipUI.h" />
+    <ClInclude Include="WEXP.h" />
     <ClInclude Include="WGaugeUI.h" />
+    <ClInclude Include="WHP.h" />
     <ClInclude Include="WInterfaceUI.h" />
     <ClInclude Include="WInventory.h" />
     <ClInclude Include="WInvenUI.h" />
@@ -171,6 +174,7 @@
     <ClInclude Include="WMenuUI.h" />
     <ClInclude Include="WMoveScene.h" />
     <ClInclude Include="WMoveScene_2.h" />
+    <ClInclude Include="WMP.h" />
     <ClInclude Include="WPlayScene.h" />
     <ClInclude Include="WQuestUI.h" />
     <ClInclude Include="WShopUI.h" />
@@ -193,8 +197,11 @@
     <ClCompile Include="WCaveStartScene.cpp" />
     <ClCompile Include="WChannleBntUI.cpp" />
     <ClCompile Include="WCharUI.cpp" />
+    <ClCompile Include="WCoverGaugeUI.cpp" />
     <ClCompile Include="WEquipUI.cpp" />
+    <ClCompile Include="WEXP.cpp" />
     <ClCompile Include="WGaugeUI.cpp" />
+    <ClCompile Include="WHP.cpp" />
     <ClCompile Include="WInterfaceUI.cpp" />
     <ClCompile Include="WInventory.cpp" />
     <ClCompile Include="WInvenUI.cpp" />
@@ -204,6 +211,7 @@
     <ClCompile Include="WMenuUI.cpp" />
     <ClCompile Include="WMoveScene.cpp" />
     <ClCompile Include="WMoveScene_2.cpp" />
+    <ClCompile Include="WMP.cpp" />
     <ClCompile Include="WPlayScene.cpp" />
     <ClCompile Include="WQuestUI.cpp" />
     <ClCompile Include="WShopUI.cpp" />

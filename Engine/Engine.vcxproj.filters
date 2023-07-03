@@ -95,6 +95,18 @@
     <ClInclude Include="WAlixirUI.h">
       <Filter>Contents\UI\ItemUI\Potion</Filter>
     </ClInclude>
+    <ClInclude Include="WHP.h">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClInclude>
+    <ClInclude Include="WMP.h">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClInclude>
+    <ClInclude Include="WEXP.h">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClInclude>
+    <ClInclude Include="WCoverGaugeUI.h">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -187,6 +199,18 @@
     </ClCompile>
     <ClCompile Include="WAlixirUI.cpp">
       <Filter>Contents\UI\ItemUI\Potion</Filter>
+    </ClCompile>
+    <ClCompile Include="WHP.cpp">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClCompile>
+    <ClCompile Include="WEXP.cpp">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClCompile>
+    <ClCompile Include="WMP.cpp">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
+    </ClCompile>
+    <ClCompile Include="WCoverGaugeUI.cpp">
+      <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

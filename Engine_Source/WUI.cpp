@@ -5,6 +5,7 @@
 #include "WSceneManger.h"
 #include "WApplication.h"
 
+
 extern W::Application application;
 
 namespace W
@@ -13,8 +14,7 @@ namespace W
 		m_bLbntDown(false),
 		m_bMouseOn(false),
 		m_pParentUI(nullptr),
-		m_vecChildUI{},
-		m_vParntUIPos{}
+		m_vecChildUI{}
 	{
 
 	}
@@ -41,16 +41,12 @@ namespace W
 	}
 	void UI::LateUpdate()
 	{
-
-		MoveToParent();
-
 		//여기서 부모 UI랑 같이 움직이게
 		GameObject::LateUpdate();
-		//마우스 체크
-
-		ChildLateupdate();
 
 		MouseOnCheck();
+
+		ChildLateupdate();
 	}
 	void UI::Render()
 	{
@@ -64,21 +60,31 @@ namespace W
 	}
 	void UI::MouseLbtnDown()
 	{
-
 	}
 	void UI::MouseLbtnUp()
 	{
-
 	}
 	void UI::MouseLbtnClicked()
 	{
 
 	}
-	void UI::AddChildUI(UI* _pUI)
+	void UI::AddChildUI(UI* _pUI , bool _bMove)
 	{
 		m_vecChildUI.push_back(_pUI);
 		_pUI->m_pParentUI = this;
+
+		//자식으로 설정될때 딱 한번만 호출
+		//ture이면 부모 기준으로 물체 이동
+		if(_bMove)
+			MoveUI(_pUI);
 	}
+
+	void UI::DeleteChildUI(UI* _pUI)
+	{
+		
+
+	}
+
 	void UI::ChildUpdate()
 	{
 		for (UI* pUI : m_vecChildUI)
@@ -100,53 +106,72 @@ namespace W
 			pUI->LateUpdate();
 		}
 	}
+
+
 	void UI::MouseOnCheck()
 	{
-		//RECT tRect = {};
-		//GetClientRect(application.GetHwnd(), &tRect);
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vScale = pTransform->GetScale();
 		Vector3 vPos = pTransform->GetPosition();
 
 		Vector2 vMousePos = Input::GetMousePos();
-		//math::Vector3 vMousePos(MousePos.x, MousePos.y, 0.f);
-
-		//math::Viewport view(0.f,0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
-		//vMousePos = view.Unproject(vMousePos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
 		
-	
 		if ((vPos.x - vScale.x/2.f) <= vMousePos.x && vMousePos.x <= (vPos.x + vScale.x/2.f) &&
 			(vPos.y - vScale.y/2.f) <= vMousePos.y && vMousePos.y <= (vPos.y + vScale.y/2.f))
-		{
 			m_bMouseOn = true;
-		}
 		else
-		{
 			m_bMouseOn = false;
-		}
-
 
 	}
-	void UI::MoveToParent()
+
+	//안쓰는 함수
+	//void UI::MoveToParent()
+	//{
+	//	if (m_pParentUI != nullptr)
+	//	{
+	//		Vector3 vFinalPos = {};
+	//	
+	//		Transform* pParentTransform = m_pParentUI->GetComponent<Transform>();
+	//		Vector3 vParentPos = pParentTransform->GetPosition();
+	//	
+	//		if (vParentPos != m_vParntUIPos)
+	//		{
+	//			m_vParntUIPos = vParentPos;
+	//	
+	//			Transform* pTransform = GetComponent<Transform>();
+	//			Vector3 vPos = pTransform->GetPosition();
+	//	
+	//			vFinalPos = vPos + vParentPos;
+	//			//vPos.x += vParentPos.x;
+	//			//vPos.y += vParentPos.y;
+	//			pTransform->SetPosition(vFinalPos);
+	//		}
+	//	}
+	//}
+
+	void UI::MoveUI(UI* _pUI)
 	{
-		if (m_pParentUI != nullptr)
+		Vector3 vFinalPos = {};
+
+		Transform* pParentTransform = GetComponent<Transform>();
+		Vector3 vParentPos = pParentTransform->GetPosition();
+
+		Transform* pTransform = _pUI->GetComponent<Transform>();
+		Vector3 vPos = pTransform->GetPosition();
+
+		vFinalPos = vParentPos + vPos;
+		pTransform->SetPosition(vFinalPos);
+	}
+
+	void UI::MoveToParent(Vector2 _vDiff)
+	{
+		const std::vector<UI*> vecChidUI = GetChildUI();
+
+		for (UI* pUI : vecChidUI)
 		{
-			Vector3 vFinalPos = {};
-
-			Transform* pParentTransform = m_pParentUI->GetComponent<Transform>();
-			Vector3 vParentPos = pParentTransform->GetPosition();
-			if (vParentPos != m_vParntUIPos)
-			{
-				m_vParntUIPos = vParentPos;
-
-				Transform* pTransform = GetComponent<Transform>();
-				Vector3 vPos = pTransform->GetPosition();
-
-				vFinalPos = vPos + vParentPos;
-				//vPos.x += vParentPos.x;
-				//vPos.y += vParentPos.y;
-				pTransform->SetPosition(vFinalPos);
-			}
+			Transform* pChildTr = pUI->GetComponent<Transform>();
+			pChildTr->SetPosition(pChildTr->GetPosition() + _vDiff);
 		}
 	}
+	
 }

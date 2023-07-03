@@ -19,19 +19,27 @@ namespace W
 		virtual void MouseLbtnUp()override;
 		virtual void MouseLbtnClicked()override;
 
-		void SetItemIndexX(UINT _iX, UINT _iY) { m_iItemIndexX = _iX; m_iItemIndexY = _iY; }
+		void SetItemIndex(int _iX, int _iY) { m_iItemIndexX = _iX; m_iItemIndexY = _iY; }
 
-		UINT GetItemindexX() { return m_iItemIndexX; }
-		UINT GetItemIndexY() { return m_iItemIndexY; }
+		int GetItemindexX() { return m_iItemIndexX; }
+		int GetItemIndexY() { return m_iItemIndexY; }
+
+		void SetInterIndex(int _iX, int _iY) { m_iInterIndexX = _iX; m_iInterIndexY = _iY; }
+
+		int GetInterindexX() { return m_iInterIndexX; }
+		int GetInterIndexY() { return m_iInterIndexY; }
 
 	private:
 		bool m_bTargetOn;
-
+		
 		Vector2 m_vDragStartPos;
 		Vector2 m_vDragEndPos;
 
-		UINT m_iItemIndexX;
-		UINT m_iItemIndexY;
+		int m_iItemIndexX;
+		int m_iItemIndexY;
+
+		int m_iInterIndexX;
+		int m_iInterIndexY;
 	};
 }
 
