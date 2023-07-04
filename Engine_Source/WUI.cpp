@@ -75,8 +75,20 @@ namespace W
 
 		//자식으로 설정될때 딱 한번만 호출
 		//ture이면 부모 기준으로 물체 이동
-		if(_bMove)
+		if (_bMove)
+		{
 			MoveUI(_pUI);
+		}
+		else
+		{
+			Transform* pUITransform = _pUI->GetComponent<Transform>();
+			Vector3 vUITransform = pUITransform->GetPosition();
+			Transform* pTransform = GetComponent<Transform>();
+			float z = pUITransform->GetPosition().z + pTransform->GetPosition().z - 0.01;;
+			pUITransform->SetPosition(vUITransform.x, vUITransform.y,z);
+		}
+			
+			
 	}
 
 	void UI::DeleteChildUI(UI* _pUI)

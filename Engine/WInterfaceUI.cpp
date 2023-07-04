@@ -47,11 +47,11 @@ namespace W
 		// 0.255 //0.34
 		m_vUIDiffPosition = Vector2(0.255f, 0.34f);
 
-		AlixirUI* pAlixir = new AlixirUI();
-		Transform* pAlixirTransform = pAlixir->GetComponent<Transform>();
-		pAlixirTransform->SetPosition(-0.68f, 1.2f, -0.3f);
-		pAlixirTransform->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
-		AddItem(pAlixir, pAlixir->GetName());
+		//AlixirUI* pAlixir = new AlixirUI();
+		//Transform* pAlixirTransform = pAlixir->GetComponent<Transform>();
+		//pAlixirTransform->SetPosition(-0.68f, 1.2f, -0.3f);
+		//pAlixirTransform->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
+		//AddItem(pAlixir, pAlixir->GetName());
 
 		//ÀÚ½ÄUI
 #pragma region ChildUI
@@ -180,7 +180,7 @@ namespace W
 		if (pItem != nullptr)
 			return;
 
-		if (setitemposition(_pItem))
+		if (SetItemPosition(_pItem))
 		{
 			AddChildUI(_pItem, false);
 			m_mapItems.insert(std::make_pair(_strName, _pItem));
@@ -199,7 +199,7 @@ namespace W
 		return iter->second;
 	}
 
-	bool InterfaceUI::setitemposition(ItemUI* _pItem)
+	bool InterfaceUI::SetItemPosition(ItemUI* _pItem)
 	{
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();

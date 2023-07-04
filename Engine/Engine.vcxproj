@@ -164,6 +164,7 @@
     <ClInclude Include="WEquipUI.h" />
     <ClInclude Include="WEXP.h" />
     <ClInclude Include="WGaugeUI.h" />
+    <ClInclude Include="WHorntailItem.h" />
     <ClInclude Include="WHP.h" />
     <ClInclude Include="WInterfaceUI.h" />
     <ClInclude Include="WInventory.h" />
@@ -201,6 +202,7 @@
     <ClCompile Include="WEquipUI.cpp" />
     <ClCompile Include="WEXP.cpp" />
     <ClCompile Include="WGaugeUI.cpp" />
+    <ClCompile Include="WHorntailItem.cpp" />
     <ClCompile Include="WHP.cpp" />
     <ClCompile Include="WInterfaceUI.cpp" />
     <ClCompile Include="WInventory.cpp" />

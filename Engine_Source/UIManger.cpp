@@ -88,8 +88,8 @@ namespace W
 
 		pFoucseUI = ((UI*)*targetiter);
 
-		//vecUI.erase(targetiter);
-		//vecUI.push_back(pFoucseUI);
+		vecUI.erase(targetiter);
+		vecUI.push_back(pFoucseUI);
 
 		return pFoucseUI;
 	}
@@ -110,6 +110,13 @@ namespace W
 		while (!queue.empty())
 		{
 			UI* pUI = queue.front();
+
+			if (pUI->m_bLbntDown)
+			{
+				pTargetUI = pUI;
+				break;
+			}
+
 			queue.pop_front();
 
 			if (pUI->IsMosueOn())

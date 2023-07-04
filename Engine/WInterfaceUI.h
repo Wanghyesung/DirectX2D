@@ -27,8 +27,9 @@ namespace W
 		void AddItem(ItemUI* _pItem, std::wstring _strName);
 		ItemUI* FindItem(std::wstring _strName);
 
+		bool SetItemPosition(ItemUI* _pItem);
+
 	private:
-		bool setitemposition(ItemUI* _pItem);
 
 	private:
 		Inventory* m_pInventory;

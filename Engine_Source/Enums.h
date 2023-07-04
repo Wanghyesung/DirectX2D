@@ -46,4 +46,11 @@ namespace W::enums
 		None,
 	};
 
+	enum class eParentUI
+	{
+		Interface,
+		Inventory,
+		None,
+	};
+	
 }

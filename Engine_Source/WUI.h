@@ -6,7 +6,6 @@ namespace W
 	class UI : public GameObject
 	{
 	public:
-
 		UI();
 		virtual ~UI();
 

@@ -107,6 +107,9 @@
     <ClInclude Include="WCoverGaugeUI.h">
       <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClInclude>
+    <ClInclude Include="WHorntailItem.h">
+      <Filter>Contents\UI\ItemUI\Equip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -212,6 +215,9 @@
     <ClCompile Include="WCoverGaugeUI.cpp">
       <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClCompile>
+    <ClCompile Include="WHorntailItem.cpp">
+      <Filter>Contents\UI\ItemUI\Equip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -306,6 +312,9 @@
     </Filter>
     <Filter Include="Contents\UI\ItemUI\Potion">
       <UniqueIdentifier>{89b91c99-324a-42c2-a53b-30ab2461e60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\ItemUI\Equip">
+      <UniqueIdentifier>{7e5125b5-cf62-4aef-b78c-a31f37a52593}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

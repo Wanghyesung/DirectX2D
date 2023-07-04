@@ -24,8 +24,9 @@ namespace W
 		void AddItem(ItemUI* _pItem, std::wstring _strName);
 		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
 
-	private:
-		bool setitemposition(ItemUI* _pItem);
+		bool SetItemPosition(ItemUI* _pItem);
+		bool ChangeItemPosition(ItemUI* _pItem , Vector2 _vSetPosition);
+		ItemUI* FindItemOnPosition(UINT _iX, UINT _iY);
 
 	private:
 		bool m_bRenderOn;
