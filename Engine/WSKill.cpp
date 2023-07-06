@@ -17,23 +17,28 @@ namespace W
 	{
 
 	}
-
 	void SKill::LateUpdate()
 	{
+
 	}
 	void SKill::Render()
 	{
+
 	}
 	void SKill::MouseOn()
 	{
+
 	}
 	void SKill::MouseLbtnDown()
 	{
+
 	}
 	void SKill::MouseLbtnUp()
 	{
+
 	}
 	void SKill::MouseLbtnClicked()
 	{
+
 	}
 }

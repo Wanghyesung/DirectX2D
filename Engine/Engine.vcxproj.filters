@@ -122,6 +122,9 @@
     <ClInclude Include="WSkillNumber1.h">
       <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber1</Filter>
     </ClInclude>
+    <ClInclude Include="WSKill.h">
+      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -241,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="WSkillNumber1.cpp">
       <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber1</Filter>
+    </ClCompile>
+    <ClCompile Include="WSKill.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

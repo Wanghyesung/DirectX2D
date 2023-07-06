@@ -180,6 +180,7 @@
     <ClInclude Include="WPlayScene.h" />
     <ClInclude Include="WQuestUI.h" />
     <ClInclude Include="WShopUI.h" />
+    <ClInclude Include="WSKill.h" />
     <ClInclude Include="WSKillBox.h" />
     <ClInclude Include="WSkillNumber1.h" />
     <ClInclude Include="WSKillStorage.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="WPlayScene.cpp" />
     <ClCompile Include="WQuestUI.cpp" />
     <ClCompile Include="WShopUI.cpp" />
+    <ClCompile Include="WSKill.cpp" />
     <ClCompile Include="WSKillBox.cpp" />
     <ClCompile Include="WSkillNumber1.cpp" />
     <ClCompile Include="WSKillStorage.cpp" />
