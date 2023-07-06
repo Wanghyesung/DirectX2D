@@ -93,7 +93,16 @@ namespace W
 
 	void UI::DeleteChildUI(UI* _pUI)
 	{
+		std::vector<UI*>::iterator iter = m_vecChildUI.begin();
 		
+		for (iter; iter != m_vecChildUI.end(); ++iter)
+		{
+			if (*iter == _pUI)
+			{
+				m_vecChildUI.erase(iter);
+				return;
+			}
+		}
 
 	}
 
@@ -177,13 +186,41 @@ namespace W
 
 	void UI::MoveToParent(Vector2 _vDiff)
 	{
-		const std::vector<UI*> vecChidUI = GetChildUI();
+		std::queue<UI*> queue;
 
-		for (UI* pUI : vecChidUI)
+		queue.push(this);
+
+		while (!queue.empty())
 		{
-			Transform* pChildTr = pUI->GetComponent<Transform>();
-			pChildTr->SetPosition(pChildTr->GetPosition() + _vDiff);
+			UI* pUI = queue.front();
+
+			//내 UI는 움직이지 않게 하기
+			if (pUI != this)
+			{
+				Transform* pChildTr = pUI->GetComponent<Transform>();
+				pChildTr->SetPosition(pChildTr->GetPosition() + _vDiff);
+			}
+			queue.pop();
+
+			const std::vector<UI*> vecChildUI = pUI->GetChildUI();
+
+			for (UI* ChildUI : vecChildUI)
+				queue.push(ChildUI);
 		}
+
+
+		
+		//for (UI* pUI : vecChidUI)
+		//{
+		//	//자식 UI가 없을떄까지
+		//	const std::vector<UI*> vecUI = pUI->GetChildUI();
+		//	
+		//	for (UI* UI : vecUI)
+		//	{
+		//		Transform* pChildTr = UI->GetComponent<Transform>();
+		//		pChildTr->SetPosition(pChildTr->GetPosition() + _vDiff);
+		//	}
+		//}
 	}
 	
 }

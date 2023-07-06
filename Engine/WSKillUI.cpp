@@ -1,5 +1,6 @@
 #include "WSKillUI.h"
-
+#include "WSKillStorage.h"
+#include "WSceneManger.h"
 namespace W
 {
 	SKillUI::SKillUI()
@@ -21,6 +22,7 @@ namespace W
 	}
 	void SKillUI::Initialize()
 	{
+
 	}
 	void SKillUI::Update()
 	{
@@ -36,14 +38,26 @@ namespace W
 	}
 	void SKillUI::MouseOn()
 	{
+
 	}
 	void SKillUI::MouseLbtnDown()
 	{
+		SKillStorage* pSKillUI = SceneManger::GetUI<SKillStorage>();
+		if (pSKillUI != nullptr)
+		{
+			bool bRender = pSKillUI->IsRender();
+			if (!bRender)
+				pSKillUI->RenderOn(true);
+			else
+				pSKillUI->RenderOn(false);
+		}
 	}
 	void SKillUI::MouseLbtnUp()
 	{
+
 	}
 	void SKillUI::MouseLbtnClicked()
 	{
+
 	}
 }

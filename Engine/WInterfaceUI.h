@@ -1,5 +1,6 @@
 #pragma once
 #include "WUI.h"
+#include "WItemUI.h"
 
 namespace W
 {
@@ -22,18 +23,22 @@ namespace W
 		virtual void MouseLbtnUp();//UI안에서 땠을 때
 		virtual void MouseLbtnClicked();//UI안에서 누르고 떘을 떄
 
-		void ActiveInventory();
-
-		void AddItem(ItemUI* _pItem, std::wstring _strName);
+		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
+		//void AddItem(ItemUI* _pItem, std::wstring _strName);
 		ItemUI* FindItem(std::wstring _strName);
 
+		void CheckItemPosition(ItemUI* _pItem);
 		bool SetItemPosition(ItemUI* _pItem);
 
-	private:
+		bool ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition);
+		ItemUI* FindItemOnPosition(UINT _iX, UINT _iY);
+		ItemUI* GetItemSamePos(ItemUI* _pItem);
+
+		Vector2 GetStartPosition() { return m_vUIStartPosition; }
+		Vector2 GetEndPosition() { return m_vUIEndPosition; }
+		Vector2 GetDiffPosition() { return m_vUIDiffPosition; }
 
 	private:
-		Inventory* m_pInventory;
-
 		//2.28 -3.21
 		Vector2 m_vUIStartPosition;
 		

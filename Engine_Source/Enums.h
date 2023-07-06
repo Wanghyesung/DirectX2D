@@ -18,6 +18,7 @@ namespace W::enums
 	enum class eLayerType
 	{
 		Default,
+		Grid,
 		Camera,
 		Background,
 		Ground,

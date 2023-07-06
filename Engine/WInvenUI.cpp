@@ -1,5 +1,7 @@
 #include "WInvenUI.h"
+#include "WInventory.h"
 #include "WInterfaceUI.h"
+#include "WSceneManger.h"
 namespace W
 {
 	InvenUI::InvenUI()
@@ -41,11 +43,16 @@ namespace W
 	}
 	void InvenUI::MouseLbtnDown()
 	{
-		UI* pParentUI = GetParentUI();
-		InterfaceUI* pInterfaceUI = dynamic_cast<InterfaceUI*>(pParentUI);
+		Inventory* pInven = SceneManger::GetUI<Inventory>();
+		if (pInven != nullptr)
+		{
+			bool bRender = pInven->IsRender();
+			if (!bRender)
+				pInven->RenderOn(true);
+			else
+				pInven->RenderOn(false);
+		}
 
-		if (pInterfaceUI != nullptr)
-			pInterfaceUI->ActiveInventory();
 	}
 	void InvenUI::MouseLbtnUp()
 	{

@@ -5,6 +5,7 @@
 #include "WSceneManger.h"
 #include "WInput.h"
 #include "WHorntailItem.h"
+#include "WInterfaceUI.h"
 
 namespace W
 {
@@ -44,18 +45,18 @@ namespace W
 		// 0.42 0.42 
 		//0.58 -0.90
 
-		//AlixirUI* pAlixir = new AlixirUI();
-		//pAlixir->SetName(L"Alxir");
-		//Transform* pAlixirTransform = pAlixir->GetComponent<Transform>();
-		////pAlixirTransform->SetPosition(-0.f, 0.f, -0.01f);
-		//pAlixirTransform->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
-		//AddItem(pAlixir,pAlixir->GetName());
-		//
-		//HorntailItem* pHorntailItem = new HorntailItem();
-		//pHorntailItem->SetName(L"pHorntailItem");
-		//Transform* pHorntailItemTr = pHorntailItem->GetComponent<Transform>();
-		//pHorntailItemTr->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
-		//AddItem(pHorntailItem, pHorntailItem->GetName());
+		AlixirUI* pAlixir = new AlixirUI();
+		pAlixir->SetName(L"Alxir");
+		Transform* pAlixirTransform = pAlixir->GetComponent<Transform>();
+		//pAlixirTransform->SetPosition(-0.f, 0.f, -0.01f);
+		pAlixirTransform->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
+		AddItem(pAlixir,pAlixir->GetName());
+		
+		HorntailItem* pHorntailItem = new HorntailItem();
+		pHorntailItem->SetName(L"pHorntailItem");
+		Transform* pHorntailItemTr = pHorntailItem->GetComponent<Transform>();
+		pHorntailItemTr->SetScale(0.1f * 2.5f, 0.1f * 2.5f, 0.f); //0.518 : 1
+		AddItem(pHorntailItem, pHorntailItem->GetName());
 		
 	}
 	void Inventory::Update()
@@ -100,7 +101,6 @@ namespace W
 			m_vDragStartPos = Input::GetMousePos();
 		}
 
-		UI::MouseOn();
 	}
 	void Inventory::MouseLbtnDown()
 	{
@@ -108,19 +108,15 @@ namespace W
 
 		m_vDragStartPos = Input::GetMousePos();
 
-		UI::MouseLbtnDown();
 	}
 	void Inventory::MouseLbtnUp()
 	{
 		m_bTargetOn = false;
 
-		m_vDragStartPos = Input::GetMousePos();
-
-		UI::MouseLbtnUp();
+		m_vUIEndPosition = Input::GetMousePos();
 	}
 	void Inventory::MouseLbtnClicked()
 	{
-		UI::MouseLbtnClicked();
 	}
 
 	ItemUI* Inventory::FindItem(std::wstring _strName)
@@ -140,16 +136,16 @@ namespace W
 
 		if (pItem != nullptr)//아이템이 있음
 			return;
-		
+
 		//새로운 아이템
 		if (SetItemPosition(_pItem))
 		{
-			AddChildUI(_pItem,false);
+			AddChildUI(_pItem, false);
 			m_mapItems.insert(make_pair(_strName, _pItem));
 			_pItem->SetParentUIType(eParentUI::Inventory);
 		}
+		
 	}
-
 
 	bool Inventory::SetItemPosition(ItemUI* _pItem)
 	{
@@ -197,9 +193,7 @@ namespace W
 	}
 
 	bool Inventory::ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition)
-	{
-		//둔 위치에 아이템이 있다면 , 아이템이 창 밖에다 두면
-		
+	{	
 		//인벤토리 위치
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
@@ -210,15 +204,6 @@ namespace W
 
 		Vector2 vStartPosition = Vector2(m_vUIStartPosition.x + vPosition.x, m_vUIStartPosition.y + vPosition.y);
 		Vector2 vComaprePos = {};
-
-		Vector3 vUIEndPosition = vPosition + m_vUIEndPosition;
-		Vector3 vUIStartPosition = vPosition + m_vUIStartPosition;
-		//인벤토리 범위 밖이면
-		if (_vSetPosition.x >= vUIEndPosition.x + m_vUIDiffPosition.x || _vSetPosition.x <= vUIStartPosition.x - m_vUIDiffPosition.x ||
-			_vSetPosition.y <= vUIEndPosition.y + m_vUIDiffPosition.y || _vSetPosition.y >= vUIStartPosition.y - m_vUIDiffPosition.y)
-		{
-			return false;
-		}
 
 		//마우스 둔 우치에서 가장 가까운곳 찾기
 		Vector2 vMinValue = Vector2(2000.f, 2000.f);
@@ -249,6 +234,7 @@ namespace W
 		}
 
 		ItemUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
+
 		if (pFindItem != nullptr)
 		{
 			//이미 아이템이 있는 위치면 자리 바꾸기
@@ -274,6 +260,21 @@ namespace W
 		return true;
 	}
 
+	void Inventory::CheckItemPosition(ItemUI* _pItem)
+	{
+		ItemUI* pUI = FindItem(_pItem->GetName());
+
+		if (pUI != nullptr)
+			return;
+
+		//새로운 아이템
+		AddChildUI(_pItem, false);
+		m_mapItems.insert(make_pair(_pItem->GetName(), _pItem));
+		//현재 아이템 위치
+		_pItem->SetParentUIType(eParentUI::Inventory);
+
+	}
+
 	ItemUI* Inventory::FindItemOnPosition(UINT _iX, UINT _iY)
 	{
 		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
@@ -293,4 +294,28 @@ namespace W
 
 		return nullptr;
 	}
+	ItemUI* Inventory::GetItemSamePos(ItemUI* _pItem)
+	{
+		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+
+		for (iter; iter != m_mapItems.end(); ++iter)
+		{
+			if (iter->second == _pItem)
+				continue;
+
+			int x = iter->second->GetItemindexX();
+			int y = iter->second->GetItemindexX();
+
+			int _x = _pItem->GetItemindexX();
+			int _y = _pItem->GetItemindexX();
+
+			if (x == _x && y == _y)
+			{
+				return iter->second;
+			}
+		}
+		return nullptr;
+	}
+
+
 }

@@ -58,6 +58,8 @@ namespace W
 		void EnableDepthStencilState();
 		void DisablDepthStencilState();
 
+		float GetSize() { return m_fSize; }
+
 	private:
 		//월드행렬은 오브젝트마다 다르지만
 		//뷰 공간과 투영행렬은 모든 오븍제트들에게 똑같이

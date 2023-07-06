@@ -65,11 +65,15 @@ namespace renderer
 		arrLayout[2].SemanticIndex = 0;
 
 		std::shared_ptr<Shader> pShader = W::Resources::Find<Shader>(L"TriangleShader");
-
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
 			pShader->GetVSCode(),
 			pShader->GetInputLayoutAddressOf());
 		
+		pShader = W::Resources::Find<Shader>(L"GridShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+
 		pShader = W::Resources::Find<Shader>(L"SpriteShader");
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
 			pShader->GetVSCode(),
@@ -204,6 +208,25 @@ namespace renderer
 #pragma endregion
 	}
 
+	void LoadMesh()
+	{
+		//텍스쳐에서 색가져오기samlestate, uv좌표 때문에 정점정보도 uv좌표를 넣어서 바뀌어야함 vertex도한 uv추가, inputlayout도 추가 (3개로)
+		vertexes[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
+		vertexes[0].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertexes[0].UV = Vector2(0.0f, 0.0f);
+
+		vertexes[1].Pos = Vector3(0.5f, 0.5f, 0.0f);
+		vertexes[1].Color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes[1].UV = Vector2(1.0f, 0.0f);
+
+		vertexes[2].Pos = Vector3(0.5f, -0.5f, 0.0f);
+		vertexes[2].Color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertexes[2].UV = Vector2(1.0f, 1.0f);
+
+		vertexes[3].Pos = Vector3(-0.5f, -0.5f, 0.0f);
+		vertexes[3].Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertexes[3].UV = Vector2(0.0f, 1.0f);
+	}
 
 	void LoadBuffer()
 	{
@@ -227,6 +250,9 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
 		
+		//grid buffer
+		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
+		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
 
 	}
 
@@ -239,6 +265,11 @@ namespace renderer
 		pShader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
 		pShader->Create(eShaderStage::PS, L"TrianglePs.hlsl", "main");
 		W::Resources::Insert(L"TriangleShader", pShader);
+
+		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
+		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
+		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
+		Resources::Insert(L"GridShader", gridShader);
 
 		std::shared_ptr<Shader> pSpriteShader = std::make_shared<Shader>();
 		pSpriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
@@ -260,12 +291,16 @@ namespace renderer
 		pUIShader->Create(eShaderStage::PS, L"UIPS.hlsl", "main");
 		W::Resources::Insert(L"UIShader", pUIShader);
 
+	}
+
+	void LoadMaterial()
+	{
 #pragma region background
 		{
 			std::shared_ptr<Texture> pTex =
 				Resources::Load<Texture>(L"LeafreTex", L"..\\Resources\\Texture\\background\\Leafre_2.png");
 			std::shared_ptr<Material> pBackgroundMater = std::make_shared<Material>();
-			pBackgroundMater->SetShader(pBackShader);
+			pBackgroundMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pBackgroundMater->SetTexture(pTex);
 			Resources::Insert(L"LeafeMater", pBackgroundMater);
 
@@ -273,14 +308,14 @@ namespace renderer
 			std::shared_ptr<Texture> pValleyTex =
 				Resources::Load<Texture>(L"dragonValleyTex", L"..\\Resources\\Texture\\background\\dragonValley.png");
 			std::shared_ptr<Material> pValleyMater = std::make_shared<Material>();
-			pValleyMater->SetShader(pBackShader);
+			pValleyMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pValleyMater->SetTexture(pValleyTex);
 			Resources::Insert(L"dragonValleyMater", pValleyMater);
 
 			std::shared_ptr<Texture> pValleyTex2 =
 				Resources::Load<Texture>(L"dragonValleyTex2", L"..\\Resources\\Texture\\background\\dragonValley_2.png");
 			std::shared_ptr<Material> pValleyMater2 = std::make_shared<Material>();
-			pValleyMater2->SetShader(pBackShader);
+			pValleyMater2->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pValleyMater2->SetTexture(pValleyTex2);
 			Resources::Insert(L"dragonValleyMater2", pValleyMater2);
 
@@ -288,14 +323,14 @@ namespace renderer
 			std::shared_ptr<Texture> pWoodCaveTex =
 				Resources::Load<Texture>(L"WoodCaveTex", L"..\\Resources\\Texture\\background\\woodCave.png");
 			std::shared_ptr<Material> pWoodMater = std::make_shared<Material>();
-			pWoodMater->SetShader(pBackShader);
+			pWoodMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pWoodMater->SetTexture(pWoodCaveTex);
 			Resources::Insert(L"WoodCaveMater", pWoodMater);
 
 			std::shared_ptr<Texture> pTempleTex =
 				Resources::Load<Texture>(L"TempleTex", L"..\\Resources\\Texture\\background\\Temple.png");
 			std::shared_ptr<Material> pTempleMater = std::make_shared<Material>();
-			pTempleMater->SetShader(pBackShader);
+			pTempleMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pTempleMater->SetTexture(pTempleTex);
 			Resources::Insert(L"TempleMater", pTempleMater);
 
@@ -303,7 +338,7 @@ namespace renderer
 				Resources::Load<Texture>(L"TempleTex2", L"..\\Resources\\Texture\\background\\temple_2.png");
 			pTempleTex2->BindShader(eShaderStage::PS, 0);
 			std::shared_ptr<Material> pTempleMater2 = std::make_shared<Material>();
-			pTempleMater2->SetShader(pBackShader);
+			pTempleMater2->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pTempleMater2->SetTexture(pTempleTex2);
 			Resources::Insert(L"TempleMater2", pTempleMater2);
 
@@ -311,74 +346,46 @@ namespace renderer
 				Resources::Load<Texture>(L"TempleBossTex", L"..\\Resources\\Texture\\background\\temple_boss.png");
 			pTempleBossTex->BindShader(eShaderStage::PS, 0);
 			std::shared_ptr<Material> pTempleBossMater = std::make_shared<Material>();
-			pTempleBossMater->SetShader(pBackShader);
+			pTempleBossMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
 			pTempleBossMater->SetTexture(pTempleBossTex);
 			Resources::Insert(L"TempleBossMater", pTempleBossMater);
 		}
 #pragma endregion
-		
-#pragma region Object
 
-
-#pragma endregion 
 		//두 오브젝트 둘다 똑같은 메테리얼로 셋팅
-		{
-			std::shared_ptr<Texture> pTex =
-				Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
+		
+		std::shared_ptr<Texture> pTex =
+			Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
-			std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
-			pSpriteMaterial->SetShader(pSpriteShader);
-			pSpriteMaterial->SetTexture(pTex);
-			Resources::Insert(L"SpriteMaterial", pSpriteMaterial);
-		}
+		std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		pMater->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+		pMater->SetTexture(pTex);
+		Resources::Insert(L"SpriteMaterial", pMater);
+		
 
-		{
-			std::shared_ptr<Texture> pTex =
-				Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		
+		pTex = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
 
-			std::shared_ptr<Material> pSpriteMaterial = std::make_shared<Material>();
-			pSpriteMaterial->SetShader(pSpriteShader);
-			pSpriteMaterial->SetTexture(pTex);
-			pSpriteMaterial->SetRenderinMode(eRenderingMode::Transparent);
-			Resources::Insert(L"SpriteMaterial02", pSpriteMaterial);
-		}
+		pMater = std::make_shared<Material>();
+		pMater->SetShader(Resources::Find<Shader>(L"SpriteShader"));
+		pMater->SetTexture(pTex);
+		pMater->SetRenderinMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteMaterial02", pMater);
+		
+		std::shared_ptr<Shader> girdShader = Resources::Find<Shader>(L"GridShader");
+		pMater = std::make_shared<Material>();
+		pMater->SetShader(girdShader);
+		Resources::Insert(L"GridMaterial", pMater);
 	}
-
 	
 
 	void Initialize()
 	{
-		//텍스쳐에서 색가져오기samlestate, uv좌표 때문에 정점정보도 uv좌표를 넣어서 바뀌어야함 vertex도한 uv추가, inputlayout도 추가 (3개로)
-		vertexes[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
-		vertexes[0].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		vertexes[0].UV = Vector2(0.0f, 0.0f);
-
-		vertexes[1].Pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertexes[1].Color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes[1].UV = Vector2(1.0f, 0.0f);
-
-		vertexes[2].Pos = Vector3(0.5f, -0.5f, 0.0f);
-		vertexes[2].Color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-		vertexes[2].UV = Vector2(1.0f, 1.0f);
-
-		vertexes[3].Pos = Vector3(-0.5f, -0.5f, 0.0f);
-		vertexes[3].Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-		vertexes[3].UV = Vector2(0.0f, 1.0f);
-
+		LoadMesh();
 		LoadBuffer();
 		LoadShader();
 		SetupState();
-
-
-		//이미지로드 후 픽셀셰이두 묶기
-		//std::shared_ptr<Texture> pTex =
-		//	Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
-		//
-		//pTex->BindShader(eShaderStage::PS, 0);
-		//
-		//std::shared_ptr<Texture> pLink =
-		//	Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
-		//pLink->BindShader(eShaderStage::PS, 0);
+		LoadMaterial();
 		
 	}
 	void Render()

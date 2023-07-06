@@ -45,6 +45,7 @@ namespace W
 		
 		Layer& GetLayer(eLayerType _eType) { return m_vecLayer[(UINT)_eType];}
 
+
 	private:
 		std::vector<Layer> m_vecLayer;
 	};

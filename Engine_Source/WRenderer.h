@@ -23,6 +23,14 @@ namespace renderer
 		Matrix m_mProjection;
 	};
 
+	CBUFFER(GridCB, CBSLOT_GRID)
+	{
+		//카메라 위치 카메라 사이즈, 해상도 크기
+		Vector4 m_vCameraPosition;
+		Vector2 m_vCameraScale;
+		Vector2 m_vResolution;
+	};
+
 	extern Vertex vertexes[];
 	//extern ID3D11InputLayout* triangleLayout;
 	//extern ID3D11Buffer* triangleBuffer;

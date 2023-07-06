@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WScene.h"
+#include "WUI.h"
 
 namespace W
 {
@@ -33,6 +34,19 @@ namespace W
 		static Scene* LoadScene(std::wstring _strName);
 
 		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj){ m_pActiveScene->AddGameObject(_eType, _pGameObj);}
+
+		template <typename T>
+		static T* GetUI()
+		{
+			std::vector<UI*> vecUI = m_pActiveScene->FindObjectsOfType<UI>();
+			for (UI* pUI : vecUI)
+			{
+				T* pTargetUI = dynamic_cast<T*>(pUI);
+				if (pTargetUI != nullptr)
+					return pTargetUI;
+			}
+			return nullptr;
+		}
 	private:
 		static Scene* m_pActiveScene;
 		static std::map<std::wstring, Scene*> m_mapScene;

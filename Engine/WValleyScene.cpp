@@ -72,7 +72,7 @@ namespace W
 		MeshRenderer* pUIMeshRenderer = pInterUI->AddComponent<MeshRenderer>();
 		pUIMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pUIMeshRenderer->SetMaterial(Resources::Find<Material>(L"InterfaceMater"));
-		pInterUI->GetComponent<Transform>()->SetPosition(0.f, -3.3f, -0.2f);
+		pInterUI->GetComponent<Transform>()->SetPosition(0.f, -3.3f, -0.25f);
 		pInterUI->GetComponent<Transform>()->SetScale(16.f * 0.88f, 1.f * 0.88f, 0.f);
 		pInterUI->Initialize();
 

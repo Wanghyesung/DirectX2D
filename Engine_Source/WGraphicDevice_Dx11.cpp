@@ -122,7 +122,7 @@ namespace W::graphics
 		dxGiDesc.Windowed = true;
 
 		dxGiDesc.BufferCount = _desc->BufferCount;
-		dxGiDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
+		dxGiDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
 		//표면 또는 리소스를 출력 렌더링 대상으로 사용합니다.
 		dxGiDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;

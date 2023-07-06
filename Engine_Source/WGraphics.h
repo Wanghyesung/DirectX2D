@@ -12,6 +12,7 @@
 
 //0¹ø ½½·Ô À§Ä¡
 #define CBSLOT_TRANSFORM		0
+#define CBSLOT_GRID				0
 enum class eShaderStage
 {
 	VS,
@@ -27,6 +28,7 @@ enum class eCBType
 {
 	Transform,
 	Material,
+	Grid,
 	END,
 };
 

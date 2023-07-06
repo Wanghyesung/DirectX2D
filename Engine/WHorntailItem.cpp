@@ -8,6 +8,7 @@ namespace W
 			Resources::Load<Texture>(L"horntailItemTex", L"..\\Resources\\Texture\\UI\\ItemUI\\horntailItem.png");
 
 		std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		pMater->SetRenderinMode(eRenderingMode::Transparent);
 		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
 		pMater->SetTexture(pTex);
 		Resources::Insert(L"horntailItemMater", pMater);

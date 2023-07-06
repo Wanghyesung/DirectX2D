@@ -11,7 +11,6 @@ namespace W
 	}
 	void Scene::Initialize()
 	{
-		
 	}
 	void Scene::Update()
 	{

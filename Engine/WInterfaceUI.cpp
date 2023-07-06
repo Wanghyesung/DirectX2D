@@ -14,12 +14,12 @@
 #include "WQuestUI.h"
 #include "WSKillUI.h"
 #include "WInventory.h"
+#include "WSKillStorage.h"
 #include "WSceneManger.h"
 #include "WAlixirUI.h"
 namespace W
 {
 	InterfaceUI::InterfaceUI():
-		m_pInventory(nullptr),
 		m_mapItems{},
 		m_vUIStartPosition(Vector2::One),
 		m_vUIEndPosition(Vector2::One),
@@ -45,7 +45,7 @@ namespace W
 		//3.3 -3.55
 		m_vUIEndPosition = Vector2(3.3f, -3.55f);
 		// 0.255 //0.34
-		m_vUIDiffPosition = Vector2(0.255f, 0.34f);
+		m_vUIDiffPosition = Vector2(0.34f, -0.34f);
 
 		//AlixirUI* pAlixir = new AlixirUI();
 		//Transform* pAlixirTransform = pAlixir->GetComponent<Transform>();
@@ -127,9 +127,14 @@ namespace W
 
 
 #pragma region Extra UI
-		m_pInventory = new Inventory();
-		SceneManger::AddGameObject(eLayerType::UI, m_pInventory);
-		m_pInventory->Initialize();
+		Inventory* pInventory = new Inventory();
+		SceneManger::AddGameObject(eLayerType::UI, pInventory);
+		pInventory->Initialize();
+
+		SKillStorage* pSKillStorage = new SKillStorage();
+		SceneManger::AddGameObject(eLayerType::UI, pSKillStorage);
+		pSKillStorage->Initialize();
+
 #pragma endregion
 	}
 	void InterfaceUI::Update()
@@ -161,33 +166,6 @@ namespace W
 
 	}
 
-	void InterfaceUI::ActiveInventory()
-	{
-		if (m_pInventory != nullptr)
-		{
-			if (m_pInventory->m_bRenderOn)
-				m_pInventory->m_bRenderOn = false;
-			else
-				m_pInventory->m_bRenderOn = true;
-		}
-	}
-
-	void InterfaceUI::AddItem(ItemUI* _pItem, std::wstring _strName)
-	{
-		ItemUI* pItem = FindItem(_strName);
-
-		//있음
-		if (pItem != nullptr)
-			return;
-
-		if (SetItemPosition(_pItem))
-		{
-			AddChildUI(_pItem, false);
-			m_mapItems.insert(std::make_pair(_strName, _pItem));
-		}
-		
-	}
-
 	ItemUI* InterfaceUI::FindItem(std::wstring _strName)
 	{
 		std::map<std::wstring, ItemUI*>::iterator iter =
@@ -197,6 +175,20 @@ namespace W
 			return nullptr;
 
 		return iter->second;
+	}
+
+	void InterfaceUI::CheckItemPosition(ItemUI* _pItem)
+	{
+		ItemUI* pUI = FindItem(_pItem->GetName());
+
+		if (pUI != nullptr)
+			return;
+
+		//새로운 아이템
+		AddChildUI(_pItem, false);
+		m_mapItems.insert(make_pair(_pItem->GetName(), _pItem));
+
+		_pItem->SetParentUIType(eParentUI::Interface);
 	}
 
 	bool InterfaceUI::SetItemPosition(ItemUI* _pItem)
@@ -228,14 +220,14 @@ namespace W
 				for (iter; iter != m_mapItems.end(); ++iter)
 				{
 					ItemUI* pITem = iter->second;
-					UINT ITEM_X = pITem->GetInterindexX();
-					UINT ITEM_Y = pITem->GetInterIndexY();
+					UINT ITEM_X = pITem->GetItemindexX();
+					UINT ITEM_Y = pITem->GetItemIndexY();
 
 					//빈칸
 					if (ITEM_X != x && ITEM_Y != y)
 					{
 						PItemTranform->SetPosition(vStartPosition.x, vStartPosition.y, vItemPosition.z);
-						_pItem->SetInterIndex(x, y);
+						_pItem->SetItemIndex(x, y);
 						return true;
 					}
 				}
@@ -243,6 +235,118 @@ namespace W
 		}
 
 		return false;
+	}
+
+	bool InterfaceUI::ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition)
+	{
+		Transform* pTransform = GetComponent<Transform>();
+		Vector3 vPosition = pTransform->GetPosition();
+
+		//들어올 아이템 트렌스폼
+		Transform* pItemTransform = _pItem->GetComponent<Transform>();
+		Vector3 vItemPosition = pItemTransform->GetPosition();
+
+		Vector2 vStartPosition = Vector2(m_vUIStartPosition.x , m_vUIStartPosition.y);
+		Vector2 vComaprePos = {};
+
+		//마우스 둔 우치에서 가장 가까운곳 찾기
+		Vector2 vMinValue = Vector2(2000.f, 2000.f);
+		float fMinLen = 2000.f;
+		UINT iMinX = 0;
+		UINT iMinY = 0;
+
+		for (UINT y = 0; y < 2; ++y)
+		{
+			vComaprePos.y = vStartPosition.y + y * m_vUIDiffPosition.y;
+			for (UINT x = 0; x < 4; ++x)
+			{
+				vComaprePos.x = vStartPosition.x + x * m_vUIDiffPosition.x;
+
+				Vector2 vDiff = _vSetPosition - vComaprePos;
+				float fLen = abs(vDiff.Length());
+
+				//아이템 둔곳에서 가장 가까운곳
+				if (fLen <= fMinLen)
+				{
+					fMinLen = fLen;
+					vMinValue = vComaprePos;
+					iMinX = x;
+					iMinY = y;
+				}
+			}
+		}
+
+		ItemUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
+
+		//int prevx = _pItem->GetItemindexX();
+		//int prevy = _pItem->GetItemIndexY();
+
+		if (pFindItem != nullptr)
+		{
+			//이미 아이템이 있는 위치면 자리 바꾸기
+			Transform* pFItemTr = pFindItem->GetComponent<Transform>();
+			Vector3 vFItemPos = pFItemTr->GetPosition();
+
+			Vector3 vItemStartPos = _pItem->GetStartPosition();
+			int x = _pItem->GetItemindexX();
+			int y = _pItem->GetItemIndexY();
+
+			pFindItem->SetItemIndex(x, y);
+			pFItemTr->SetPosition(vItemStartPos);
+
+			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);
+			_pItem->SetItemIndex(iMinX, iMinY);
+		}
+		else
+		{
+			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);
+			_pItem->SetItemIndex(iMinX, iMinY);
+		}
+
+
+		return true;
+	}
+
+	ItemUI* InterfaceUI::FindItemOnPosition(UINT _iX, UINT _iY)
+	{
+		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+
+		for (iter; iter != m_mapItems.end(); ++iter)
+		{
+			ItemUI* pITem = iter->second;
+			UINT ITEM_X = pITem->GetItemindexX();
+			UINT ITEM_Y = pITem->GetItemIndexY();
+
+			//빈칸
+			if (ITEM_X == _iX && ITEM_Y == _iY)
+			{
+				return iter->second;
+			}
+		}
+		return nullptr;
+	}
+
+	ItemUI* InterfaceUI::GetItemSamePos(ItemUI* _pItem)
+	{
+		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+
+		for (iter; iter != m_mapItems.end(); ++iter)
+		{
+			if (iter->second == _pItem)
+				continue;
+
+			int x =iter->second->GetItemindexX();
+			int y = iter->second->GetItemindexX();
+
+			int _x = _pItem->GetItemindexX();
+			int _y = _pItem->GetItemindexX();
+
+			if (x == _x && y==_y)
+			{
+				return iter->second;
+			}
+		}
+		return nullptr;
 	}
 
 

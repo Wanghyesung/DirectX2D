@@ -110,6 +110,18 @@
     <ClInclude Include="WHorntailItem.h">
       <Filter>Contents\UI\ItemUI\Equip</Filter>
     </ClInclude>
+    <ClInclude Include="WGridScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="WSKillStorage.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="WSKillBox.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="WSkillNumber1.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -218,6 +230,18 @@
     <ClCompile Include="WHorntailItem.cpp">
       <Filter>Contents\UI\ItemUI\Equip</Filter>
     </ClCompile>
+    <ClCompile Include="WGridScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="WSKillStorage.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="WSKillBox.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="WSkillNumber1.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -315,6 +339,27 @@
     </Filter>
     <Filter Include="Contents\UI\ItemUI\Equip">
       <UniqueIdentifier>{7e5125b5-cf62-4aef-b78c-a31f37a52593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\1">
+      <UniqueIdentifier>{3019af27-fac1-4b21-a1fe-5a3bb2676695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\2">
+      <UniqueIdentifier>{a7f4658f-296f-46a6-b40b-2fe06a69dd6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\3">
+      <UniqueIdentifier>{d3056b9d-a33b-46ae-b053-8220d62ec530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\4">
+      <UniqueIdentifier>{f49a63dd-ed21-48ab-9827-fc0afe4cdb15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\5">
+      <UniqueIdentifier>{32bcabcf-4fcc-4c2d-ab24-599d3b845cb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\SkillStorage">
+      <UniqueIdentifier>{0ffaf433-ba65-40fd-adba-a3dc75d9db1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Interface\Extra\Skill\1\SkillNumber1">
+      <UniqueIdentifier>{a26a92e4-d1ca-4bc1-9b0a-dce9350a0d8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -29,15 +29,15 @@ namespace W
 		bool IsLBntDown() { return m_bLbntDown; }
 		bool IsMosueOn() { return m_bMouseOn; }
 
-		const std::vector<UI*> GetChildUI() { return m_vecChildUI; }
+		//private -> public
+		void MouseOnCheck();
 
+		const std::vector<UI*> GetChildUI() { return m_vecChildUI; }
 	private:
 		//자식 UI 업데이트
 		void ChildUpdate();
 		void ChildRender();
 		void ChildLateupdate();
-
-		void MouseOnCheck();
 
 		//void MoveToParent();
 

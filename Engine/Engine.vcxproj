@@ -164,6 +164,7 @@
     <ClInclude Include="WEquipUI.h" />
     <ClInclude Include="WEXP.h" />
     <ClInclude Include="WGaugeUI.h" />
+    <ClInclude Include="WGridScript.h" />
     <ClInclude Include="WHorntailItem.h" />
     <ClInclude Include="WHP.h" />
     <ClInclude Include="WInterfaceUI.h" />
@@ -179,6 +180,9 @@
     <ClInclude Include="WPlayScene.h" />
     <ClInclude Include="WQuestUI.h" />
     <ClInclude Include="WShopUI.h" />
+    <ClInclude Include="WSKillBox.h" />
+    <ClInclude Include="WSkillNumber1.h" />
+    <ClInclude Include="WSKillStorage.h" />
     <ClInclude Include="WSKillUI.h" />
     <ClInclude Include="WStarUI.h" />
     <ClInclude Include="WStatUI.h" />
@@ -202,6 +206,7 @@
     <ClCompile Include="WEquipUI.cpp" />
     <ClCompile Include="WEXP.cpp" />
     <ClCompile Include="WGaugeUI.cpp" />
+    <ClCompile Include="WGridScript.cpp" />
     <ClCompile Include="WHorntailItem.cpp" />
     <ClCompile Include="WHP.cpp" />
     <ClCompile Include="WInterfaceUI.cpp" />
@@ -217,6 +222,9 @@
     <ClCompile Include="WPlayScene.cpp" />
     <ClCompile Include="WQuestUI.cpp" />
     <ClCompile Include="WShopUI.cpp" />
+    <ClCompile Include="WSKillBox.cpp" />
+    <ClCompile Include="WSkillNumber1.cpp" />
+    <ClCompile Include="WSKillStorage.cpp" />
     <ClCompile Include="WSKillUI.cpp" />
     <ClCompile Include="WStarUI.cpp" />
     <ClCompile Include="WStatUI.cpp" />
