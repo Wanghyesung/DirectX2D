@@ -49,7 +49,7 @@ namespace W
 		if (!m_bActive)
 		{
 			//마우스만 체크
-			MouseOnCheck();
+//			MouseOnCheck();
 			GameObject::LateUpdate();
 		}
 		else

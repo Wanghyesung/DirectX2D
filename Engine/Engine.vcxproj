@@ -182,6 +182,7 @@
     <ClInclude Include="WShopUI.h" />
     <ClInclude Include="WSKill.h" />
     <ClInclude Include="WSKillBox.h" />
+    <ClInclude Include="WSkillDarkUI.h" />
     <ClInclude Include="WSkillNumber1.h" />
     <ClInclude Include="WSKillStorage.h" />
     <ClInclude Include="WSKillUI.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="WShopUI.cpp" />
     <ClCompile Include="WSKill.cpp" />
     <ClCompile Include="WSKillBox.cpp" />
+    <ClCompile Include="WSkillDarkUI.cpp" />
     <ClCompile Include="WSkillNumber1.cpp" />
     <ClCompile Include="WSKillStorage.cpp" />
     <ClCompile Include="WSKillUI.cpp" />
