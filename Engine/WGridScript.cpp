@@ -56,8 +56,10 @@ namespace W
 	}
 	void GridScript::LateUpdate()
 	{
+
 	}
 	void GridScript::Render()
 	{
+
 	}
 }

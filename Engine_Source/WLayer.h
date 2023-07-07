@@ -14,6 +14,7 @@ namespace W
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render();
+		virtual void Destory();
 
 		void AddGameObject(GameObject* _pGameObj);
 		std::vector<GameObject*> GetGameObjects() { return m_vecGameObject; }

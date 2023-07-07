@@ -33,6 +33,15 @@ namespace W
 			layer.Render();
 		}
 	}
+
+	void Scene::Destroy()
+	{
+		for (Layer& layer : m_vecLayer)
+		{
+			layer.Destory();
+		}
+	}
+
 	void Scene::OnEnter()
 	{
 

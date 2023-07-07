@@ -23,6 +23,7 @@ namespace W
 		virtual void MouseLbtnUp();//UI안에서 땠을 때
 		virtual void MouseLbtnClicked();//UI안에서 누르고 떘을 떄
 
+		void InsertItem(ItemUI* _pItem, std::wstring _strName);
 		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
 		//void AddItem(ItemUI* _pItem, std::wstring _strName);
 		ItemUI* FindItem(std::wstring _strName);
@@ -32,7 +33,6 @@ namespace W
 
 		bool ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition);
 		ItemUI* FindItemOnPosition(UINT _iX, UINT _iY);
-		ItemUI* GetItemSamePos(ItemUI* _pItem);
 
 		Vector2 GetStartPosition() { return m_vUIStartPosition; }
 		Vector2 GetEndPosition() { return m_vUIEndPosition; }

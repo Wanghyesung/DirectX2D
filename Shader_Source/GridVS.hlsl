@@ -17,8 +17,8 @@ VSOut main(VSIn In)
 {
     VSOut Out = (VSOut) 0.f;
     float2 gridPos = float2(0.f, 0.f);
-    gridPos.x = In.Pos.x * 1.f * Resolution.x + CameraPosition.x * CameraScale.x;
-    gridPos.y = In.Pos.y * 1.f * Resolution.y + CameraPosition.y * CameraScale.y;
+    gridPos.x = In.Pos.x  * Resolution.x + CameraPosition.x * CameraScale.x;
+    gridPos.y = In.Pos.y  * Resolution.y + CameraPosition.y * CameraScale.y;
     
     const float meshScale = 2.f;
     Out.Pos = float4(In.Pos.xy * meshScale, 0.999f, 1.f);//가장 뒷쪽에 그리게
@@ -26,5 +26,4 @@ VSOut main(VSIn In)
     Out.GridPos = gridPos;
     
     return Out;
-    
 }

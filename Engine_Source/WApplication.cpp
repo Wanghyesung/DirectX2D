@@ -65,6 +65,11 @@ namespace W
 		graphicDevice->Present();
 	}
 
+	void Application::Destroy()
+	{
+		SceneManger::Destroy();
+	}
+
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)
 	{
 		//한번만 호출되게

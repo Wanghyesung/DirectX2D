@@ -36,6 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResources.h" />

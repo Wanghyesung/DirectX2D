@@ -166,6 +166,13 @@ namespace W
 
 	}
 
+	void InterfaceUI::InsertItem(ItemUI* _pItem, std::wstring _strName)
+	{
+		m_mapItems.insert(std::make_pair(_pItem->GetName(), _pItem));
+		AddChildUI(_pItem,false);
+		_pItem->SetParentUIType(eParentUI::Interface);
+	}
+
 	ItemUI* InterfaceUI::FindItem(std::wstring _strName)
 	{
 		std::map<std::wstring, ItemUI*>::iterator iter =
@@ -239,6 +246,8 @@ namespace W
 
 	bool InterfaceUI::ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition)
 	{
+
+		findindex(_pItem, _vSetPosition);
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
 
@@ -276,34 +285,52 @@ namespace W
 			}
 		}
 
+		//이미 있는 아이템이 있는 위치인지
 		ItemUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
 
-		//int prevx = _pItem->GetItemindexX();
-		//int prevy = _pItem->GetItemIndexY();
-
-		if (pFindItem != nullptr)
+		//여기서 구간 나누기 다른 UI에서 왔는지 내 UI에서만 바꾸는건지
+		if (_pItem->GetParentUIType() != eParentUI::Interface)
 		{
-			//이미 아이템이 있는 위치면 자리 바꾸기
-			Transform* pFItemTr = pFindItem->GetComponent<Transform>();
-			Vector3 vFItemPos = pFItemTr->GetPosition();
+			//찾은 아이템을 들어온 아이템이 있던 UI로 보내기
+			if (pFindItem != nullptr)
+			{
+				Transform* pFindTr = pFindItem->GetComponent<Transform>();
+				pFindTr->SetPosition(_pItem->GetStartPosition());
+				pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
+				pFindItem->DeleteParent();
 
-			Vector3 vItemStartPos = _pItem->GetStartPosition();
-			int x = _pItem->GetItemindexX();
-			int y = _pItem->GetItemIndexY();
-
-			pFindItem->SetItemIndex(x, y);
-			pFItemTr->SetPosition(vItemStartPos);
-
+				eParentUI eParentType = _pItem->GetParentUIType();
+				switch (eParentType)
+				{
+				case W::enums::eParentUI::Inventory:
+					SceneManger::GetUI<Inventory>()->InsertItem(pFindItem, pFindItem->GetName());
+					break;
+				}
+			}
 			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);
 			_pItem->SetItemIndex(iMinX, iMinY);
+			_pItem->DeleteParent();
+			InsertItem(_pItem, _pItem->GetName());
 		}
+
+		//내 UI에서 왔다면
 		else
-		{
+		{	
+			if (pFindItem != nullptr)
+			{
+				Transform* pFItemTr = pFindItem->GetComponent<Transform>();
+				Vector3 vFItemPos = pFItemTr->GetPosition();
+
+				Vector3 vItemStartPos = _pItem->GetStartPosition();
+				int x = _pItem->GetItemindexX();
+				int y = _pItem->GetItemIndexY();
+				pFindItem->SetItemIndex(x, y);
+				pFItemTr->SetPosition(vItemStartPos);
+			}
+			
 			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);
 			_pItem->SetItemIndex(iMinX, iMinY);
 		}
-
-
 		return true;
 	}
 
@@ -326,27 +353,11 @@ namespace W
 		return nullptr;
 	}
 
-	ItemUI* InterfaceUI::GetItemSamePos(ItemUI* _pItem)
+	Vector2 InterfaceUI::findindex(ItemUI* _pItem, Vector2 _vSetPosition)
 	{
-		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
 
-		for (iter; iter != m_mapItems.end(); ++iter)
-		{
-			if (iter->second == _pItem)
-				continue;
 
-			int x =iter->second->GetItemindexX();
-			int y = iter->second->GetItemindexX();
-
-			int _x = _pItem->GetItemindexX();
-			int _y = _pItem->GetItemindexX();
-
-			if (x == _x && y==_y)
-			{
-				return iter->second;
-			}
-		}
-		return nullptr;
+		return Vector2();
 	}
 
 

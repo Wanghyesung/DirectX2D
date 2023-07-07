@@ -1,6 +1,7 @@
 #include "WSkillNumber1.h"
 #include "WSKillBox.h"
 #include "WTransform.h"
+#include "WSkillDarkUI.h"
 
 
 namespace W
@@ -36,6 +37,15 @@ namespace W
 		pBoxTransform1->SetPosition(0.3f, -0.8f, -0.01f);
 		pBoxTransform1->SetScale(0.4f * 3.8f, 0.1f * 3.8f, 0.f); //4 : 1
 		AddChildUI(pSKillBox1);
+
+		SkillDarkUI* pDarkSkill = new SkillDarkUI();
+		pDarkSkill->SetName(L"DarkSkill");
+		Transform* pDarkTr = pDarkSkill->GetComponent<Transform>();
+		pDarkTr->SetPosition(-0.27f, -0.8f, -0.02f);
+		pDarkTr->SetScale(0.1f * 3.7f, 0.1f * 3.7f, 0.f); //1 : 1
+		AddChildUI(pDarkSkill);
+
+
 	}
 	void SkillNumber1::Update()
 	{
@@ -49,7 +59,7 @@ namespace W
 		if (!m_bActive)
 		{
 			//마우스만 체크
-//			MouseOnCheck();
+			MouseOnCheck();
 			GameObject::LateUpdate();
 		}
 		else

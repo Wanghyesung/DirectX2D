@@ -24,14 +24,13 @@ namespace W
 		bool IsRender() { return m_bRenderOn; }
 
 		ItemUI* FindItem(std::wstring _strName);
+		void InsertItem(ItemUI* _pItem, std::wstring _strName);
 		void AddItem(ItemUI* _pItem, std::wstring _strName);
 		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
 
-		void CheckItemPosition(ItemUI* _pItem);
 		bool SetItemPosition(ItemUI* _pItem);
 		bool ChangeItemPosition(ItemUI* _pItem , Vector2 _vSetPosition);
 		ItemUI* FindItemOnPosition(UINT _iX, UINT _iY);
-		ItemUI* GetItemSamePos(ItemUI* _pItem);
 
 		Vector2 GetStartPosition() { return m_vUIStartPosition; }
 		Vector2 GetEndPosition() { return m_vUIEndPosition; }

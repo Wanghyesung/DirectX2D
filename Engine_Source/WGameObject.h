@@ -73,7 +73,7 @@ namespace W
 		}
 
 		void SetState(eState _eState) { m_eState = _eState; }
-
+		eState GetState() { return m_eState; }
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;

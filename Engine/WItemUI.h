@@ -28,9 +28,16 @@ namespace W
 		void SetParentUIType(eParentUI _eType) { m_ePrevParentType = m_eParentType; m_eParentType = _eType; }
 		eParentUI GetParentUIType() { return m_eParentType; }
 
-		void SetItemIndex(int _iX, int _iY) { m_iItemIndexX = _iX; m_iItemIndexY = _iY; }
+		void SetItemIndex(int _iX, int _iY) 
+		{ 
+			m_iPrevIndexX = m_iItemIndexX; m_iPrevIndexY = m_iItemIndexY;
+			m_iItemIndexX = _iX; m_iItemIndexY = _iY; 
+		}
 		int GetItemindexX() { return m_iItemIndexX; }
 		int GetItemIndexY() { return m_iItemIndexY; }
+
+		int GetPrevItemindexX() { return m_iPrevIndexX; }
+		int GetPrevItemIndexY() { return m_iPrevIndexY; }
 		
 		Vector3 GetStartPosition() { return m_vStartPos; }
 
@@ -54,6 +61,9 @@ namespace W
 
 		int m_iItemIndexX;
 		int m_iItemIndexY;
+
+		int m_iPrevIndexX;
+		int m_iPrevIndexY;
 	};
 }
 

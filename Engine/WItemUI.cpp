@@ -13,6 +13,8 @@ namespace W
 		m_vDragEndPos(Vector2::One),
 		m_iItemIndexX(-1),
 		m_iItemIndexY(-1),
+		m_iPrevIndexX(-1),
+		m_iPrevIndexY(-1),
 		m_eParentType(eParentUI::None),
 		m_ePrevParentType(eParentUI::None)
 	{
@@ -117,8 +119,8 @@ namespace W
 		Vector2 vStartPosition = Vector2(vInvenPosition + vUIStartPosition);
 
 		//인벤토리 범위 밖이면
-		if (vPosition.x >= vEndPosition.x + vUIDiffPosition.x || vPosition.x <= vStartPosition.x - vUIDiffPosition.x ||
-			vPosition.y <= vEndPosition.y + vUIDiffPosition.y || vPosition.y >= vStartPosition.y - vUIDiffPosition.y)
+		if (! ((vPosition.x <= vEndPosition.x + vUIDiffPosition.x && vPosition.x >= vStartPosition.x - vUIDiffPosition.x) &&
+			(vPosition.y >= vEndPosition.y + vUIDiffPosition.y && vPosition.y <= vStartPosition.y - vUIDiffPosition.y)))
 			return false;
 		else
 			changepos_inventory();
@@ -134,34 +136,11 @@ namespace W
 		{
 			//내 위치
 			Vector3 vPosisition = GetComponent<Transform>()->GetPosition();
-			//비교할 내 위치
 			Vector2 vComparePosition = Vector2(vPosisition.x, vPosisition.y);
 
 			pInventroy->ChangeItemPosition(this, vComparePosition);
 
-			//다른 UI에서 왔다면 원래 부모 UI 제거
-
-			if (m_eParentType != eParentUI::Inventory)
-			{
-				DeleteParent();
-				pInventroy->CheckItemPosition(this);
-			}
-
-			//다른 아이템과 자리가 똑같다면
-			ItemUI* pSameItem = pInventroy->GetItemSamePos(this);
-			if (pSameItem == nullptr)
-				return;
-
-			switch (m_ePrevParentType)
-			{
-			case W::enums::eParentUI::Interface:
-			{
-				Vector3 vPosition = pSameItem->GetComponent<Transform>()->GetPosition();
-				pSameItem->changepos_interface();
-				//SceneManger::GetUI<Inventory>()->ChangeItemPosition(pSameItem, Vector2(vPosition.x, vPosition.y));
-			}
-			break;
-			}
+			
 		}
 	}
 
@@ -171,15 +150,14 @@ namespace W
 
 		InterfaceUI* pInter = SceneManger::GetUI<InterfaceUI>();
 		Transform* pInterTr = pInter->GetComponent<Transform>();
-		Vector3 vInterPosition = pInterTr->GetPosition();
 
 		Vector2 vUIStartPosition = pInter->GetStartPosition();
 		Vector2 vUIEndPosition = pInter->GetEndPosition();
 		Vector2 vUIDiffPosition = pInter->GetDiffPosition();
 
 		//인벤토리 범위 밖이면
-		if (vPosition.x >= vUIEndPosition.x + vUIDiffPosition.x || vPosition.x <= vUIStartPosition.x - vUIDiffPosition.x ||
-			vPosition.y <= vUIEndPosition.y + vUIDiffPosition.y || vPosition.y >= vUIStartPosition.y - vUIDiffPosition.y)
+		if (! ((vPosition.x <= vUIEndPosition.x + vUIDiffPosition.x && vPosition.x >= vUIStartPosition.x - vUIDiffPosition.x) &&
+			(vPosition.y >= vUIEndPosition.y + vUIDiffPosition.y && vPosition.y <= vUIStartPosition.y - vUIDiffPosition.y)))
 			return false;
 		else
 			changepos_interface();
@@ -198,32 +176,7 @@ namespace W
 			//비교할 내 위치
 			Vector2 vComparePosition = Vector2(vPosisition.x, vPosisition.y);
 
-			//여기서 위치만 바꾸고
 			pInterface->ChangeItemPosition(this, vComparePosition);
-
-			if (m_eParentType != eParentUI::Interface)
-			{
-				DeleteParent();
-				pInterface->CheckItemPosition(this);
-
-				//같은 위치에 2개의 
-
-				ItemUI* pSameItem = pInterface->GetItemSamePos(this);
-				if (pSameItem == nullptr)
-					return;
-
-				switch (m_ePrevParentType)
-				{
-				case W::enums::eParentUI::Inventory:
-				{
-					Vector3 vPosition = pSameItem->GetComponent<Transform>()->GetPosition();
-					pSameItem->changepos_inventory();
-				}
-					break;
-				}
-
-			}
-
 		}
 	}
 

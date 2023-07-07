@@ -52,6 +52,12 @@ namespace W
 	{
 		m_pActiveScene->Render();
 	}
+
+	void SceneManger::Destroy()
+	{
+		m_pActiveScene->Destroy();
+	}
+
 	void SceneManger::Release()
 	{
 		for (auto &iter : m_mapScene)

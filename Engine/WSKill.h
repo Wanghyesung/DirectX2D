@@ -20,7 +20,8 @@ namespace W
 		virtual void MouseLbtnClicked();
 
 	private:
-
+		bool m_bTargetOn;
+		Vector2 m_vDragStartPos;
 
 	};
 }

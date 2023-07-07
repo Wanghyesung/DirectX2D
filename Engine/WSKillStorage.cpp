@@ -95,7 +95,7 @@ namespace W
 	{
 		m_bTargetOn = false;
 
-		m_vUIEndPosition = Input::GetMousePos();
+		//m_vUIEndPosition = Input::GetMousePos();
 	}
 	void SKillStorage::MouseLbtnClicked()
 	{

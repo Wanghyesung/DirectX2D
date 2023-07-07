@@ -252,7 +252,7 @@ namespace renderer
 		
 		//grid buffer
 		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
-		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
+		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
 
 	}
 

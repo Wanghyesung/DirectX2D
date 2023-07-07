@@ -6,6 +6,8 @@
 #include "WMaterial.h"
 #include "WCameraScript.h"
 #include "WCamera.h"
+#include "WGridScript.h"
+#include "WObject.h"
 namespace W
 {
 	PlayScene::PlayScene()
@@ -17,35 +19,87 @@ namespace W
 	void PlayScene::Initialize()
 	{
 		{
-			GameObject* pPlayer2 = new GameObject();
-			AddGameObject(eLayerType::Player, pPlayer2);
-			MeshRenderer* pMeshRender2 = pPlayer2->AddComponent<MeshRenderer>();
-			pMeshRender2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender2->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			pPlayer2->GetComponent<Transform>()->SetPosition(2.f, 0.f, 0.f);
+			GameObject* player
+				= object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::Player);
 
+			player->SetName(L"Zelda");
 
-			GameObject* pPlayer = new GameObject();
-			AddGameObject(eLayerType::Player, pPlayer);
-			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
-			pPlayer->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 0.f));
-			pPlayer->GetComponent<Transform>()->SetScale(Vector3(1.5f, 1.5f, 0.f));
-			//Resources::Find<Material>(L"SpriteMaterial")->SetRenderinMode(eRenderingMode::Transparent);
+			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 
-			pPlayer2->GetComponent<Transform>()->SetParent(pPlayer->GetComponent<Transform>());
+			GameObject* player2 = new GameObject();
+			player2->SetName(L"ZeldaChild");
+			AddGameObject(eLayerType::Player, player2);
+			MeshRenderer* mr2 = player2->AddComponent<MeshRenderer>();
+			mr2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr2->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+			player2->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 0.0f, 1.0001f));
 
+			player2->GetComponent<Transform>()->SetParent(player->GetComponent<Transform>());
+			//player->AddComponent<CameraScript>();
 
-			//pPlayer->GetComponent<Transform>()->SetPosition(2.f, 0.f, 0.f);
+			const float pi = 3.141592f;
+			float degree = pi / 2.0f;
+
+			player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
+			player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
 		}
 
-		//camera object
-		GameObject* pCamera = new GameObject();
-		AddGameObject(eLayerType::Player, pCamera);
-		pCamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
-		Camera* pCameraComp = pCamera->AddComponent<Camera>();
-		pCamera->AddComponent<CameraScript>();
+		{
+			GameObject* player = new GameObject();
+			player->SetName(L"Smile");
+			AddGameObject(eLayerType::Player, player);
+			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
+			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+			//player->AddComponent<CameraScript>();
+		}
+
+		{
+			GameObject* player = new GameObject();
+			player->SetName(L"Smile");
+			AddGameObject(eLayerType::UI, player);
+			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
+			player->GetComponent<Transform>()->SetPosition(Vector3(0.2f, 0.0f, 0.0f));
+			//player->AddComponent<CameraScript>();
+		}
+
+		//Main Camera
+		Camera* cameraComp = nullptr;
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			cameraComp = camera->AddComponent<Camera>();
+			cameraComp->TrunLayerMask(eLayerType::UI, false);
+			camera->AddComponent<CameraScript>();
+		}
+
+		//UI Camera
+		{
+			GameObject* camera = new GameObject();
+			AddGameObject(eLayerType::Player, camera);
+			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			Camera* cameraComp = camera->AddComponent<Camera>();
+			cameraComp->TrunLayerMask(eLayerType::Player, false);
+			//camera->AddComponent<CameraScript>();
+		}
+
+		{
+			GameObject* grid = new GameObject();
+			grid->SetName(L"Grid");
+			AddGameObject(eLayerType::Grid, grid);
+			MeshRenderer* mr = grid->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
+			GridScript* gridSc = grid->AddComponent<GridScript>();
+			gridSc->SetCamera(cameraComp);
+		}
+
 	}
 	void PlayScene::Update()
 	{
