@@ -1,7 +1,10 @@
 #include "WSKillBox.h"
 namespace W
 {
-	SKillBox::SKillBox()
+	SKillBox::SKillBox():
+		m_vUIStartPosition(Vector2::One),
+		m_vUIEndPosition(Vector2::One),
+		m_vUIDiffPosition(Vector2::One)
 	{
 		std::shared_ptr<Texture> pSkillBoxTex =
 			Resources::Load<Texture>(L"SkillBoxTex", L"..\\Resources\\Texture\\UI\\SkillUI\\SkillBox.png");
@@ -20,14 +23,17 @@ namespace W
 	{
 
 	}
+
 	void SKillBox::Initialize()
 	{
 
 	}
+
 	void SKillBox::Update()
 	{
 		UI::Update();
 	}
+
 	void SKillBox::LateUpdate()
 	{
 		UI::LateUpdate();

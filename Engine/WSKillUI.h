@@ -20,6 +20,7 @@ namespace W
 		virtual void MouseLbtnClicked()override;
 
 	private:
+		
 	};
 }
 

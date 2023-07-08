@@ -21,6 +21,8 @@ namespace W
 
 		UI* GetParentUI() { return m_pParentUI; }
 		void AddChildUI(UI* _pUI, bool _bMove = true);
+
+		//내 벡터에만 지우기
 		void DeleteChildUI(UI* _pUI);
 
 		void MoveUI(UI* _pUI);

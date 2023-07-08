@@ -45,6 +45,8 @@ namespace W
 
 		SceneManger::Update();
 		UIManger::Update();
+		Destroy();
+		UIManger::ReleaseChildUI();
 	}
 
 	void Application::LateUpdate()

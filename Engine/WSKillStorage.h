@@ -7,6 +7,16 @@ namespace W
 	class SKillStorage : public UI
 	{
 	public:
+		enum class eSkillNuber
+		{
+			First,
+			Second,
+			Third,
+			Four,
+			Five,
+			None,
+		};
+
 		SKillStorage();
 		virtual ~SKillStorage();
 

@@ -246,8 +246,6 @@ namespace W
 
 	bool InterfaceUI::ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition)
 	{
-
-		findindex(_pItem, _vSetPosition);
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
 
@@ -351,13 +349,6 @@ namespace W
 			}
 		}
 		return nullptr;
-	}
-
-	Vector2 InterfaceUI::findindex(ItemUI* _pItem, Vector2 _vSetPosition)
-	{
-
-
-		return Vector2();
 	}
 
 

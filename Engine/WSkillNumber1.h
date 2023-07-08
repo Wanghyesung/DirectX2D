@@ -22,8 +22,11 @@ namespace W
 		void SetActive(bool _bOn) { m_bActive = _bOn; }
 		bool IsActive() { return m_bActive; }
 
+		class SKill* CreateClone(class SKill* _pSkill);
 	private:
 		bool m_bActive;
+
+		Vector3 m_vDarkSkillPosition;
 
 	};
 }

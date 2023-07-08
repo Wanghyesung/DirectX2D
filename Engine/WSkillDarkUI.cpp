@@ -15,7 +15,7 @@ namespace W
 		std::shared_ptr<Material> pSKillMater = std::make_shared<Material>();
 		pSKillMater->SetShader(Resources::Find<Shader>(L"UIShader"));
 		pSKillMater->SetTexture(pSKillUI);
-		Resources::Insert(L"SKillDarkUI", pSKillMater);
+		Resources::Insert(L"SKillDarkMater", pSKillMater);
 
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -43,18 +43,38 @@ namespace W
 	}
 	void SkillDarkUI::MouseOn()
 	{
+		bool bClone = IsClone();
+		if (bClone)
+			return;
+
 		SKill::MouseOn();
 	}
 	void SkillDarkUI::MouseLbtnDown()
 	{
+		bool bClone = IsClone();
+		if (bClone)
+			return;
+
 		SKill::MouseLbtnDown();
+
+		std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillDarkMater");
+		pShMater->SetTexture(Resources::Find<Texture>(L"SKillDarkUI1"));
 	}
 	void SkillDarkUI::MouseLbtnUp()
 	{
+		bool bClone = IsClone();
+		if (bClone)
+			return;
+
 		SKill::MouseLbtnUp();
+
+		std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillDarkMater");
+		pShMater->SetTexture(Resources::Find<Texture>(L"SKillDarkUI0"));
 	}
+
 	void SkillDarkUI::MouseLbtnClicked()
 	{
 
 	}
+	
 }

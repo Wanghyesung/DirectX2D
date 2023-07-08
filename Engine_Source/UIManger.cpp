@@ -4,7 +4,7 @@
 #include "WInput.h"
 #include "WGameObject.h"
 #include "WTransform.h"
-
+#include "WLayer.h"
 
 namespace W
 {
@@ -149,5 +149,52 @@ namespace W
 
 
 		return pTargetUI;
+	}
+	void UIManger::ReleaseChildUI()
+	{
+		Layer& pLayer = SceneManger::GetActiveScene()->GetLayer(eLayerType::UI);
+		std::vector<GameObject*> m_vecUI = pLayer.GetGameObjects();
+		
+		for (GameObject* pObj : m_vecUI)
+		{
+			UI* pUI = dynamic_cast<UI*>(pObj);
+
+			std::queue<UI*> queue;
+			queue.push(pUI);
+
+			while (!queue.empty())
+			{
+				UI* pChildUI = queue.front();
+				queue.pop();
+
+				if (pChildUI->GetState() == GameObject::eState::Dead)
+				{
+					UI* pParentUI = pChildUI->GetParentUI();
+					//가장 위에 부모라면
+					if (pParentUI == nullptr)
+					{
+						delete pChildUI;
+						pChildUI = nullptr;
+					}
+						
+					else
+					{
+						//벡터에서 지우고 메모리 해제
+						pChildUI->GetParentUI()->DeleteChildUI(pChildUI);
+						delete pChildUI;
+						pChildUI = nullptr;
+					}
+				}
+				else
+				{
+					const std::vector<UI*> vecChildUI = pChildUI->GetChildUI();
+
+					for (UI* ChildUI : vecChildUI)
+						queue.push(ChildUI);
+				}
+			}
+		}
+
+
 	}
 }

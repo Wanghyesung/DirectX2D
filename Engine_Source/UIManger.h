@@ -12,7 +12,7 @@ namespace W
 
 		static UI* GetFoucseUI();
 		static UI* GetTargetUI(UI* _pParentUI);
-
+		static void ReleaseChildUI();
 
 	private:
 		static UI* m_pFoucseUI;

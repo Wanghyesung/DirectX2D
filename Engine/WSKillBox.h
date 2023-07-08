@@ -21,8 +21,11 @@ namespace W
 		virtual void MouseLbtnUp();
 		virtual void MouseLbtnClicked();
 
-	private:
 
+	private:
+		Vector3 m_vUIStartPosition;
+		Vector3 m_vUIEndPosition;
+		Vector3 m_vUIDiffPosition;
 	};
 }
 
