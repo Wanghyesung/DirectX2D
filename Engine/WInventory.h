@@ -1,7 +1,7 @@
 #pragma once
 
 #include "WUI.h"
-#include "WItemUI.h"
+#include "WIconUI.h"
 namespace W
 {
 	class Inventory : public UI
@@ -23,14 +23,14 @@ namespace W
 		void RenderOn(bool _bOn) { m_bRenderOn = _bOn; }
 		bool IsRender() { return m_bRenderOn; }
 
-		ItemUI* FindItem(std::wstring _strName);
-		void InsertItem(ItemUI* _pItem, std::wstring _strName);
-		void AddItem(ItemUI* _pItem, std::wstring _strName);
-		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
+		IconUI* FindItem(std::wstring _strName);
+		void InsertItem(IconUI* _pItem, std::wstring _strName);
+		void AddItem(IconUI* _pItem, std::wstring _strName);
+		void DeleteItem(IconUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
 
-		bool SetItemPosition(ItemUI* _pItem);
-		bool ChangeItemPosition(ItemUI* _pItem , Vector2 _vSetPosition);
-		ItemUI* FindItemOnPosition(UINT _iX, UINT _iY);
+		bool SetItemPosition(IconUI* _pItem);
+		bool ChangeItemPosition(IconUI* _pItem , Vector2 _vSetPosition);
+		IconUI* FindItemOnPosition(UINT _iX, UINT _iY);
 
 		Vector2 GetStartPosition() { return m_vUIStartPosition; }
 		Vector2 GetEndPosition() { return m_vUIEndPosition; }
@@ -38,7 +38,7 @@ namespace W
 
 	private:
 		bool m_bRenderOn;
-		std::map<std::wstring, ItemUI*> m_mapItems;
+		std::map<std::wstring, IconUI*> m_mapItems;
 
 		bool m_bTargetOn;
 

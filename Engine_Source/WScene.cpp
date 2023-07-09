@@ -36,9 +36,12 @@ namespace W
 
 	void Scene::Destroy()
 	{
-		for (Layer& layer : m_vecLayer)
+		for (UINT i = 0; i < m_vecLayer.size(); ++i)
 		{
-			layer.Destory();
+			if (i == (UINT)eLayerType::UI)
+				continue;
+
+			m_vecLayer[i].Destory();
 		}
 	}
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "WUI.h"
+#include "WIconUI.h"
 
 namespace W
 {

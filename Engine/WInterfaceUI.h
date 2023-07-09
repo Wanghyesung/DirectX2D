@@ -1,7 +1,7 @@
 #pragma once
 #include "WUI.h"
 #include "WItemUI.h"
-
+#include "WIconUI.h"
 namespace W
 {
 	class Inventory;
@@ -23,16 +23,16 @@ namespace W
 		virtual void MouseLbtnUp();//UI안에서 땠을 때
 		virtual void MouseLbtnClicked();//UI안에서 누르고 떘을 떄
 
-		void InsertItem(ItemUI* _pItem, std::wstring _strName);
-		void DeleteItem(ItemUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
+		void InsertItem(IconUI* _pItem, std::wstring _strName);
+		void DeleteItem(IconUI* _pItem) { m_mapItems.erase(_pItem->GetName()); }
 		//void AddItem(ItemUI* _pItem, std::wstring _strName);
-		ItemUI* FindItem(std::wstring _strName);
+		IconUI* FindItem(std::wstring _strName);
 
-		void CheckItemPosition(ItemUI* _pItem);
-		bool SetItemPosition(ItemUI* _pItem);
+		void CheckItemPosition(IconUI* _pItem);
+		bool SetItemPosition(IconUI* _pItem);
 
-		bool ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition);
-		ItemUI* FindItemOnPosition(UINT _iX, UINT _iY);
+		bool ChangeItemPosition(IconUI* _pItem, Vector2 _vSetPosition);
+		IconUI* FindItemOnPosition(UINT _iX, UINT _iY);
 
 		Vector2 GetStartPosition() { return m_vUIStartPosition; }
 		Vector2 GetEndPosition() { return m_vUIEndPosition; }
@@ -48,7 +48,7 @@ namespace W
 		// 0.255 //0.34
 		Vector2 m_vUIDiffPosition;
 
-		std::map<std::wstring, ItemUI*> m_mapItems;
+		std::map<std::wstring, IconUI*> m_mapItems;
 	};
 
 }

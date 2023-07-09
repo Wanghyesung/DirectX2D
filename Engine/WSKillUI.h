@@ -1,9 +1,10 @@
 #pragma once
 
 #include "WUI.h"
+#include "WIconUI.h"
 namespace W
 {
-	class SKillUI : public UI
+	class SKillUI : public IconUI
 	{
 	public:
 		SKillUI();

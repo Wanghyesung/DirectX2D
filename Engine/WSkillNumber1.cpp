@@ -107,16 +107,18 @@ namespace W
 		SKill* pSkill = dynamic_cast<SkillDarkUI*>(_pSkill);
 		if (pSkill != nullptr)
 		{
-			pSkill = new SkillDarkUI();
-			pSkill->SetName(L"DarkSkill");
-			pSkill->SetSkillNuber(SKillStorage::eSkillNuber::First);
-			pSkill->SetClone(true);
-			Transform* pDarkTr = pSkill->GetComponent<Transform>();
+			SkillDarkUI* pDarkSkill = new SkillDarkUI();
+			pDarkSkill->SetName(L"DarkSkill");
+			pDarkSkill->SetSkillNuber(SKillStorage::eSkillNuber::First);
+			pDarkSkill->SetClone(true);
+			pDarkSkill->SetOwner(_pSkill);
+			Transform* pDarkTr = pDarkSkill->GetComponent<Transform>();
 			pDarkTr->SetPosition(m_vDarkSkillPosition);
 			pDarkTr->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
-			AddChildUI(pSkill);
+			AddChildUI(pDarkSkill);
+			return pDarkSkill;
 		}
-		return pSkill;
+		
 	}
 	
 }

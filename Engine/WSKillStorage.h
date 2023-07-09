@@ -1,7 +1,6 @@
 #pragma once
 
 #include "WUI.h"
-
 namespace W
 {
 	class SKillStorage : public UI

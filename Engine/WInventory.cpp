@@ -119,9 +119,9 @@ namespace W
 	{
 	}
 
-	ItemUI* Inventory::FindItem(std::wstring _strName)
+	IconUI* Inventory::FindItem(std::wstring _strName)
 	{
-		std::map<std::wstring, ItemUI*>::iterator iter =
+		std::map<std::wstring, IconUI*>::iterator iter =
 			m_mapItems.find(_strName);
 
 		if (iter == m_mapItems.end())
@@ -129,16 +129,16 @@ namespace W
 
 		return iter->second;
 	}
-	void Inventory::InsertItem(ItemUI* _pItem, std::wstring _strName)
+	void Inventory::InsertItem(IconUI* _pItem, std::wstring _strName)
 	{
 		AddChildUI(_pItem, false);
 		m_mapItems.insert(make_pair(_strName, _pItem));
 		_pItem->SetParentUIType(eParentUI::Inventory);
 	}
-	void Inventory::AddItem(ItemUI* _pItem , std::wstring _strName)
+	void Inventory::AddItem(IconUI* _pItem , std::wstring _strName)
 	{
 		//-3.6 -0.8
-		ItemUI* pItem = FindItem(_strName);
+		IconUI* pItem = FindItem(_strName);
 
 		if (pItem != nullptr)//아이템이 있음
 			return;
@@ -153,7 +153,7 @@ namespace W
 		
 	}
 
-	bool Inventory::SetItemPosition(ItemUI* _pItem)
+	bool Inventory::SetItemPosition(IconUI* _pItem)
 	{
 		//3.66 0.9 //3.2 0.45
 		//인벤토리 위치
@@ -174,7 +174,7 @@ namespace W
 			for (UINT x = 0; x < 4; ++x)
 			{
 				vComaprePos.x = vStartPosition.x + x * m_vUIDiffPosition.x;
-				std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+				std::map<std::wstring, IconUI*>::iterator iter = m_mapItems.begin();
 				
 				//처음 들어온 아이템이라면
 				if (iter == m_mapItems.end())
@@ -184,7 +184,7 @@ namespace W
 					return true;
 				}
 
-				ItemUI* pITem = FindItemOnPosition(x, y);
+				IconUI* pITem = FindItemOnPosition(x, y);
 				//빈칸
 				if (pITem == nullptr)
 				{
@@ -200,8 +200,13 @@ namespace W
 		return false;
 	}
 
-	bool Inventory::ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition)
+	bool Inventory::ChangeItemPosition(IconUI* _pItem, Vector2 _vSetPosition)
 	{	
+		//아이템과 장비템만 들어올수있음
+		IconUI::eIconType eIconType = _pItem->GetIconType();
+		if (eIconType != IconUI::eIconType::Item && eIconType != IconUI::eIconType::Equip)
+			return false;
+
 		//인벤토리 위치
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
@@ -241,7 +246,7 @@ namespace W
 			}
 		}
 
-		ItemUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
+		IconUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
 
 		//여기서 구간 나누기 다른 UI에서 왔는지 내 UI에서만 바꾸는건지
 		if (_pItem->GetParentUIType() != eParentUI::Inventory)
@@ -290,13 +295,13 @@ namespace W
 		return true;
 	}
 
-	ItemUI* Inventory::FindItemOnPosition(UINT _iX, UINT _iY)
+	IconUI* Inventory::FindItemOnPosition(UINT _iX, UINT _iY)
 	{
-		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+		std::map<std::wstring, IconUI*>::iterator iter = m_mapItems.begin();
 
 		for (iter; iter != m_mapItems.end(); ++iter)
 		{
-			ItemUI* pITem = iter->second;
+			IconUI* pITem = iter->second;
 			UINT ITEM_X = pITem->GetItemindexX();
 			UINT ITEM_Y = pITem->GetItemIndexY();
 

@@ -43,9 +43,6 @@ namespace W
 	}
 	void SkillDarkUI::MouseOn()
 	{
-		bool bClone = IsClone();
-		if (bClone)
-			return;
 
 		SKill::MouseOn();
 	}

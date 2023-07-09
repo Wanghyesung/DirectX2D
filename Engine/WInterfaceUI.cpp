@@ -166,16 +166,16 @@ namespace W
 
 	}
 
-	void InterfaceUI::InsertItem(ItemUI* _pItem, std::wstring _strName)
+	void InterfaceUI::InsertItem(IconUI* _pItem, std::wstring _strName)
 	{
 		m_mapItems.insert(std::make_pair(_pItem->GetName(), _pItem));
 		AddChildUI(_pItem,false);
 		_pItem->SetParentUIType(eParentUI::Interface);
 	}
 
-	ItemUI* InterfaceUI::FindItem(std::wstring _strName)
+	IconUI* InterfaceUI::FindItem(std::wstring _strName)
 	{
-		std::map<std::wstring, ItemUI*>::iterator iter =
+		std::map<std::wstring, IconUI*>::iterator iter =
 			m_mapItems.find(_strName);
 
 		if(iter == m_mapItems.end())
@@ -184,9 +184,9 @@ namespace W
 		return iter->second;
 	}
 
-	void InterfaceUI::CheckItemPosition(ItemUI* _pItem)
+	void InterfaceUI::CheckItemPosition(IconUI* _pItem)
 	{
-		ItemUI* pUI = FindItem(_pItem->GetName());
+		IconUI* pUI = FindItem(_pItem->GetName());
 
 		if (pUI != nullptr)
 			return;
@@ -198,7 +198,7 @@ namespace W
 		_pItem->SetParentUIType(eParentUI::Interface);
 	}
 
-	bool InterfaceUI::SetItemPosition(ItemUI* _pItem)
+	bool InterfaceUI::SetItemPosition(IconUI* _pItem)
 	{
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
@@ -214,7 +214,7 @@ namespace W
 			for (UINT x = 0; x < 4; ++x)
 			{
 				vStartPosition.x += x * m_vUIDiffPosition.x;
-				std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+				std::map<std::wstring, IconUI*>::iterator iter = m_mapItems.begin();
 
 				//처음 들어온 아이템이라면
 				if (iter == m_mapItems.end())
@@ -226,7 +226,7 @@ namespace W
 
 				for (iter; iter != m_mapItems.end(); ++iter)
 				{
-					ItemUI* pITem = iter->second;
+					IconUI* pITem = iter->second;
 					UINT ITEM_X = pITem->GetItemindexX();
 					UINT ITEM_Y = pITem->GetItemIndexY();
 
@@ -244,8 +244,12 @@ namespace W
 		return false;
 	}
 
-	bool InterfaceUI::ChangeItemPosition(ItemUI* _pItem, Vector2 _vSetPosition)
+	bool InterfaceUI::ChangeItemPosition(IconUI* _pItem, Vector2 _vSetPosition)
 	{
+		IconUI::eIconType eIconType = _pItem->GetIconType();
+		if (eIconType != IconUI::eIconType::Item && eIconType != IconUI::eIconType::SKill)
+			return false;
+
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
 
@@ -284,25 +288,28 @@ namespace W
 		}
 
 		//이미 있는 아이템이 있는 위치인지
-		ItemUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
-
+		IconUI* pFindItem = FindItemOnPosition(iMinX, iMinY);
 		//여기서 구간 나누기 다른 UI에서 왔는지 내 UI에서만 바꾸는건지
 		if (_pItem->GetParentUIType() != eParentUI::Interface)
 		{
 			//찾은 아이템을 들어온 아이템이 있던 UI로 보내기
 			if (pFindItem != nullptr)
 			{
-				Transform* pFindTr = pFindItem->GetComponent<Transform>();
-				pFindTr->SetPosition(_pItem->GetStartPosition());
-				pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
-				pFindItem->DeleteParent();
-
 				eParentUI eParentType = _pItem->GetParentUIType();
 				switch (eParentType)
 				{
 				case W::enums::eParentUI::Inventory:
+				{
+					Transform* pFindTr = pFindItem->GetComponent<Transform>();
+					pFindTr->SetPosition(_pItem->GetStartPosition());
+					pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
+					pFindItem->DeleteParent();
 					SceneManger::GetUI<Inventory>()->InsertItem(pFindItem, pFindItem->GetName());
+				}
 					break;
+
+				case W::enums::eParentUI::SkillStorage:
+					return false;
 				}
 			}
 			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);
@@ -332,13 +339,13 @@ namespace W
 		return true;
 	}
 
-	ItemUI* InterfaceUI::FindItemOnPosition(UINT _iX, UINT _iY)
+	IconUI* InterfaceUI::FindItemOnPosition(UINT _iX, UINT _iY)
 	{
-		std::map<std::wstring, ItemUI*>::iterator iter = m_mapItems.begin();
+		std::map<std::wstring, IconUI*>::iterator iter = m_mapItems.begin();
 
 		for (iter; iter != m_mapItems.end(); ++iter)
 		{
-			ItemUI* pITem = iter->second;
+			IconUI* pITem = iter->second;
 			UINT ITEM_X = pITem->GetItemindexX();
 			UINT ITEM_Y = pITem->GetItemIndexY();
 

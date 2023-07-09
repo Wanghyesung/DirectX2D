@@ -167,6 +167,7 @@
     <ClInclude Include="WGridScript.h" />
     <ClInclude Include="WHorntailItem.h" />
     <ClInclude Include="WHP.h" />
+    <ClInclude Include="WIconUI.h" />
     <ClInclude Include="WInterfaceUI.h" />
     <ClInclude Include="WInventory.h" />
     <ClInclude Include="WInvenUI.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="WGridScript.cpp" />
     <ClCompile Include="WHorntailItem.cpp" />
     <ClCompile Include="WHP.cpp" />
+    <ClCompile Include="WIconUI.cpp" />
     <ClCompile Include="WInterfaceUI.cpp" />
     <ClCompile Include="WInventory.cpp" />
     <ClCompile Include="WInvenUI.cpp" />

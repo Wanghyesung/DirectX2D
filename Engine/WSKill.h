@@ -1,10 +1,10 @@
 #pragma once
-#include "WUI.h"
 #include "WSKillStorage.h"
+#include "WIconUI.h"
 
 namespace W
 {
-	class SKill : public UI
+	class SKill : public IconUI
 	{
 	public:
 		SKill();
@@ -23,6 +23,7 @@ namespace W
 		void SetSkillNuber(SKillStorage::eSkillNuber _eNuber) { eSkillNuber = _eNuber; }
 
 		void SetClone(bool _bOn) { m_bClone = _bOn; }
+		void SetOwner(SKill* _pSKill) { m_pOwnerClone = _pSKill; }
 		bool IsClone() { return m_bClone; }
 
 	private:
@@ -36,7 +37,9 @@ namespace W
 		bool m_bTargetOn;
 		bool m_bClone;//클론이면 움직임없이
 
+		//내 클론 UI, 부모
 		SKill* m_pSKillClone;
+		SKill* m_pOwnerClone;
 		Vector2 m_vDragStartPos;
 		Vector3 m_vStartPos;
 		SKillStorage::eSkillNuber eSkillNuber;

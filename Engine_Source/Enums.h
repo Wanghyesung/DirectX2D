@@ -51,6 +51,7 @@ namespace W::enums
 	{
 		Interface,
 		Inventory,
+		SkillStorage,
 		None,
 	};
 	
