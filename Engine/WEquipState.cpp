@@ -42,8 +42,13 @@ namespace W
 		//m_vUIEndPosition = Vector2();
 		m_vUIDiffPosition = Vector2(0.32f,0.32f);
 
+		//장비 위치 초기화
 		m_vPandantPosition = Vector2(0.02f, 0.04f);
-
+		m_vHatPosition = Vector2(-0.3f, 1.f);;
+		m_vTopPosition = Vector2(-0.3f, 0.04f);;
+		m_vBottomPosition = Vector2(-0.3f, -0.28f);;
+		m_vShoesPosition = Vector2(0.02f, -0.6f);
+		m_vWeaponPosition == Vector2(0.34f, 0.04f);
 	}
 	void EquipState::Update()
 	{
@@ -112,20 +117,26 @@ namespace W
 
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 		Vector3 vItemPosition = pEquip->GetComponent<Transform>()->GetPosition();
+
 		switch (eType)
 		{
 		case W::Equip::EquipType::Pandant:
 			pEquip->GetComponent<Transform>()->SetPosition(vPosition.x + m_vPandantPosition.x, vPosition.y + m_vPandantPosition.y,vItemPosition.z);
 			break;
 		case W::Equip::EquipType::Hat:
+			pEquip->GetComponent<Transform>()->SetPosition(vPosition.x + m_vHatPosition.x, vPosition.y + m_vHatPosition.y, vItemPosition.z);
 			break;
 		case W::Equip::EquipType::Top:
+			pEquip->GetComponent<Transform>()->SetPosition(vPosition.x + m_vTopPosition.x, vPosition.y + m_vTopPosition.y, vItemPosition.z);
 			break;
 		case W::Equip::EquipType::Bottom:
+			pEquip->GetComponent<Transform>()->SetPosition(vPosition.x + m_vBottomPosition.x, vPosition.y + m_vBottomPosition.y, vItemPosition.z);
 			break;
 		case W::Equip::EquipType::Shoes:
+			pEquip->GetComponent<Transform>()->SetPosition(vPosition.x + m_vShoesPosition.x, vPosition.y + m_vShoesPosition.y, vItemPosition.z);
 			break;
 		case W::Equip::EquipType::Weapon:
+			pEquip->GetComponent<Transform>()->SetPosition(vPosition.x + m_vWeaponPosition.x, vPosition.y + m_vWeaponPosition.y, vItemPosition.z);
 			break;
 		}
 

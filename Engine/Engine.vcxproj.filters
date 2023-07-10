@@ -125,13 +125,29 @@
     <ClInclude Include="WSKill.h">
       <Filter>Contents\UI\Interface\Extra\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="WIconUI.h" />
-    <ClInclude Include="WSkillDarkUI.h" />
     <ClInclude Include="WEquipState.h">
       <Filter>Contents\UI\Interface\Extra\Equip</Filter>
     </ClInclude>
     <ClInclude Include="WEquip.h">
       <Filter>Contents\UI\Interface\Extra\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="WStat.h">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="WSkillDarkUI.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
+    </ClInclude>
+    <ClInclude Include="WSkillLuckUI.h">
+      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
+    </ClInclude>
+    <ClInclude Include="WIconUI.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="WAutoUI.h">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="WUpBtn.h">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -256,13 +272,29 @@
     <ClCompile Include="WSKill.cpp">
       <Filter>Contents\UI\Interface\Extra\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="WIconUI.cpp" />
-    <ClCompile Include="WSkillDarkUI.cpp" />
     <ClCompile Include="WEquipState.cpp">
       <Filter>Contents\UI\Interface\Extra\Equip</Filter>
     </ClCompile>
     <ClCompile Include="WEquip.cpp">
       <Filter>Contents\UI\Interface\Extra\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="WStat.cpp">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="WSkillLuckUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
+    </ClCompile>
+    <ClCompile Include="WSkillDarkUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
+    </ClCompile>
+    <ClCompile Include="WIconUI.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="WAutoUI.cpp">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="WUpBtn.cpp">
+      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

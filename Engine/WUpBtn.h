@@ -3,11 +3,12 @@
 
 namespace W
 {
-	class SkillNumber1 : public UI
+	class UpBtn : public UI
 	{
+
 	public:
-		SkillNumber1();
-		virtual ~SkillNumber1();
+		UpBtn();
+		virtual ~UpBtn();
 
 		virtual void Initialize();
 		virtual void Update();
@@ -19,15 +20,9 @@ namespace W
 		virtual void MouseLbtnUp();
 		virtual void MouseLbtnClicked();
 
-		void SetActive(bool _bOn) { m_bActive = _bOn; }
-		bool IsActive() { return m_bActive; }
-
-		class SKill* CreateClone(class SKill* _pSkill);
 	private:
-		bool m_bActive;
-
-		Vector3 m_vDarkSkillPosition;
-		Vector3 m_vLuckSkillPosition;
+		static UINT m_iBntCount;
+		UINT m_iNumber;
 	};
 }
 

@@ -3,6 +3,7 @@
 #include "WSKill.h"
 #include "WTransform.h"
 #include "WSkillDarkUI.h"
+#include "WSkillLuckUI.h"
 #include "WSKillStorage.h"
 
 
@@ -49,6 +50,22 @@ namespace W
 		pDarkTr->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
 		AddChildUI(pDarkSkill);
 
+		//내 스킬 박스
+		SKillBox* pSKillBox2 = new SKillBox();
+		pSKillBox2->SetName(L"SKillBox2");
+		Transform* pBoxTransform2 = pSKillBox2->GetComponent<Transform>();
+		pBoxTransform2->SetPosition(1.8f, -0.8f, -0.01f);
+		pBoxTransform2->SetScale(0.4f * 3.5f, 0.1f * 3.5f, 0.f); //4 : 1
+		AddChildUI(pSKillBox2);
+
+		m_vLuckSkillPosition = Vector3(1.28f, -0.8f, -0.02f);
+		SkillLuckUI* pLuckSKill = new SkillLuckUI();
+		pLuckSKill->SetName(L"LuckSkill");
+		pLuckSKill->SetSkillNuber(SKillStorage::eSkillNuber::First);
+		Transform* pLuckTr = pLuckSKill->GetComponent<Transform>();
+		pLuckTr->SetPosition(m_vLuckSkillPosition);
+		pLuckTr->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
+		AddChildUI(pLuckSKill);
 	}
 	void SkillNumber1::Update()
 	{
@@ -104,8 +121,7 @@ namespace W
 
 	SKill* SkillNumber1::CreateClone(SKill* _pSkill)
 	{
-		SKill* pSkill = dynamic_cast<SkillDarkUI*>(_pSkill);
-		if (pSkill != nullptr)
+		if (dynamic_cast<SkillDarkUI*>(_pSkill))
 		{
 			SkillDarkUI* pDarkSkill = new SkillDarkUI();
 			pDarkSkill->SetName(L"DarkSkill");
@@ -117,6 +133,19 @@ namespace W
 			pDarkTr->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
 			AddChildUI(pDarkSkill);
 			return pDarkSkill;
+		}
+		else if(dynamic_cast<SkillLuckUI*>(_pSkill))
+		{
+			SkillLuckUI* pLuckSkill = new SkillLuckUI();
+			pLuckSkill->SetName(L"DarkSkill");
+			pLuckSkill->SetSkillNuber(SKillStorage::eSkillNuber::First);
+			pLuckSkill->SetClone(true);
+			pLuckSkill->SetOwner(_pSkill);
+			Transform* pLuckTr = pLuckSkill->GetComponent<Transform>();
+			pLuckTr->SetPosition(m_vLuckSkillPosition);
+			pLuckTr->SetScale(0.1f * 3.3f, 0.1f * 3.3f, 0.f); //1 : 1
+			AddChildUI(pLuckSkill);
+			return pLuckSkill;
 		}
 		
 	}

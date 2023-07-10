@@ -155,6 +155,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScene.h" />
     <ClInclude Include="WAlixirUI.h" />
+    <ClInclude Include="WAutoUI.h" />
     <ClInclude Include="WCameraScript.h" />
     <ClInclude Include="WCaveScene.h" />
     <ClInclude Include="WCaveStartScene.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="WItemUI.h" />
     <ClInclude Include="WLeafreScene.h" />
     <ClInclude Include="WLevelUI.h" />
+    <ClInclude Include="WSkillLuckUI.h" />
     <ClInclude Include="WMenuUI.h" />
     <ClInclude Include="WMoveScene.h" />
     <ClInclude Include="WMoveScene_2.h" />
@@ -190,18 +192,21 @@
     <ClInclude Include="WSKillStorage.h" />
     <ClInclude Include="WSKillUI.h" />
     <ClInclude Include="WStarUI.h" />
+    <ClInclude Include="WStat.h" />
     <ClInclude Include="WStatUI.h" />
     <ClInclude Include="WSystemUI.h" />
     <ClInclude Include="WTempleBossScene.h" />
     <ClInclude Include="WTempleScene.h" />
     <ClInclude Include="WTempleScene_2.h" />
     <ClInclude Include="WTempleStartScene.h" />
+    <ClInclude Include="WUpBtn.h" />
     <ClInclude Include="WValleyScene.h" />
     <ClInclude Include="WValleyScene_2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="WAlixirUI.cpp" />
+    <ClCompile Include="WAutoUI.cpp" />
     <ClCompile Include="WCameraScript.cpp" />
     <ClCompile Include="WCaveScene.cpp" />
     <ClCompile Include="WCaveStartScene.cpp" />
@@ -223,6 +228,7 @@
     <ClCompile Include="WItemUI.cpp" />
     <ClCompile Include="WLeafreScene.cpp" />
     <ClCompile Include="WLevelUI.cpp" />
+    <ClCompile Include="WSkillLuckUI.cpp" />
     <ClCompile Include="WMenuUI.cpp" />
     <ClCompile Include="WMoveScene.cpp" />
     <ClCompile Include="WMoveScene_2.cpp" />
@@ -237,12 +243,14 @@
     <ClCompile Include="WSKillStorage.cpp" />
     <ClCompile Include="WSKillUI.cpp" />
     <ClCompile Include="WStarUI.cpp" />
+    <ClCompile Include="WStat.cpp" />
     <ClCompile Include="WStatUI.cpp" />
     <ClCompile Include="WSystemUI.cpp" />
     <ClCompile Include="WTempleBossScene.cpp" />
     <ClCompile Include="WTempleScene.cpp" />
     <ClCompile Include="WTempleScene_2.cpp" />
     <ClCompile Include="WTempleStartScene.cpp" />
+    <ClCompile Include="WUpBtn.cpp" />
     <ClCompile Include="WValleyScene.cpp" />
     <ClCompile Include="WValleyScene_2.cpp" />
   </ItemGroup>

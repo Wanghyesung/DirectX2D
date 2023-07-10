@@ -17,6 +17,7 @@
 #include "WInventory.h"
 #include "WSKillStorage.h"
 #include "WEquipState.h"
+#include "WStat.h"
 #include "WSceneManger.h"
 #include "WAlixirUI.h"
 namespace W
@@ -140,6 +141,10 @@ namespace W
 		EquipState* pEquipState = new EquipState();
 		SceneManger::AddGameObject(eLayerType::UI, pEquipState);
 		pEquipState->Initialize();
+
+		Stat* pStat = new Stat();
+		SceneManger::AddGameObject(eLayerType::UI, pStat);
+		pStat->Initialize();
 
 #pragma endregion
 	}

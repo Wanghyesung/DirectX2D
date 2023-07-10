@@ -1,12 +1,13 @@
 #pragma once
-#include "WUI.h"
+#include "WSkill.h"
+
 namespace W
 {
-	class StatUI : public UI
+	class SkillLuckUI : public SKill
 	{
 	public:
-		StatUI();
-		virtual ~StatUI();
+		SkillLuckUI();
+		virtual ~SkillLuckUI();
 
 		virtual void Initialize() override;
 		virtual void Update()override;
@@ -19,7 +20,6 @@ namespace W
 		virtual void MouseLbtnClicked()override;
 
 	private:
-
 	};
 }
 

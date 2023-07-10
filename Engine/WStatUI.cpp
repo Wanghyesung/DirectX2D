@@ -1,5 +1,6 @@
 #include "WStatUI.h"
-
+#include "WStat.h"
+#include "WSceneManger.h"
 namespace W
 {
 	StatUI::StatUI()
@@ -21,6 +22,7 @@ namespace W
 	}
 	void StatUI::Initialize()
 	{
+
 	}
 	void StatUI::Update()
 	{
@@ -36,14 +38,25 @@ namespace W
 	}
 	void StatUI::MouseOn()
 	{
+
 	}
 	void StatUI::MouseLbtnDown()
 	{
+		Stat* pStat = SceneManger::GetUI<Stat>();
+		
+		bool bRenderOn = pStat->IsRender();
+		if (bRenderOn)
+			pStat->RenderOn(false);
+		else
+			pStat->RenderOn(true);
+
 	}
 	void StatUI::MouseLbtnUp()
 	{
+
 	}
 	void StatUI::MouseLbtnClicked()
 	{
+
 	}
 }
