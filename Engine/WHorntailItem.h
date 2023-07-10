@@ -1,9 +1,9 @@
 #pragma once
-#include "WItemUI.h"
+#include "WEquip.h"
 
 namespace W
 {
-	class HorntailItem : public ItemUI
+	class HorntailItem : public Equip
 	{
 	public:
 		HorntailItem();

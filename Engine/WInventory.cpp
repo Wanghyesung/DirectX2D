@@ -202,10 +202,6 @@ namespace W
 
 	bool Inventory::ChangeItemPosition(IconUI* _pItem, Vector2 _vSetPosition)
 	{	
-		//아이템과 장비템만 들어올수있음
-		IconUI::eIconType eIconType = _pItem->GetIconType();
-		if (eIconType != IconUI::eIconType::Item && eIconType != IconUI::eIconType::Equip)
-			return false;
 
 		//인벤토리 위치
 		Transform* pTransform = GetComponent<Transform>();
@@ -255,16 +251,21 @@ namespace W
 			if (pFindItem != nullptr)
 			{
 				Transform* pFindTr = pFindItem->GetComponent<Transform>();
-				pFindTr->SetPosition(_pItem->GetStartPosition());
-				pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
-				pFindItem->DeleteParent();
 
 				eParentUI eParentType = _pItem->GetParentUIType();
 				switch (eParentType)
 				{
 				case W::enums::eParentUI::Interface:
+				{
+					pFindTr->SetPosition(_pItem->GetStartPosition());
+					pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
+					pFindItem->DeleteParent();
 					SceneManger::GetUI<InterfaceUI>()->InsertItem(pFindItem, pFindItem->GetName());
-					break;
+				}
+				break;
+				case W::enums::eParentUI::EquipState:
+					return false;
+				break;
 				}
 			}
 			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);

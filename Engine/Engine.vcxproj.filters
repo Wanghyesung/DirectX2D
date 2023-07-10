@@ -108,7 +108,7 @@
       <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClInclude>
     <ClInclude Include="WHorntailItem.h">
-      <Filter>Contents\UI\ItemUI\Equip</Filter>
+      <Filter>Contents\UI\Equip</Filter>
     </ClInclude>
     <ClInclude Include="WGridScript.h">
       <Filter>Contents\Script</Filter>
@@ -124,6 +124,14 @@
     </ClInclude>
     <ClInclude Include="WSKill.h">
       <Filter>Contents\UI\Interface\Extra\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="WIconUI.h" />
+    <ClInclude Include="WSkillDarkUI.h" />
+    <ClInclude Include="WEquipState.h">
+      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="WEquip.h">
+      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +239,7 @@
       <Filter>Contents\UI\Interface\Gauge</Filter>
     </ClCompile>
     <ClCompile Include="WHorntailItem.cpp">
-      <Filter>Contents\UI\ItemUI\Equip</Filter>
+      <Filter>Contents\UI\Equip</Filter>
     </ClCompile>
     <ClCompile Include="WGridScript.cpp">
       <Filter>Contents\Script</Filter>
@@ -247,6 +255,14 @@
     </ClCompile>
     <ClCompile Include="WSKill.cpp">
       <Filter>Contents\UI\Interface\Extra\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="WIconUI.cpp" />
+    <ClCompile Include="WSkillDarkUI.cpp" />
+    <ClCompile Include="WEquipState.cpp">
+      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="WEquip.cpp">
+      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,9 +359,6 @@
     <Filter Include="Contents\UI\ItemUI\Potion">
       <UniqueIdentifier>{89b91c99-324a-42c2-a53b-30ab2461e60f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\UI\ItemUI\Equip">
-      <UniqueIdentifier>{7e5125b5-cf62-4aef-b78c-a31f37a52593}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\UI\Interface\Extra\Skill\1">
       <UniqueIdentifier>{3019af27-fac1-4b21-a1fe-5a3bb2676695}</UniqueIdentifier>
     </Filter>
@@ -366,6 +379,9 @@
     </Filter>
     <Filter Include="Contents\UI\Interface\Extra\Skill\1\SkillNumber1">
       <UniqueIdentifier>{a26a92e4-d1ca-4bc1-9b0a-dce9350a0d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Equip">
+      <UniqueIdentifier>{7e5125b5-cf62-4aef-b78c-a31f37a52593}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

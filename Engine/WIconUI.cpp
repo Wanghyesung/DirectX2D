@@ -111,6 +111,12 @@ namespace W
 			pParentUI->DeleteChildUI(this);
 		}
 		break;
+		case W::enums::eParentUI::EquipState:
+		{
+			UI* pParentUI = GetParentUI();
+			pParentUI->DeleteChildUI(this);
+		}
+		break;
 		default:
 			break;
 		}

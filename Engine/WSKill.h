@@ -26,6 +26,9 @@ namespace W
 		void SetOwner(SKill* _pSKill) { m_pOwnerClone = _pSKill; }
 		bool IsClone() { return m_bClone; }
 
+		SKill* GetClone() { return m_pOwnerClone; }
+		void SetNullClone() { m_pSKillClone = nullptr; }
+
 	private:
 		void create_clone();
 

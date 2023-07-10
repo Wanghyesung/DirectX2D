@@ -52,6 +52,7 @@ namespace W::enums
 		Interface,
 		Inventory,
 		SkillStorage,
+		EquipState,
 		None,
 	};
 	

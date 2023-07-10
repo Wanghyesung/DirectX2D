@@ -1,5 +1,6 @@
 #include "WEquipUI.h"
-
+#include "WEquipState.h"
+#include "WSceneManger.h"
 namespace W
 {
 	EquipUI::EquipUI()
@@ -22,6 +23,9 @@ namespace W
 	}
 	void EquipUI::Initialize()
 	{
+		//Transform* pTransform = GetComponent<Transform>();
+		//pTransform->SetPosition(0.f, 0.f, -0.25f);
+		//pTransform->SetScale(0.518f * 3.8f, 1.f * 3.8f, 0.f); //0.518 : 1
 	}
 	void EquipUI::Update()
 	{
@@ -37,9 +41,19 @@ namespace W
 	}
 	void EquipUI::MouseOn()
 	{
+
 	}
 	void EquipUI::MouseLbtnDown()
 	{
+		EquipState* pInven = SceneManger::GetUI<EquipState>();
+		if (pInven != nullptr)
+		{
+			bool bRender = pInven->IsRender();
+			if (!bRender)
+				pInven->RenderOn(true);
+			else
+				pInven->RenderOn(false);
+		}
 	}
 	void EquipUI::MouseLbtnUp()
 	{

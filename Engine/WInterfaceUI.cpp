@@ -13,8 +13,10 @@
 #include "WStatUI.h"
 #include "WQuestUI.h"
 #include "WSKillUI.h"
+#include "WSKill.h"
 #include "WInventory.h"
 #include "WSKillStorage.h"
+#include "WEquipState.h"
 #include "WSceneManger.h"
 #include "WAlixirUI.h"
 namespace W
@@ -134,6 +136,10 @@ namespace W
 		SKillStorage* pSKillStorage = new SKillStorage();
 		SceneManger::AddGameObject(eLayerType::UI, pSKillStorage);
 		pSKillStorage->Initialize();
+
+		EquipState* pEquipState = new EquipState();
+		SceneManger::AddGameObject(eLayerType::UI, pEquipState);
+		pEquipState->Initialize();
 
 #pragma endregion
 	}
@@ -309,7 +315,25 @@ namespace W
 					break;
 
 				case W::enums::eParentUI::SkillStorage:
-					return false;
+				{
+					if(pFindItem->GetIconType() == IconUI::eIconType::Item)
+						return false;
+					else
+					{
+						//찾은 아이템 다시 스킬창으로 위치 설정
+						SKill* pSKill = dynamic_cast<SKill*>(pFindItem);
+						SKill* pSKillClone = pSKill->GetClone();
+						Vector3 vClonePosition = pSKillClone->GetComponent<Transform>()->GetPosition();
+						pFindItem->GetComponent<Transform>()->SetPosition(vClonePosition);
+
+						//자식 UI로 받기
+						pFindItem->DeleteParent();
+						pFindItem->SetParentUIType(eParentUI::SkillStorage);
+						pSKillClone->GetParentUI()->AddChildUI(pFindItem);
+						pSKill->SetNullClone();
+					}
+				}
+					
 				}
 			}
 			pItemTransform->SetPosition(vMinValue.x, vMinValue.y, vItemPosition.z);
@@ -338,6 +362,10 @@ namespace W
 		}
 		return true;
 	}
+
+
+
+
 
 	IconUI* InterfaceUI::FindItemOnPosition(UINT _iX, UINT _iY)
 	{

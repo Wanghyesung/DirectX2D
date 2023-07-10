@@ -16,6 +16,9 @@ namespace W
 		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(pMater);
+
+		SetEquipType(EquipType::Pandant);
+		SetIconType(eIconType::Equip);
 	}
 	HorntailItem::~HorntailItem()
 	{
@@ -27,30 +30,30 @@ namespace W
 	}
 	void HorntailItem::Update()
 	{
-		ItemUI::Update();
+		Equip::Update();
 	}
 	void HorntailItem::LateUpdate()
 	{
-		ItemUI::LateUpdate();
+		Equip::LateUpdate();
 	}
 	void HorntailItem::Render()
 	{
-		ItemUI::Render();
+		Equip::Render();
 	}
 	void HorntailItem::MouseOn()
 	{
-		ItemUI::MouseOn();
+		Equip::MouseOn();
 	}
 	void HorntailItem::MouseLbtnDown()
 	{
-		ItemUI::MouseLbtnDown();
+		Equip::MouseLbtnDown();
 	}
 	void HorntailItem::MouseLbtnUp()
 	{
-		ItemUI::MouseLbtnUp();
+		Equip::MouseLbtnUp();
 	}
 	void HorntailItem::MouseLbtnClicked()
 	{
-		ItemUI::MouseLbtnClicked();
+		Equip::MouseLbtnClicked();
 	}
 }

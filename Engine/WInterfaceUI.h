@@ -39,6 +39,10 @@ namespace W
 		Vector2 GetDiffPosition() { return m_vUIDiffPosition; }
 
 	private:
+		bool change_item_otherUI(IconUI* _pItem, IconUI* _pFindItem);
+		void change_item_interface(IconUI* _pItem, IconUI* _pFindItem);
+
+	private:
 		//2.28 -3.21
 		Vector2 m_vUIStartPosition;
 		

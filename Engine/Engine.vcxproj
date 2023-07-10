@@ -161,6 +161,8 @@
     <ClInclude Include="WChannleBntUI.h" />
     <ClInclude Include="WCharUI.h" />
     <ClInclude Include="WCoverGaugeUI.h" />
+    <ClInclude Include="WEquip.h" />
+    <ClInclude Include="WEquipState.h" />
     <ClInclude Include="WEquipUI.h" />
     <ClInclude Include="WEXP.h" />
     <ClInclude Include="WGaugeUI.h" />
@@ -206,6 +208,8 @@
     <ClCompile Include="WChannleBntUI.cpp" />
     <ClCompile Include="WCharUI.cpp" />
     <ClCompile Include="WCoverGaugeUI.cpp" />
+    <ClCompile Include="WEquip.cpp" />
+    <ClCompile Include="WEquipState.cpp" />
     <ClCompile Include="WEquipUI.cpp" />
     <ClCompile Include="WEXP.cpp" />
     <ClCompile Include="WGaugeUI.cpp" />
