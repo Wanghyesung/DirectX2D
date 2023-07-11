@@ -8,6 +8,7 @@
 #include "WCamera.h"
 #include "WGridScript.h"
 #include "WObject.h"
+#include "WRenderer.h"
 namespace W
 {
 	PlayScene::PlayScene()
@@ -77,6 +78,7 @@ namespace W
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TrunLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
+			//renderer::m_vecCameras.push_back(cameraComp);
 		}
 
 		//UI Camera
@@ -87,17 +89,6 @@ namespace W
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TrunLayerMask(eLayerType::Player, false);
 			//camera->AddComponent<CameraScript>();
-		}
-
-		{
-			GameObject* grid = new GameObject();
-			grid->SetName(L"Grid");
-			AddGameObject(eLayerType::Grid, grid);
-			MeshRenderer* mr = grid->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
-			GridScript* gridSc = grid->AddComponent<GridScript>();
-			gridSc->SetCamera(cameraComp);
 		}
 
 	}

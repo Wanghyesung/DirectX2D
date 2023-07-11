@@ -12,9 +12,6 @@ namespace renderer
 	using namespace W;
 	using namespace W::graphics;
 
-	//삼각형 버퍼 수
-	Vertex vertexes[4] = {};
-
 	W::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::END] = {};
 
 	
@@ -35,7 +32,8 @@ namespace renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_cpDepthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> m_cpBlendStates[(UINT)eBSType::End] = {};
 
-	std::vector<W::Camera*> vecCameras = {};
+	std::vector<W::Camera*> m_vecCameras = {};
+	std::vector<DebugMesh> m_vecDebugMeshs = {};
 
 	void SetupState()
 	{
@@ -68,11 +66,7 @@ namespace renderer
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
 			pShader->GetVSCode(),
 			pShader->GetInputLayoutAddressOf());
-		
-		pShader = W::Resources::Find<Shader>(L"GridShader");
-		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
-			pShader->GetVSCode(),
-			pShader->GetInputLayoutAddressOf());
+
 
 		pShader = W::Resources::Find<Shader>(L"SpriteShader");
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
@@ -90,7 +84,20 @@ namespace renderer
 			pShader->GetVSCode(),
 			pShader->GetInputLayoutAddressOf());
 
+
 		pShader = W::Resources::Find<Shader>(L"UIShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+
+
+		pShader = W::Resources::Find<Shader>(L"GridShader");
+		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
+			pShader->GetVSCode(),
+			pShader->GetInputLayoutAddressOf());
+
+
+		pShader = W::Resources::Find<Shader>(L"DebugShader");
 		W::graphics::GetDevice()->CreateInputLayout(arrLayout, 3,
 			pShader->GetVSCode(),
 			pShader->GetInputLayoutAddressOf());
@@ -210,6 +217,10 @@ namespace renderer
 
 	void LoadMesh()
 	{
+		std::vector<Vertex> vertexes = {};
+		std::vector<UINT> indexes = {};
+
+		vertexes.resize(4);
 		//텍스쳐에서 색가져오기samlestate, uv좌표 때문에 정점정보도 uv좌표를 넣어서 바뀌어야함 vertex도한 uv추가, inputlayout도 추가 (3개로)
 		vertexes[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].Color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -226,17 +237,14 @@ namespace renderer
 		vertexes[3].Pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[3].Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 		vertexes[3].UV = Vector2(0.0f, 1.0f);
-	}
 
-	void LoadBuffer()
-	{
 		std::shared_ptr<Mesh> pMesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", pMesh);
 
-		pMesh->CreateVertexBuffer(vertexes, 4);
+		pMesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
 
 		//그리는 순서 지정 (사각형)
-		std::vector<UINT> indexes = {};
+		//std::vector<UINT> indexes = {};
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
@@ -245,7 +253,51 @@ namespace renderer
 		indexes.push_back(2);
 		indexes.push_back(3);
 		pMesh->CreateIndexBuffer(indexes.data(), indexes.size());
-	
+
+
+		//debug Rect Mesh
+		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugRect", rectDebug);
+		rectDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		rectDebug->CreateIndexBuffer(vertexes.data(), indexes.size());
+		
+		//circle
+		vertexes.clear();
+		indexes.clear();
+
+		Vertex center = {};
+		center.Pos = Vector3(0.f, 0.f, 0.f);
+		center.Color = Vector4(0.f, 1.f, 0.f, 0.f);
+		vertexes.push_back(center);
+
+		int iSlice = 40;
+		float fRadius = 0.5f;
+		float fTheta = XM_2PI / (float)iSlice;
+
+		for (int i = 0; i < iSlice; ++i)
+		{
+			center.Pos = Vector3(fRadius * cosf(fTheta * (float)i),
+				fRadius * sinf(fTheta * (float)i), 0.f);
+
+			center.Color = Vector4(0.f, 1.f, 0.f, 1.f);
+			vertexes.push_back(center);
+		}
+
+		for (int i = 0; i < vertexes.size() - 2; ++i)
+		{
+			indexes.push_back(i + 1);
+		}
+
+		indexes.push_back(1);
+		std::shared_ptr<Mesh> circleDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugCircle", circleDebug);
+		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+
+	}
+
+	void LoadBuffer()
+	{
 		//constant buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
@@ -290,6 +342,14 @@ namespace renderer
 		pUIShader->Create(eShaderStage::VS, L"UIVS.hlsl", "main");
 		pUIShader->Create(eShaderStage::PS, L"UIPS.hlsl", "main");
 		W::Resources::Insert(L"UIShader", pUIShader);
+
+		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
+		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
+		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
+		debugShader->SetRSState(eRSType::SolidNone);
+		//debugShader->SetDSState(eDSType::NoWrite);
+		Resources::Insert(L"DebugShader", debugShader);
 
 	}
 
@@ -376,6 +436,12 @@ namespace renderer
 		pMater = std::make_shared<Material>();
 		pMater->SetShader(girdShader);
 		Resources::Insert(L"GridMaterial", pMater);
+
+		
+		
+		pMater = std::make_shared<Material>();
+		pMater->SetShader(Resources::Find<Shader>(L"DebugShader"));
+		Resources::Insert(L"DebugMaterial", pMater);
 	}
 	
 
@@ -390,7 +456,7 @@ namespace renderer
 	}
 	void Render()
 	{
-		for (Camera* cam : vecCameras)
+		for (Camera* cam : m_vecCameras)
 		{
 			if (cam == nullptr)
 				continue;
@@ -398,14 +464,16 @@ namespace renderer
 			cam->Render();
 		}
 		//물체 그리고 벡터 지우기
-		vecCameras.clear();
+		m_vecCameras.clear();
 	}
 
+	void pushDebugMeshAttribute(DebugMesh& _mesh)
+	{
+		m_vecDebugMeshs.push_back(_mesh);
+	}
 
 	void Release()
 	{
-		
-		
 		for (ConstantBuffer* buff : constantBuffer)
 		{
 			if (buff == nullptr)

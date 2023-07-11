@@ -311,6 +311,7 @@ namespace W
 				{
 				case W::enums::eParentUI::Inventory:
 				{
+
 					Transform* pFindTr = pFindItem->GetComponent<Transform>();
 					pFindTr->SetPosition(_pItem->GetStartPosition());
 					pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());

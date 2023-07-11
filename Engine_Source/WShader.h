@@ -26,6 +26,7 @@ namespace W
 		void SetRSState(eRSType _eType) { m_eRSType = _eType; }
 		void SetDSState(eDSType _eType) { m_eDSType = _eType; }
 		void SetBSState(eBSType _eType) { m_eBSType = _eType; }
+		void SetTopology(D3D11_PRIMITIVE_TOPOLOGY eTopology) { m_eTopology = m_eTopology; }
 	private:
 		ID3D11InputLayout* m_tInputLayout;
 		D3D11_PRIMITIVE_TOPOLOGY m_eTopology;

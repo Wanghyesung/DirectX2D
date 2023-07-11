@@ -71,6 +71,9 @@ namespace W
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 
 		Inventory* pInven = SceneManger::GetUI<Inventory>();
+		if (!pInven->IsRender())
+			return false;
+
 		Transform* pInvenTr = pInven->GetComponent<Transform>();
 		Vector3 vInvenPosition = pInvenTr->GetPosition();
 
@@ -82,16 +85,17 @@ namespace W
 		Vector2 vStartPosition = Vector2(vInvenPosition + vUIStartPosition);
 
 		//인벤토리 범위 밖이면
-		if (! ((vPosition.x <= vEndPosition.x + vUIDiffPosition.x && vPosition.x >= vStartPosition.x - vUIDiffPosition.x) &&
+		if (!((vPosition.x <= vEndPosition.x + vUIDiffPosition.x && vPosition.x >= vStartPosition.x - vUIDiffPosition.x) &&
 			(vPosition.y >= vEndPosition.y + vUIDiffPosition.y && vPosition.y <= vStartPosition.y - vUIDiffPosition.y)))
 			return false;
 		else
-			changepos_inventory();
+			if (!changepos_inventory())
+				return false;
 
 		return true;
 	}
 
-	void ItemUI::changepos_inventory()
+	bool ItemUI::changepos_inventory()
 	{
 		Inventory* pInventroy = SceneManger::GetUI<Inventory>();
 
@@ -101,7 +105,8 @@ namespace W
 			Vector3 vPosisition = GetComponent<Transform>()->GetPosition();
 			Vector2 vComparePosition = Vector2(vPosisition.x, vPosisition.y);
 
-			pInventroy->ChangeItemPosition(this, vComparePosition);
+			bool bSuccess = pInventroy->ChangeItemPosition(this, vComparePosition);
+			return bSuccess;
 		}
 	}
 
@@ -117,16 +122,17 @@ namespace W
 		Vector2 vUIDiffPosition = pInter->GetDiffPosition();
 
 		//인벤토리 범위 밖이면
-		if (! ((vPosition.x <= vUIEndPosition.x + vUIDiffPosition.x && vPosition.x >= vUIStartPosition.x - vUIDiffPosition.x) &&
+		if (!((vPosition.x <= vUIEndPosition.x + vUIDiffPosition.x && vPosition.x >= vUIStartPosition.x - vUIDiffPosition.x) &&
 			(vPosition.y >= vUIEndPosition.y + vUIDiffPosition.y && vPosition.y <= vUIStartPosition.y - vUIDiffPosition.y)))
 			return false;
 		else
-			changepos_interface();
+			if (!changepos_interface())
+				return false;
 
 		return true;
 	}
 
-	void ItemUI::changepos_interface()
+	bool ItemUI::changepos_interface()
 	{
 		InterfaceUI* pInterface = SceneManger::GetUI<InterfaceUI>();
 
@@ -137,8 +143,11 @@ namespace W
 			//비교할 내 위치
 			Vector2 vComparePosition = Vector2(vPosisition.x, vPosisition.y);
 
-			pInterface->ChangeItemPosition(this, vComparePosition);
+			bool bSuccess = pInterface->ChangeItemPosition(this, vComparePosition);
+			return bSuccess;
 		}
+
+		return false;
 	}
 
 }

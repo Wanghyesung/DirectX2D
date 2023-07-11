@@ -65,11 +65,11 @@ namespace W
 
 		//레이터라이저 단계
 		Microsoft::WRL::ComPtr<ID3D11RasterizerState> cpRSstate = renderer::m_cpRasterizerStates[(UINT)m_eRSType];
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> cpDSstate = renderer::m_cpDepthStencilStates[(UINT)m_eDSType];
+		//Microsoft::WRL::ComPtr<ID3D11DepthStencilState> cpDSstate = renderer::m_cpDepthStencilStates[(UINT)m_eDSType];
 		Microsoft::WRL::ComPtr<ID3D11BlendState> cpBSstate = renderer::m_cpBlendStates[(UINT)m_eBSType];
 
 		GetDevice()->BindRasterizeState(cpRSstate.Get());
-		GetDevice()->BindDepthStencilState(cpDSstate.Get());
+		//GetDevice()->BindDepthStencilState(cpDSstate.Get());
 		GetDevice()->BindBlendState(cpBSstate.Get());
 	}
 }

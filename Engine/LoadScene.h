@@ -38,6 +38,6 @@ namespace W
 		SceneManger::CreateScene<MoveScene>(L"Move1");
 		SceneManger::CreateScene<MoveScene_2>(L"Move2");
 		SceneManger::CreateScene<ValleyScene>(L"Valley");
-		
+		//SceneManger::CreateScene<PlayScene>(L"PlayScene");
 	}
 }

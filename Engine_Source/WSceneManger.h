@@ -3,6 +3,10 @@
 #include "WScene.h"
 #include "WUI.h"
 
+//editor에서 콜라이더 선
+//하나의 메쉬콜라이더로 다른 물체들을 그림
+//정보만 가지고있고 실제로 그리는 곳은 에디터쪽에서
+
 namespace W
 {
 	class SceneManger
@@ -36,18 +40,54 @@ namespace W
 
 		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj){ m_pActiveScene->AddGameObject(_eType, _pGameObj);}
 
+		//template <typename T>
+		//static T* GetUI()
+		//{
+		//	std::vector<UI*> vecUI = m_pActiveScene->FindObjectsOfType<UI>();
+		//	for (UI* pUI : vecUI)
+		//	{
+		//		T* pTargetUI = dynamic_cast<T*>(pUI);
+		//		if (pTargetUI != nullptr)
+		//			return pTargetUI;
+		//	}
+		//	return nullptr;
+		//}
+
 		template <typename T>
 		static T* GetUI()
 		{
-			std::vector<UI*> vecUI = m_pActiveScene->FindObjectsOfType<UI>();
-			for (UI* pUI : vecUI)
+			std::vector<UI*> m_vecUI = m_pActiveScene->FindObjectsOfType<UI>();
+
+			for (GameObject* pObj : m_vecUI)
 			{
-				T* pTargetUI = dynamic_cast<T*>(pUI);
-				if (pTargetUI != nullptr)
-					return pTargetUI;
+				UI* pUI = dynamic_cast<UI*>(pObj);
+
+				std::queue<UI*> queue;
+				queue.push(pUI);
+
+				while (!queue.empty())
+				{
+					UI* pChildUI = queue.front();
+					queue.pop();
+
+					T* pTarget = dynamic_cast<T*>(pChildUI);
+					if (pTarget != nullptr)
+						return pTarget;
+
+					if (pChildUI->GetState() == GameObject::eState::Dead)
+						continue;
+					else
+					{
+						const std::vector<UI*> vecChildUI = pChildUI->GetChildUI();
+
+						for (UI* ChildUI : vecChildUI)
+							queue.push(ChildUI);
+					}
+				}
 			}
 			return nullptr;
 		}
+
 	private:
 		static Scene* m_pActiveScene;
 		static std::map<std::wstring, Scene*> m_mapScene;

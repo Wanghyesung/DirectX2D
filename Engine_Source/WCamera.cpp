@@ -92,7 +92,7 @@ namespace W
 		//불투명 먼저 그리고 같은 z값에 투명을 그리면 z값 우선순위에서 밀려서 안그려짐
 		//z버퍼 끄기
 		DisablDepthStencilState();
-		//투명 -> 반투명 -> 불투명
+		//불투명 -> 반투명 -> 투명
 		RenderCutOut();
 		RenderTransparent();
 		EnableDepthStencilState();
@@ -100,7 +100,7 @@ namespace W
 	
 	void Camera::RegisterCameraInRenderer()
 	{
-		renderer::vecCameras.push_back(this);
+		renderer::m_vecCameras.push_back(this);
 	}
 
 	void Camera::TrunLayerMask(eLayerType _eType, bool _bEnable)
@@ -180,6 +180,9 @@ namespace W
 		{
 			if (gameObj == nullptr)
 				continue;
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+				continue;
 
 			gameObj->Render();
 		}
@@ -191,6 +194,9 @@ namespace W
 		{
 			if (gameObj == nullptr)
 				continue;
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+				continue;
 
 			gameObj->Render();
 		}
@@ -201,6 +207,9 @@ namespace W
 		for (GameObject* gameObj : m_vecTransparentGameObjects)
 		{
 			if (gameObj == nullptr)
+				continue;
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();

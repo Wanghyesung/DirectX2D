@@ -7,6 +7,7 @@
 #include "WCamera.h"
 
 using namespace W::math;
+using namespace W::graphics;
 namespace renderer
 {
 	struct Vertex
@@ -51,10 +52,13 @@ namespace renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_cpDepthStencilStates[(UINT)eDSType::End];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> m_cpBlendStates[(UINT)eBSType::End];
 
-	extern std::vector<W::Camera*> vecCameras;
+	extern std::vector<W::Camera*> m_vecCameras;
+	extern std::vector<DebugMesh> m_vecDebugMeshs;
 
 	void Render();
 	void Initialize();
 	void Release();
+
+	void pushDebugMeshAttribute(DebugMesh& _mesh);
 }
 

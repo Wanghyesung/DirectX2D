@@ -157,6 +157,10 @@ namespace W
 		
 		for (GameObject* pObj : m_vecUI)
 		{
+			//tem 
+			//if (pObj->GetName() == L"Smile")
+			//	continue;
+
 			UI* pUI = dynamic_cast<UI*>(pObj);
 
 			std::queue<UI*> queue;

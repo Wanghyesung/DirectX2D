@@ -88,6 +88,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{b130f63c-321a-475a-be85-57688e346cf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Collider2D">
+      <UniqueIdentifier>{d89c7d0e-0984-41fb-a524-44a30e9ffc73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">
@@ -176,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)UIManger.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCollisionManager.cpp">
+      <Filter>Scene\Manger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCollider2D.cpp">
+      <Filter>GameObject\Component\Collider2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +289,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WObject.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCollisionManager.h">
+      <Filter>Scene\Manger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCollider2D.h">
+      <Filter>GameObject\Component\Collider2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

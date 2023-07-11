@@ -26,6 +26,8 @@ namespace W
 		Update();
 		LateUpdate();
 		Render();
+		Destroy();
+		UIManger::ReleaseChildUI();
 	}
 
 
@@ -45,8 +47,6 @@ namespace W
 
 		SceneManger::Update();
 		UIManger::Update();
-		Destroy();
-		UIManger::ReleaseChildUI();
 	}
 
 	void Application::LateUpdate()
@@ -64,12 +64,17 @@ namespace W
 
 		//SceneManger::Render();
 		renderer::Render();
-		graphicDevice->Present();
+		//graphicDevice->Present();
 	}
 
 	void Application::Destroy()
 	{
 		SceneManger::Destroy();
+	}
+
+	void Application::Present()
+	{
+		graphicDevice->Present();
 	}
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)

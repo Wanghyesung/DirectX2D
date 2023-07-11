@@ -60,7 +60,10 @@ namespace W
 	bool Equip::changepos_equipstate()
 	{
 		EquipState* pEquipState = SceneManger::GetUI<EquipState>();
-		
+		if (!pEquipState->IsRender())
+			return false;
+
+
 		Transform* pTransform = GetComponent<Transform>();
 		Vector3 vPosition = pTransform->GetPosition();
 		//최종 내 아이템을 넣을 위치
@@ -116,6 +119,9 @@ namespace W
 		Vector3 vPosition = pTransform->GetPosition();
 
 		Inventory* pInventory = SceneManger::GetUI<Inventory>();
+		if (!pInventory->IsRender())
+			return false;
+
 		Transform* pInvenTr = pInventory->GetComponent<Transform>();
 		Vector3 vInvenPosition = pInvenTr->GetPosition();
 

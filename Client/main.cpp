@@ -16,6 +16,8 @@
 #include "..\Engine_Source\WResources.h"
 //#include "WSceneManger.h"
 #include "LoadScene.h"
+#include "guiEditor.h"
+
 
 //키 이동, shader 색, 랜덤한게 생성, 먹으면 크기 늘어나게 (분열은 선택)
 
@@ -154,13 +156,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             // 여기서 게임 로직이 돌아가야한다.
+            gui::Editor::Run();
             application.Run();
+            application.Present();
         }
     }
 
     renderer::Release();
     //W::Resources::Release();//전부 shadered_ptr로 바꿈 알아서 해제
     W::SceneManger::Release();
+    gui::Editor::Release();
 
     return (int)msg.wParam;
 }
@@ -221,6 +226,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     application.Initialize();
     W::InitializeScenes();
+    gui::Editor::Initialize();
 
     return TRUE;
 }

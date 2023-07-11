@@ -5,7 +5,7 @@
 #include "WSkillDarkUI.h"
 #include "WSkillLuckUI.h"
 #include "WSKillStorage.h"
-
+#include "WInput.h"
 
 namespace W
 {

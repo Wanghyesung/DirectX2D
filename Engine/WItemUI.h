@@ -26,8 +26,8 @@ namespace W
 
 	
 	private:
-		void changepos_interface();
-		void changepos_inventory();
+		bool changepos_interface();
+		bool changepos_inventory();
 
 		bool check_postion();
 		bool check_inventory();

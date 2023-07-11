@@ -257,6 +257,9 @@ namespace W
 				{
 				case W::enums::eParentUI::Interface:
 				{
+					if (pFindItem->GetIconType() == IconUI::eIconType::Equip)
+						return false;
+
 					pFindTr->SetPosition(_pItem->GetStartPosition());
 					pFindItem->SetItemIndex(_pItem->GetItemindexX(), _pItem->GetItemIndexY());
 					pFindItem->DeleteParent();

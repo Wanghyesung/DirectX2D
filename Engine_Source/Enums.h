@@ -8,6 +8,8 @@ namespace W::enums
 		None,
 		Transform,
 		Mesh,
+		Collider2D,
+		Rigidbody,
 		Particle,
 		MeshRenderer,
 		Script,
@@ -54,6 +56,15 @@ namespace W::enums
 		SkillStorage,
 		EquipState,
 		None,
+	};
+
+	enum class eColliderType
+	{
+		Rect,
+		Circle,
+		Sphere,
+		Cube,
+		End,
 	};
 	
 }

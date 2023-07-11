@@ -18,6 +18,7 @@ namespace W
 		void LateUpdate();
 		void Render();
 		void Destroy();
+		void Present();
 
 		void SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight);
 

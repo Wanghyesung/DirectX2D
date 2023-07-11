@@ -1,21 +1,18 @@
 #pragma once
+#include "WGameObject.h"
 
-#include "..\Engine_Source\WScene.h"
-
-namespace W
+namespace gui
 {
-	class PlayScene : public Scene
+	class EditorObject : public W::GameObject
 	{
 	public:
-		PlayScene();
-		virtual ~PlayScene();
+		EditorObject();
+		virtual ~EditorObject();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 		virtual void Render() override;
-
-	private:
 
 	};
 }

@@ -16,6 +16,8 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)UIManger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WCage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLadder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WNPC.h" />
@@ -52,6 +54,8 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)UIManger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WCage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLadder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WNPC.cpp" />
